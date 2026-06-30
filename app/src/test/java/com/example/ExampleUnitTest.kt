@@ -3272,6 +3272,10 @@ class ExampleUnitTest {
     rootWebFile.writeText(htmlContent)
     println("Successfully generated HTML website at root: " + rootWebFile.absolutePath)
 
+    val vercelWebFile = java.io.File(rootDir, "index.html")
+    vercelWebFile.writeText(htmlContent)
+    println("Successfully generated HTML website for Vercel at: " + vercelWebFile.absolutePath)
+
     val assetsWebFile = java.io.File(rootDir, "app/src/main/assets/web/index.html")
     assetsWebFile.parentFile?.mkdirs()
     assetsWebFile.writeText(htmlContent)
