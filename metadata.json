@@ -1,0 +1,6 @@
+{
+  "name": "Pharma SOP Portal",
+  "description": "Standard Operating Procedures (SOP) management portal for Quality Control, Quality Assurance, Production, and Warehouse departments with role-based search and filters.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

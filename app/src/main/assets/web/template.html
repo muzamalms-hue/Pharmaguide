@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USP Column & Monograph Finder Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+    @keyframes slideUp { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .animate-slide { animation: slideUp 0.2s ease-out forwards; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-emerald-800 to-teal-950 text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-full bg-emerald-600 border border-amber-400 flex items-center justify-center shadow">
+          <i class="fa-solid fa-flask text-white text-sm"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-black tracking-tight">USP Monograph Web Portal</h1>
+          <p class="text-emerald-300 text-[10px] tracking-wide uppercase font-semibold">USP Chromatographic Column Finder</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-1.5">
+        <button onclick="switchTab('monographs')" id="btn-monographs" class="px-3 py-1.5 text-xs font-bold rounded bg-emerald-600 text-white shadow shadow-emerald-900/20">Monographs</button>
+        <button onclick="switchTab('lcodes')" id="btn-lcodes" class="px-3 py-1.5 text-xs font-semibold rounded text-emerald-100 hover:bg-emerald-800/30">L-Codes</button>
+        <button onclick="switchTab('compare')" id="btn-compare" class="px-3 py-1.5 text-xs font-semibold rounded text-emerald-100 hover:bg-emerald-800/30">Compare</button>
+        <button onclick="switchTab('sops')" id="btn-sops" class="px-3 py-1.5 text-xs font-semibold rounded text-emerald-100 hover:bg-emerald-800/30">SOP Guide</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Metrics -->
+  <section class="bg-white border-b border-slate-200 py-3 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+      <div class="bg-emerald-50/50 p-2.5 rounded-lg border border-emerald-100 flex items-center gap-2">
+        <i class="fa-solid fa-capsules text-emerald-600 text-sm"></i>
+        <div><p class="text-[9px] text-emerald-800 uppercase font-bold tracking-wider">Monographs</p><p class="text-sm font-black" id="stat-total">0</p></div>
+      </div>
+      <div class="bg-blue-50/50 p-2.5 rounded-lg border border-blue-100 flex items-center gap-2">
+        <i class="fa-solid fa-table-list text-blue-600 text-sm"></i>
+        <div><p class="text-[9px] text-blue-800 uppercase font-bold tracking-wider">USP L-Codes</p><p class="text-sm font-black" id="stat-lcodes">0</p></div>
+      </div>
+      <div class="bg-amber-50/50 p-2.5 rounded-lg border border-amber-100 flex items-center gap-2">
+        <i class="fa-solid fa-vial text-amber-600 text-sm"></i>
+        <div><p class="text-[9px] text-amber-800 uppercase font-bold tracking-wider">Primary Column</p><p class="text-sm font-black text-slate-700">L1 (C18)</p></div>
+      </div>
+      <div class="bg-purple-50/50 p-2.5 rounded-lg border border-purple-100 flex items-center gap-2">
+        <i class="fa-solid fa-circle-plus text-purple-600 text-sm"></i>
+        <div><p class="text-[9px] text-purple-800 uppercase font-bold tracking-wider">User Additions</p><p class="text-sm font-black" id="stat-custom">0</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 py-4 w-full">
+    <!-- 1. MONOGRAPHS TAB -->
+    <div id="section-monographs" class="tab-content animate-slide">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <!-- Search, filters & form -->
+        <div class="lg:col-span-3 flex flex-col gap-3">
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-3">
+            <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5 border-b pb-1.5"><i class="fa-solid fa-magnifying-glass text-emerald-600"></i> Search Filters</h3>
+            <input type="text" id="input-search" oninput="onSearchInput()" placeholder="Search active ingredient, drug, L-code..." class="w-full px-2.5 py-1.5 text-xs rounded border border-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+            <div>
+              <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Dosage Form</label>
+              <div class="flex flex-col gap-0.5" id="form-filters">
+                <button onclick="setFormFilter('ALL')" id="ff-ALL" class="text-left text-xs px-2 py-1 rounded bg-emerald-50 text-emerald-800 font-bold flex justify-between w-full"><span>All Forms</span><span id="ff-count-all">0</span></button>
+                <button onclick="setFormFilter('Tablets')" id="ff-Tablets" class="text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full"><span>Tablets</span><span id="ff-count-tablets">0</span></button>
+                <button onclick="setFormFilter('Capsules')" id="ff-Capsules" class="text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full"><span>Capsules</span><span id="ff-count-capsules">0</span></button>
+                <button onclick="setFormFilter('Injection')" id="ff-Injection" class="text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full"><span>Injections</span><span id="ff-count-injections">0</span></button>
+                <button onclick="setFormFilter('Raw')" id="ff-Raw" class="text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full"><span>Raw Materials</span><span id="ff-count-raw">0</span></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Form -->
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+            <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5 border-b pb-1.5"><i class="fa-solid fa-plus text-emerald-600"></i> Add Drug</h3>
+            <form onsubmit="submitCustom(event)" class="flex flex-col gap-2 mt-2">
+              <input type="text" id="add-name" required placeholder="Drug Name (e.g. Paracetamol Tablets)" class="w-full px-2 py-1 text-xs rounded border border-slate-200">
+              <input type="text" id="add-active" required placeholder="Active (e.g. Paracetamol)" class="w-full px-2 py-1 text-xs rounded border border-slate-200">
+              <div class="grid grid-cols-2 gap-1.5">
+                <select id="add-form" class="px-1 py-1 text-xs rounded border border-slate-200 bg-white">
+                  <option value="Tablets">Tablets</option><option value="Capsules">Capsules</option><option value="Injection">Injection</option><option value="Raw Material (API)">API</option>
+                </select>
+                <select id="add-lcode" class="px-1 py-1 text-xs rounded border border-slate-200 bg-white">
+                  <option value="L1">L1 (C18)</option><option value="L7">L7 (C8)</option><option value="L10">L10 (CN)</option><option value="L11">L11</option><option value="L3">L3</option>
+                </select>
+              </div>
+              <input type="text" id="add-brand" required placeholder="Column Brand (e.g. Luna C18)" class="w-full px-2 py-1 text-xs rounded border border-slate-200">
+              <input type="text" id="add-comments" placeholder="Comments..." class="w-full px-2 py-1 text-xs rounded border border-slate-200">
+              <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-1.5 rounded text-xs transition shadow">Save Entry</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right Side list -->
+        <div class="lg:col-span-9 flex flex-col gap-3">
+          <div class="bg-white p-2 rounded-lg border border-slate-200 shadow-sm flex flex-wrap gap-1 items-center" id="alphabet-jumps">
+            <!-- Alphabets injected here -->
+          </div>
+          <div class="flex justify-between items-center text-[11px] text-slate-500 font-semibold px-1">
+            <span id="results-count">Showing monographs...</span>
+            <button onclick="clearCustom()" id="btn-reset-db" class="hidden text-red-600 hover:underline"><i class="fa-solid fa-trash-can mr-1"></i>Reset Database</button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="monographs-container">
+            <!-- Cards injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. L-CODES TAB -->
+    <div id="section-lcodes" class="tab-content hidden animate-slide">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-3 flex flex-col gap-2">
+          <h3 class="text-xs font-bold text-slate-800 border-b pb-1.5"><i class="fa-solid fa-list-ol mr-1"></i>USP L-Codes</h3>
+          <div class="flex flex-col gap-1" id="lcodes-list"></div>
+        </div>
+        <div class="lg:col-span-2 bg-white rounded-lg border border-slate-200 shadow-sm p-4 flex flex-col gap-3.5" id="lcode-detail"></div>
+      </div>
+    </div>
+
+    <!-- 3. COMPARE TAB -->
+    <div id="section-compare" class="tab-content hidden animate-slide">
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 flex flex-col gap-3">
+        <div class="flex justify-between items-center border-b pb-2">
+          <h2 class="text-sm font-bold text-slate-900"><i class="fa-solid fa-scale-balanced mr-1"></i>Columns Comparison Board</h2>
+          <div class="flex gap-2">
+            <select id="comp-left" onchange="compare()" class="text-xs px-2 py-1 rounded border bg-slate-50 font-bold"></select>
+            <span class="text-xs font-black text-slate-400">vs</span>
+            <select id="comp-right" onchange="compare()" class="text-xs px-2 py-1 rounded border bg-slate-50 font-bold"></select>
+          </div>
+        </div>
+        <div class="overflow-x-auto" id="compare-table-wrapper"></div>
+      </div>
+    </div>
+
+    <!-- 4. SOP TAB -->
+    <div id="section-sops" class="tab-content hidden animate-slide">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-3 flex flex-col gap-1.5">
+          <h3 class="text-xs font-bold text-slate-800 border-b pb-1.5">Guidelines Index</h3>
+          <button onclick="showSop('qc-col')" id="sop-btn-qc-col" class="sop-btn text-xs text-left px-2 py-1.5 rounded font-semibold bg-emerald-50 text-emerald-800 border-l-2 border-emerald-600">Column Storage SOP</button>
+          <button onclick="showSop('qc-hplc')" id="sop-btn-qc-hplc" class="sop-btn text-xs text-left px-2 py-1.5 rounded text-slate-600 hover:bg-slate-50">HPLC Suitability Testing</button>
+          <button onclick="showSop('qa-oos')" id="sop-btn-qa-oos" class="sop-btn text-xs text-left px-2 py-1.5 rounded text-slate-600 hover:bg-slate-50">OOS Investigation SOP</button>
+        </div>
+        <div class="md:col-span-2 bg-white rounded-lg border border-slate-200 shadow-sm p-4" id="sop-detail-content"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-4 border-t border-slate-800 text-[10px] text-center mt-auto">
+    <p class="font-bold text-slate-200">USP Chromatography Database & SOP Web Portal</p>
+    <p class="text-slate-600 mt-0.5">WHO • CGMP • FDA Compliant Guidelines Reference Tool</p>
+  </footer>
+
+  <script>
+    const columnsDb = /*COLUMNS_DATA_PLACEHOLDER*/;
+    const monographsDb = /*MONOGRAPHS_DATA_PLACEHOLDER*/;
+
+    let filterLetter = 'ALL';
+    let filterForm = 'ALL';
+    let searchQuery = '';
+    let selectedLCode = 'L1';
+    let customDb = JSON.parse(localStorage.getItem('custom_mono') || '[]');
+
+    function init() {
+      // Alphabet Row
+      const chars = ['ALL', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+      const alphContainer = document.getElementById('alphabet-jumps');
+      alphContainer.innerHTML = chars.map(c => {
+        const activeClass = filterLetter === c ? 'bg-emerald-600 text-white' : 'hover:bg-slate-100 text-slate-600';
+        return `<button onclick="setLetter('${c}')" id="jump-${c}" class="px-2 py-1 text-[10px] font-bold rounded ${activeClass}">${c}</button>`;
+      }).join('');
+
+      // Dropdowns
+      const lSelect = document.getElementById('comp-left');
+      const rSelect = document.getElementById('comp-right');
+      columnsDb.forEach(col => {
+        lSelect.add(new Option(col.code + ' - ' + col.name, col.code, col.code === 'L1', col.code === 'L1'));
+        rSelect.add(new Option(col.code + ' - ' + col.name, col.code, col.code === 'L7', col.code === 'L7'));
+      });
+
+      refreshStats();
+      renderMonographs();
+      renderLCodes();
+      compare();
+      showSop('qc-col');
+    }
+
+    function switchTab(id) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('section-' + id).classList.remove('hidden');
+      const tabs = ['monographs', 'lcodes', 'compare', 'sops'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('btn-' + t);
+        if (t === id) {
+          btn.className = "px-3 py-1.5 text-xs font-bold rounded bg-emerald-600 text-white shadow";
+        } else {
+          btn.className = "px-3 py-1.5 text-xs font-semibold rounded text-emerald-100 hover:bg-emerald-800/30";
+        }
+      });
+    }
+
+    function setLetter(c) {
+      filterLetter = c;
+      document.querySelectorAll('#alphabet-jumps button').forEach(b => {
+        b.className = "px-2 py-1 text-[10px] font-bold rounded text-slate-600 hover:bg-slate-100";
+      });
+      const targetBtn = document.getElementById('jump-' + c);
+      if (targetBtn) {
+        targetBtn.className = "px-2 py-1 text-[10px] font-bold rounded bg-emerald-600 text-white shadow-sm";
+      }
+      renderMonographs();
+    }
+
+    function setFormFilter(formName) {
+      filterForm = formName;
+      document.querySelectorAll('#form-filters button').forEach(b => {
+        b.className = "text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full";
+      });
+      const formKey = formName === 'Raw' ? 'Raw' : formName;
+      const targetBtn = document.getElementById('ff-' + formKey);
+      if (targetBtn) {
+        targetBtn.className = "text-left text-xs px-2 py-1 rounded bg-emerald-50 text-emerald-800 font-bold flex justify-between w-full";
+      }
+      renderMonographs();
+    }
+
+    function onSearchInput() {
+      searchQuery = document.getElementById('input-search').value.trim().toLowerCase();
+      renderMonographs();
+    }
+
+    function getCombined() { return [...customDb, ...monographsDb]; }
+
+    function refreshStats() {
+      const combined = getCombined();
+      document.getElementById('stat-total').innerText = combined.length;
+      document.getElementById('stat-lcodes').innerText = columnsDb.length;
+      document.getElementById('stat-custom').innerText = customDb.length;
+
+      document.getElementById('ff-count-all').innerText = combined.length;
+      document.getElementById('ff-count-tablets').innerText = combined.filter(m => m.dosageForm.toLowerCase().includes('tablet')).length;
+      document.getElementById('ff-count-capsules').innerText = combined.filter(m => m.dosageForm.toLowerCase().includes('capsule')).length;
+      document.getElementById('ff-count-injections').innerText = combined.filter(m => m.dosageForm.toLowerCase().includes('injection')).length;
+      document.getElementById('ff-count-raw').innerText = combined.filter(m => m.dosageForm.toLowerCase().includes('raw') || m.dosageForm.toLowerCase().includes('api')).length;
+
+      const resetBtn = document.getElementById('btn-reset-db');
+      if (customDb.length > 0) {
+        resetBtn.className = "text-red-600 hover:underline inline-block";
+      } else {
+        resetBtn.className = "hidden";
+      }
+    }
+
+    function renderMonographs() {
+      const combined = getCombined();
+      const container = document.getElementById('monographs-container');
+      container.innerHTML = '';
+
+      const filtered = combined.filter(m => {
+        if (searchQuery) {
+          const matchName = m.productName.toLowerCase().includes(searchQuery);
+          const matchActive = m.activeIngredient.toLowerCase().includes(searchQuery);
+          const matchForm = m.dosageForm.toLowerCase().includes(searchQuery);
+          const matchCols = m.columnsUsed && m.columnsUsed.some(c => c.lgsCode.toLowerCase().includes(searchQuery) || c.brand.toLowerCase().includes(searchQuery));
+          if (!matchName && !matchActive && !matchForm && !matchCols) return false;
+        }
+        if (filterLetter !== 'ALL' && !m.productName.toUpperCase().startsWith(filterLetter)) return false;
+        if (filterForm !== 'ALL') {
+          if (filterForm === 'Raw') {
+            if (!m.dosageForm.toLowerCase().includes('raw') && !m.dosageForm.toLowerCase().includes('api')) return false;
+          } else if (!m.dosageForm.toLowerCase().includes(filterForm.toLowerCase())) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('results-count').innerText = "Found " + filtered.length + " matching monographs";
+
+      filtered.forEach(m => {
+        const isCustom = customDb.some(c => c.productName === m.productName);
+        const card = document.createElement('div');
+        card.className = "bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 animate-slide";
+        
+        const badgeClass = isCustom ? 'bg-purple-100 text-purple-700' : 'bg-emerald-50 text-emerald-700';
+        const customLabel = isCustom ? '<span class="text-[8px] text-purple-500 font-semibold"><i class="fa-solid fa-cloud-arrow-up"></i> Custom</span>' : '';
+        
+        const columnsHtml = m.columnsUsed.map(c => `
+          <div class="flex justify-between py-0.5">
+            <span>Ref: <strong class="font-mono">${c.pf}</strong></span>
+            <span>Type: <button onclick="viewLCode('${c.lgsCode}')" class="text-emerald-600 hover:underline font-bold">${c.lgsCode}</button></span>
+          </div>
+          <p class="font-semibold text-slate-800">${c.brand}</p>
+          <p class="text-[9px] italic text-slate-400 leading-tight mb-2">${c.comments}</p>
+        `).join('');
+
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-center">
+              <span class="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ${badgeClass}">${m.dosageForm}</span>
+              ${customLabel}
+            </div>
+            <h4 class="text-xs font-black text-slate-900 mt-1">${m.productName}</h4>
+            <p class="text-[10px] text-slate-500">Active: <span class="font-bold text-slate-700">${m.activeIngredient}</span></p>
+          </div>
+          <div class="border-t border-slate-100 pt-1.5 text-[10px] text-slate-600">
+            ${columnsHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function viewLCode(code) {
+      selectedLCode = code;
+      switchTab('lcodes');
+      renderLCodes();
+    }
+
+    function renderLCodes() {
+      const list = document.getElementById('lcodes-list');
+      const detail = document.getElementById('lcode-detail');
+      list.innerHTML = '';
+
+      columnsDb.forEach(col => {
+        const isActive = selectedLCode === col.code;
+        const count = getCombined().filter(m => m.columnsUsed && m.columnsUsed.some(c => c.lgsCode === col.code)).length;
+        
+        const btnClass = isActive ? 'bg-emerald-600 text-white font-bold shadow-sm' : 'bg-white border hover:bg-slate-50';
+        const countBadgeClass = isActive ? 'bg-emerald-700 text-white' : 'bg-slate-100 text-slate-600';
+        
+        list.innerHTML += `
+          <button onclick="viewLCode('${col.code}')" class="text-left text-xs px-2.5 py-2 rounded flex justify-between w-full items-center ${btnClass}">
+            <span><strong>${col.code}</strong> - ${col.name.substring(0,18)}...</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded font-bold ${countBadgeClass}">${count}</span>
+          </button>
+        `;
+      });
+
+      const active = columnsDb.find(c => c.code === selectedLCode);
+      if (!active) return;
+      
+      const matchingDrugs = getCombined().filter(m => m.columnsUsed && m.columnsUsed.some(c => c.lgsCode === active.code));
+
+      detail.innerHTML = `
+        <div class="border-b pb-2 animate-slide">
+          <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold font-mono px-2 py-0.5 rounded border">${active.code}</span>
+          <h2 class="text-sm font-extrabold text-slate-900 mt-1">${active.name}</h2>
+          <p class="text-xs text-slate-500 italic leading-snug mt-1">${active.description}</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px] leading-tight animate-slide">
+          <div class="bg-slate-50 p-2 rounded"><strong>Packing:</strong><p class="text-slate-600">${active.packingMaterial}</p></div>
+          <div class="bg-slate-50 p-2 rounded"><strong>pH range:</strong><p class="text-slate-600">${active.phRange}</p></div>
+          <div class="bg-slate-50 p-2 rounded"><strong>Carbon load:</strong><p class="text-slate-600">${active.carbonLoadRange}</p></div>
+          <div class="bg-slate-50 p-2 rounded"><strong>Max Temp:</strong><p class="text-slate-600">${active.maxTemp}</p></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs animate-slide">
+          <div class="bg-slate-50 p-3 rounded">
+            <strong class="text-slate-800 block mb-1">Typical Applications</strong>
+            <ul class="list-disc list-inside text-slate-600 flex flex-col gap-1 text-[11px]">${active.typicalApplications.map(app => `<li>${app}</li>`).join('')}</ul>
+          </div>
+          <div class="bg-slate-50 p-3 rounded">
+            <strong class="text-slate-800 block mb-1">Equivalent Brands</strong>
+            <div class="flex flex-wrap gap-1">${active.popularBrands.map(b => `<span class="bg-white border px-1.5 py-0.5 rounded text-[10px] font-bold shadow-xs">${b}</span>`).join('')}</div>
+          </div>
+        </div>
+        <div class="animate-slide">
+          <strong class="text-xs block mb-1 font-bold text-slate-800">Drug monographs requiring ${active.code} (${matchingDrugs.length})</strong>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 max-h-[140px] overflow-y-auto custom-scrollbar p-1">
+            ${matchingDrugs.map(m => `
+              <button onclick="jumpToDrug('${m.productName}')" class="text-left text-xs bg-slate-50 border hover:bg-emerald-50/50 p-2 rounded flex justify-between items-center">
+                <span class="font-bold truncate">${m.productName}</span>
+                <i class="fa-solid fa-chevron-right text-slate-300 text-[10px]"></i>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function jumpToDrug(name) {
+      switchTab('monographs');
+      document.getElementById('input-search').value = name;
+      onSearchInput();
+    }
+
+    function compare() {
+      const left = columnsDb.find(c => c.code === document.getElementById('comp-left').value);
+      const right = columnsDb.find(c => c.code === document.getElementById('comp-right').value);
+      if (!left || !right) return;
+
+      document.getElementById('compare-table-wrapper').innerHTML = `
+        <table class="w-full text-left text-xs border-collapse rounded-lg overflow-hidden border">
+          <tr class="bg-slate-100 font-bold text-slate-700 border-b">
+            <th class="p-2.5">Factor</th>
+            <th class="p-2.5 bg-emerald-50/20">${left.code} - ${left.name}</th>
+            <th class="p-2.5 bg-blue-50/20">${right.code} - ${right.name}</th>
+          </tr>
+          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">Packing</td><td class="p-2">${left.packingMaterial}</td><td class="p-2">${right.packingMaterial}</td></tr>
+          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">pH range</td><td class="p-2">${left.phRange}</td><td class="p-2">${right.phRange}</td></tr>
+          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">Carbon load</td><td class="p-2">${left.carbonLoadRange}</td><td class="p-2">${right.carbonLoadRange}</td></tr>
+          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">Max Temp</td><td class="p-2">${left.maxTemp}</td><td class="p-2">${right.maxTemp}</td></tr>
+          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">Applications</td><td class="p-2 text-[10px] leading-snug">${left.typicalApplications.join(', ')}</td><td class="p-2 text-[10px] leading-snug">${right.typicalApplications.join(', ')}</td></tr>
+          <tr><td class="p-2 font-semibold text-slate-500">Popular Brands</td><td class="p-2"><div class="flex flex-wrap gap-1">${left.popularBrands.map(b=>`<span class="bg-slate-50 px-1 rounded text-[9px] font-bold border">${b}</span>`).join('')}</div></td><td class="p-2"><div class="flex flex-wrap gap-1">${right.popularBrands.map(b=>`<span class="bg-slate-50 px-1 rounded text-[9px] font-bold border">${b}</span>`).join('')}</div></td></tr>
+        </table>
+      `;
+    }
+
+    function submitCustom(e) {
+      e.preventDefault();
+      const newM = {
+        productName: document.getElementById('add-name').value.trim().toUpperCase(),
+        activeIngredient: document.getElementById('add-active').value.trim(),
+        dosageForm: document.getElementById('add-form').value,
+        columnsUsed: [{
+          pf: "48(1)", lgsCode: document.getElementById('add-lcode').value,
+          brand: document.getElementById('add-brand').value.trim(),
+          testType: "Assay / Impurities", comments: document.getElementById('add-comments').value.trim() || "User Custom Column Equivalents"
+        }]
+      };
+
+      customDb.unshift(newM);
+      localStorage.setItem('custom_mono', JSON.stringify(customDb));
+      e.target.reset();
+
+      refreshStats();
+      renderMonographs();
+      renderLCodes();
+      alert("Added Custom Monograph: " + newM.productName);
+    }
+
+    function clearCustom() {
+      if(confirm("Confirm reset? This deletes all custom listings.")) {
+        customDb = [];
+        localStorage.removeItem('custom_mono');
+        refreshStats();
+        renderMonographs();
+        renderLCodes();
+      }
+    }
+
+    const sopsDb = {
+      'qc-col': {
+        title: "QC Column Care & Handling SOP",
+        text: "HPLC Columns are highly sensitive analytical core components. Flush with 50:50 organic solvent / water for 30 minutes after buffer salts usage. Store L1 columns in 100% Acetonitrile or Methanol. Maintain pressure below 400 bar and avoid drastic mobile phase changes."
+      },
+      'qc-hplc': {
+        title: "HPLC Suitability & Qualification Testing",
+        text: "Pre-requisite criteria before sample injection: Injection precision RSD of replicate injections must not exceed 2.0% under standard requirements. Theoretical plate count N must exceed 2000 plates, and tailing factor T must lie between 0.8 and 2.0."
+      },
+      'qa-oos': {
+        title: "OOS Investigation Standard Procedures",
+        text: "When an Out-of-Specification laboratory outcome is obtained, immediately halt operations. Phase Ia: Laboratory analytical review, verify dilution errors, column cleanliness, calculations, and standards calibration. Phase Ib: Manufacturing batch review and formulation verification."
+      }
+    };
+
+    function showSop(id) {
+      document.querySelectorAll('.sop-btn').forEach(b => {
+        b.className = "sop-btn text-xs text-left px-2 py-1.5 rounded text-slate-600 hover:bg-slate-50 w-full";
+      });
+      const activeBtn = document.getElementById('sop-btn-' + id);
+      if (activeBtn) {
+        activeBtn.className = "sop-btn text-xs text-left px-2 py-1.5 rounded font-semibold bg-emerald-50 text-emerald-800 border-l-2 border-emerald-600 w-full";
+      }
+      const sop = sopsDb[id];
+      if (!sop) return;
+      document.getElementById('sop-detail-content').innerHTML = `
+        <h2 class="text-sm font-bold text-slate-900 border-b pb-2 flex items-center"><i class="fa-solid fa-file-invoice text-emerald-600 mr-2"></i> ${sop.title}</h2>
+        <p class="text-xs text-slate-600 leading-relaxed mt-2 bg-slate-50 p-3 rounded border border-slate-100">${sop.text}</p>
+      `;
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
