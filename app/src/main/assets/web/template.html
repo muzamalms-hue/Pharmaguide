@@ -17,19 +17,17 @@
 <body class="bg-slate-950 text-slate-100 flex flex-col min-h-screen custom-scrollbar">
 
   <!-- Header -->
-  <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3 shadow-md">
+  <header class="bg-slate-950 border-b border-slate-900 sticky top-0 z-50 px-4 py-3 shadow-md">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-emerald-700 border border-amber-400 flex items-center justify-center shadow">
-          <i class="fa-solid fa-file-shield text-white text-base"></i>
+        <button onclick="toggleMobileMenu()" class="text-slate-400 hover:text-white text-base mr-1"><i class="fa-solid fa-bars"></i></button>
+        <div class="w-7 h-7 rounded-full bg-emerald-800 border-2 border-yellow-500 flex items-center justify-center shadow font-black text-yellow-400 text-[10px]">
+          <i class="fa-solid fa-plus"></i>
         </div>
-        <div>
-          <h1 class="text-base font-extrabold tracking-tight">Pharma SOP Web Portal</h1>
-          <p class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">cGMP & FDA Compliance Hub</p>
-        </div>
+        <h1 class="text-sm font-black tracking-wide text-white">Home</h1>
       </div>
-      <div class="flex items-center gap-3">
-        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-400 hover:text-white text-lg px-2"><i class="fa-solid fa-bars"></i></button>
+      <div class="flex items-center gap-2">
+        <span class="text-[8px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-emerald-400 font-bold uppercase">cGMP HUB</span>
       </div>
     </div>
   </header>
@@ -52,35 +50,123 @@
       
       <!-- 1. DASHBOARD / HOME -->
       <section id="sec-home" class="tab-sec flex flex-col gap-4">
-        <div class="bg-gradient-to-r from-emerald-950 to-emerald-900 border border-emerald-800/50 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <!-- Grass green regulatory resource card banner -->
+        <div class="bg-gradient-to-br from-green-700 via-green-600 to-emerald-600 border border-emerald-500/30 p-6 rounded-2xl flex flex-col justify-between items-start gap-4 shadow-xl">
           <div>
-            <span class="bg-amber-400 text-slate-950 text-[9px] font-black tracking-widest px-2 py-0.5 rounded uppercase">cGMP COMPLIANT</span>
-            <h2 class="text-xl md:text-2xl font-black text-white mt-1.5" id="welcome-title">Welcome back!</h2>
-            <p class="text-xs text-emerald-200 mt-1 max-w-xl">Access standard operating procedures, validation guidelines, active USP columns, and calculation utilities instantly.</p>
+            <span class="bg-amber-400 text-slate-950 text-[9px] font-black tracking-widest px-2.5 py-1 rounded font-mono">CGMP REGULATORY RESOURCE</span>
+            <h2 class="text-xl md:text-2xl font-black text-white mt-2.5 leading-tight">Pharmaceutical Guidelines & SOPs</h2>
+            <p class="text-xs text-emerald-50 text-emerald-100/90 mt-1.5 max-w-xl">Access standard procedures, validation templates & regulatory checkers.</p>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <input type="text" id="dash-search" oninput="doSearch()" placeholder="Search SOPs, codes, or procedures..." class="md:col-span-2 bg-slate-900 border border-slate-800 text-xs px-4 py-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-100 placeholder-slate-500">
-          <button onclick="switchTab('sops'); filterDept('ALL');" class="bg-slate-900 border border-slate-800 text-slate-300 rounded-xl px-4 py-3 text-xs font-bold hover:bg-slate-800 transition flex justify-between items-center">
-            <span id="sop-catalog-btn-count">SOP Catalog</span>
-            <i class="fa-solid fa-chevron-right text-[10px]"></i>
-          </button>
+        <!-- Search row exactly matching the app -->
+        <div class="relative w-full">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs"></i>
+          </span>
+          <input type="text" id="dash-search" oninput="doSearch()" placeholder="Search SOPs, codes, procedures..." class="w-full bg-slate-900/80 border border-slate-800 text-xs pl-10 pr-4 py-3.5 rounded-xl focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-100 placeholder-slate-500 shadow-inner">
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 mt-2">
-          <div onclick="switchTab('sops'); filterDept('Quality Control');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-microscope text-emerald-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Quality Control</p><p class="text-[9px] text-slate-500 mt-0.5">Specifications & HPLC</p></div></div>
-          <div onclick="switchTab('sops'); filterDept('Quality Assurance');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-file-contract text-blue-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Quality Assurance</p><p class="text-[9px] text-slate-500 mt-0.5">Deviation & CAPA</p></div></div>
-          <div onclick="switchTab('sops'); filterDept('Microlab');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-disease text-purple-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Microbiology</p><p class="text-[9px] text-slate-500 mt-0.5">EM & Sterility Test</p></div></div>
-          <div onclick="switchTab('sops'); filterDept('Production');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-industry text-amber-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Production</p><p class="text-[9px] text-slate-500 mt-0.5">Granulation & Sterile</p></div></div>
-          <div onclick="switchTab('sops'); filterDept('ALL');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-folder-open text-teal-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">All SOPs List</p><p class="text-[9px] text-slate-500 mt-0.5">Comprehensive index</p></div></div>
-          <div onclick="switchTab('sops'); filterDept('Validation');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-circle-check text-cyan-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Validation</p><p class="text-[9px] text-slate-500 mt-0.5">Cleaning & Process</p></div></div>
-          <div onclick="switchTab('sops'); filterDept('GMP');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-circle-info text-pink-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">GMP Guide</p><p class="text-[9px] text-slate-500 mt-0.5">Regulatory reference</p></div></div>
-          <div onclick="switchTab('sops'); filterDept('Audit');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-chart-line text-yellow-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Audits</p><p class="text-[9px] text-slate-500 mt-0.5">Checklists & Reviews</p></div></div>
-          <div onclick="switchTab('usp')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-table text-red-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">USP Columns</p><p class="text-[9px] text-slate-500 mt-0.5">Chromatography tools</p></div></div>
-          <div onclick="switchTab('videos')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-play text-orange-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">SOP Videos</p><p class="text-[9px] text-slate-500 mt-0.5">Aseptic training courses</p></div></div>
-          <div onclick="switchTab('calculators')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-calculator text-blue-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Lab Calculators</p><p class="text-[9px] text-slate-500 mt-0.5">15 active validation modules</p></div></div>
-          <div onclick="switchTab('contact')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-envelope-open-text text-teal-400 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Contact Us</p><p class="text-[9px] text-slate-500 mt-0.5">Form & Support team</p></div></div>
+        <!-- Header: Explore Departments & Services -->
+        <h3 class="text-sm font-black tracking-wide text-white mt-4" id="explore-header">Explore Departments & Services</h3>
+
+        <!-- Responsive Grid Exactly Matching App Screenshot (3 columns on mobile, auto-expanding on desk) -->
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 mt-1.5">
+          <!-- 1. Quality Control -->
+          <div onclick="switchTab('sops'); filterDept('Quality Control');" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-emerald-950/60 border border-emerald-800 text-emerald-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-flask"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">Quality Control</p>
+          </div>
+
+          <!-- 2. Quality Assurance -->
+          <div onclick="switchTab('sops'); filterDept('Quality Assurance');" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-blue-950/60 border border-blue-800 text-blue-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-file-shield"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">Quality Assurance</p>
+          </div>
+
+          <!-- 3. Microbiology -->
+          <div onclick="switchTab('sops'); filterDept('Microlab');" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-purple-950/60 border border-purple-800 text-purple-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-vial-virus"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">Microbiology</p>
+          </div>
+
+          <!-- 4. Production -->
+          <div onclick="switchTab('sops'); filterDept('Production');" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-amber-950/60 border border-amber-800 text-amber-500 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-wrench"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">Production</p>
+          </div>
+
+          <!-- 5. SOPs List -->
+          <div onclick="switchTab('sops'); filterDept('ALL');" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-teal-950/60 border border-teal-800 text-teal-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-list-check"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">SOPs List</p>
+          </div>
+
+          <!-- 6. Validation -->
+          <div onclick="switchTab('sops'); filterDept('Validation');" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-sky-950/60 border border-sky-800 text-sky-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">Validation</p>
+          </div>
+
+          <!-- 7. GMP Guide -->
+          <div onclick="switchTab('sops'); filterDept('GMP');" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 text-slate-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">GMP Guide</p>
+          </div>
+
+          <!-- 8. Audits -->
+          <div onclick="switchTab('sops'); filterDept('Audit');" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-indigo-950/60 border border-indigo-800 text-indigo-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">Audits</p>
+          </div>
+
+          <!-- 9. USP -->
+          <div onclick="switchTab('usp')" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-rose-950/60 border border-rose-800 text-rose-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">USP</p>
+          </div>
+
+          <!-- 10. SOP Videos -->
+          <div onclick="switchTab('videos')" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-red-950/60 border border-red-800 text-red-400 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-circle-play"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">SOP Videos</p>
+          </div>
+
+          <!-- 11. Calculators -->
+          <div onclick="switchTab('calculators')" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-yellow-950/60 border border-yellow-800 text-yellow-550 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">Calculators</p>
+          </div>
+
+          <!-- 12. Contact Us -->
+          <div onclick="switchTab('contact')" class="bg-slate-900 hover:bg-slate-850 border border-slate-800/80 p-3.5 rounded-xl cursor-pointer transition flex flex-col items-center justify-center text-center gap-2">
+            <div class="w-10 h-10 rounded-full bg-teal-950/60 border border-teal-800 text-teal-450 flex items-center justify-center text-sm shadow">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <p class="text-[10px] font-bold text-slate-200 leading-tight">Contact Us</p>
+          </div>
         </div>
 
         <div class="mt-4 bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
@@ -345,6 +431,45 @@
     const monographsDb = /*MONOGRAPHS_DATA_PLACEHOLDER*/;
     const sopsDb = /*SOPS_DATA_PLACEHOLDER*/;
 
+    function sanitizeData() {
+      const cleanStr = (str) => {
+        if (typeof str !== 'string') return str;
+        return str
+          .replace(/°/g, '&deg;')
+          .replace(/±/g, '&plusmn;')
+          .replace(/µ/g, '&micro;');
+      };
+
+      sopsDb.forEach(s => {
+        s.title = cleanStr(s.title);
+        s.objective = cleanStr(s.objective);
+        s.scope = cleanStr(s.scope);
+        s.responsibility = cleanStr(s.responsibility);
+        s.procedure = cleanStr(s.procedure);
+        s.safetyPrecautions = cleanStr(s.safetyPrecautions);
+      });
+
+      columnsDb.forEach(c => {
+        c.name = cleanStr(c.name);
+        c.description = cleanStr(c.description);
+        c.packingMaterial = cleanStr(c.packingMaterial);
+        c.phRange = cleanStr(c.phRange);
+        c.carbonLoadRange = cleanStr(c.carbonLoadRange);
+        c.maxTemp = cleanStr(c.maxTemp);
+        if (c.typicalApplications) {
+          c.typicalApplications = c.typicalApplications.map(cleanStr);
+        }
+      });
+
+      monographsDb.forEach(m => {
+        m.productName = cleanStr(m.productName);
+        m.activeIngredient = cleanStr(m.activeIngredient);
+        m.dosageForm = cleanStr(m.dosageForm);
+        m.brand = cleanStr(m.brand);
+        m.comments = cleanStr(m.comments);
+      });
+    }
+
     let activeTab = 'home';
     let filterLetter = 'ALL';
     let filterForm = 'ALL';
@@ -375,6 +500,9 @@
     ];
 
     function init() {
+      // Clean character encodings and weird symbols
+      sanitizeData();
+
       // Set default role
       currentRole = 'QA Officer';
 

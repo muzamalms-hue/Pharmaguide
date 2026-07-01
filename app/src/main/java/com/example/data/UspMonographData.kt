@@ -1985,6 +1985,998 @@ object UspMonographData {
         FUROSEMIDE INJECTION|Furosemide|Injection
         FUROSEMIDE ORAL SOLUTION|Furosemide|Oral Solution
         FUROSEMIDE TABLETS|Furosemide|Tablets
+        GABAPENTIN|Gabapentin|Raw Material (API)
+        GABAPENTIN CAPSULES|Gabapentin|Capsules
+        GABAPENTIN COMPOUNDED CREAM|Gabapentin Compounded|Cream
+        GABAPENTIN COMPOUNDED ORAL SUSPENSION|Gabapentin|Oral Suspension
+        GABAPENTIN TABLETS|Gabapentin|Tablets
+        GADOBUTROL|Gadobutrol|Raw Material (API)
+        GADODIAMIDE|Gadodiamide|Raw Material (API)
+        GADODIAMIDE INJECTION|Gadodiamide|Injection
+        GADOPENTETATE DIMEGLUMINE INJECTION|Gadopentetate Dimeglumine|Injection
+        GADOTERATE MEGLUMINE INJECTION|Gadoterate Meglumine|Injection
+        GADOTERIDOL|Gadoteridol|Raw Material (API)
+        GADOTERIDOL INJECTION|Gadoteridol|Injection
+        GALANTAMINE EXTENDED-RELEASE CAPSULES|Galantamine|Capsules
+        GALANTAMINE HYDROBROMIDE|Galantamine Hydrobromide|Raw Material (API)
+        GALANTAMINE ORAL SOLUTION|Galantamine|Oral Solution
+        GALANTAMINE TABLETS|Galantamine|Tablets
+        GALLIUM CITRATE GA 67 INJECTION|Gallium Citrate Ga 67|Injection
+        GANCICLOVIR|Ganciclovir|Raw Material (API)
+        GANCICLOVIR COMPOUNDED ORAL SUSPENSION|Ganciclovir|Oral Suspension
+        GANCICLOVIR FOR INJECTION|Ganciclovir|Injection
+        GAUZE BANDAGE|Gauze Bandage|Raw Material (API)
+        GEFITINIB|Gefitinib|Raw Material (API)
+        GEFITINIB TABLETS|Gefitinib|Tablets
+        GEMCITABINE FOR INJECTION|Gemcitabine|Injection
+        GEMCITABINE HYDROCHLORIDE|Gemcitabine HCl|Raw Material (API)
+        GEMFIBROZIL|Gemfibrozil|Raw Material (API)
+        GEMFIBROZIL CAPSULES|Gemfibrozil|Capsules
+        GEMFIBROZIL TABLETS|Gemfibrozil|Tablets
+        GEMIFLOXACIN MESYLATE|Gemifloxacin Mesylate|Raw Material (API)
+        GEMIFLOXACIN TABLETS|Gemifloxacin|Tablets
+        GENTAMICIN AND PREDNISOLONE ACETATE OPHTHALMIC OINTMENT|Gentamicin and Prednisolone Acetate Ophthalmic|Ointment
+        GENTAMICIN AND PREDNISOLONE ACETATE OPHTHALMIC SUSPENSION|Gentamicin and Prednisolone Acetate|Ophthalmic
+        GENTAMICIN INJECTION|Gentamicin|Injection
+        GENTAMICIN SULFATE|Gentamicin Sulfate|Raw Material (API)
+        GENTAMICIN SULFATE AND BETAMETHASONE ACETATE OPHTHALMIC SOLUTION|Gentamicin Sulfate and Betamethasone Acetate|Oral Solution
+        GENTAMICIN SULFATE AND BETAMETHASONE VALERATE OINTMENT|Gentamicin Sulfate and Betamethasone Valerate|Ointment
+        GENTAMICIN SULFATE AND BETAMETHASONE VALERATE OTIC SOLUTION|Gentamicin Sulfate and Betamethasone Valerate|Oral Solution
+        GENTAMICIN SULFATE AND BETAMETHASONE VALERATE TOPICAL SOLUTION|Gentamicin Sulfate and Betamethasone Valerate|Oral Solution
+        GENTAMICIN SULFATE CREAM|Gentamicin Sulfate|Cream
+        GENTAMICIN SULFATE OINTMENT|Gentamicin Sulfate|Ointment
+        GENTAMICIN SULFATE OPHTHALMIC OINTMENT|Gentamicin Sulfate Ophthalmic|Ointment
+        GENTAMICIN SULFATE OPHTHALMIC SOLUTION|Gentamicin Sulfate|Oral Solution
+        GENTAMICIN UTERINE INFUSION|Gentamicin Uterine Infusion|Raw Material (API)
+        GENTIAN VIOLET|Gentian Violet|Raw Material (API)
+        GENTIAN VIOLET CREAM|Gentian Violet|Cream
+        GENTIAN VIOLET TOPICAL SOLUTION|Gentian Violet|Oral Solution
+        GLACIAL ACETIC ACID USP|Glacial Acetic Acid|Raw Material (API)
+        GLIMEPIRIDE|Glimepiride|Raw Material (API)
+        GLIMEPIRIDE TABLETS|Glimepiride|Tablets
+        GLIPIZIDE|Glipizide|Raw Material (API)
+        GLIPIZIDE AND METFORMIN HYDROCHLORIDE TABLETS|Glipizide and Metformin HCl|Tablets
+        GLIPIZIDE TABLETS|Glipizide|Tablets
+        GLUCAGON|Glucagon|Raw Material (API)
+        GLUCAGON FOR INJECTION|Glucagon|Injection
+        GLUCONOLACTONE|Gluconolactone|Raw Material (API)
+        GLUCOSE ENZYMATIC TEST STRIP|Glucose Enzymatic Test Strip|Raw Material (API)
+        GLUTAMINE|Glutamine|Raw Material (API)
+        GLUTARAL CONCENTRATE|Glutaral Concentrate|Raw Material (API)
+        GLYBURIDE|Glyburide|Raw Material (API)
+        GLYBURIDE AND METFORMIN HYDROCHLORIDE TABLETS|Glyburide and Metformin HCl|Tablets
+        GLYBURIDE TABLETS|Glyburide|Tablets
+        GLYCERIN OPHTHALMIC SOLUTION|Glycerin|Oral Solution
+        GLYCERIN ORAL SOLUTION|Glycerin|Oral Solution
+        GLYCERIN SUPPOSITORIES|Glycerin Suppositories|Suppositories
+        GLYCERIN USP|Glycerin|Raw Material (API)
+        GLYCINE IRRIGATION|Glycine Irrigation|Irrigation
+        GLYCINE USP|Glycine|Raw Material (API)
+        GLYCOPYRROLATE|Glycopyrrolate|Raw Material (API)
+        GLYCOPYRROLATE INJECTION|Glycopyrrolate|Injection
+        GLYCOPYRROLATE TABLETS|Glycopyrrolate|Tablets
+        GOLD SODIUM THIOMALATE|Gold Sodium Thiomalate|Raw Material (API)
+        GOLD SODIUM THIOMALATE INJECTION|Gold Sodium Thiomalate|Injection
+        GONADORELIN ACETATE|Gonadorelin Acetate|Raw Material (API)
+        GONADORELIN FOR INJECTION|Gonadorelin|Injection
+        GONADORELIN HYDROCHLORIDE|Gonadorelin HCl|Raw Material (API)
+        GOSERELIN ACETATE|Goserelin Acetate|Raw Material (API)
+        GOSERELIN IMPLANTS|Goserelin Implants|Raw Material (API)
+        GRAMICIDIN|Gramicidin|Raw Material (API)
+        GRANISETRON|Granisetron|Raw Material (API)
+        GRANISETRON HYDROCHLORIDE|Granisetron HCl|Raw Material (API)
+        GRANISETRON HYDROCHLORIDE COMPOUNDED ORAL SUSPENSION|Granisetron HCl|Oral Suspension
+        GRANISETRON HYDROCHLORIDE INJECTION|Granisetron HCl|Injection
+        GRANISETRON HYDROCHLORIDE TABLETS|Granisetron HCl|Tablets
+        GREEN SOAP|Green Soap|Raw Material (API)
+        GREEN SOAP TINCTURE|Green Soap Tincture|Raw Material (API)
+        GRISEOFULVIN|Griseofulvin|Raw Material (API)
+        GRISEOFULVIN CAPSULES|Griseofulvin|Capsules
+        GRISEOFULVIN ORAL SUSPENSION|Griseofulvin|Oral Suspension
+        GRISEOFULVIN TABLETS|Griseofulvin|Tablets
+        GUAIFENESIN|Guaifenesin|Raw Material (API)
+        GUAIFENESIN AND CODEINE PHOSPHATE ORAL SOLUTION|Guaifenesin and Codeine Phosphate|Oral Solution
+        GUAIFENESIN CAPSULES|Guaifenesin|Capsules
+        GUAIFENESIN COMPOUNDED INJECTION, VETERINARY|Guaifenesin Compounded Injection, Veterinary|Injection
+        GUAIFENESIN FOR INJECTION|Guaifenesin|Injection
+        GUAIFENESIN ORAL SOLUTION|Guaifenesin|Oral Solution
+        GUAIFENESIN TABLETS|Guaifenesin|Tablets
+        GUAIFENESIN, PSEUDOEPHEDRINE HYDROCHLORIDE, AND DEXTROMETHORPHAN HYDROBROMIDE CAPSULES|Guaifenesin, Pseudoephedrine Hydrochloride, and Dextromethorphan Hydrobromide|Capsules
+        GUANABENZ ACETATE|Guanabenz Acetate|Raw Material (API)
+        GUANABENZ ACETATE TABLETS|Guanabenz Acetate|Tablets
+        GUANETHIDINE MONOSULFATE|Guanethidine Monosulfate|Raw Material (API)
+        GUANFACINE EXTENDED-RELEASE TABLETS|Guanfacine|Tablets
+        GUANFACINE HYDROCHLORIDE|Guanfacine HCl|Raw Material (API)
+        GUANFACINE TABLETS|Guanfacine|Tablets
+        GUTTA PERCHA|Gutta Percha|Raw Material (API)
+        HALAZONE|Halazone|Raw Material (API)
+        HALAZONE TABLETS FOR SOLUTION|Halazone Tablets for|Tablets
+        HALCINONIDE|Halcinonide|Raw Material (API)
+        HALCINONIDE CREAM|Halcinonide|Cream
+        HALCINONIDE OINTMENT|Halcinonide|Ointment
+        HALCINONIDE TOPICAL SOLUTION|Halcinonide|Oral Solution
+        HALF-STRENGTH LACTATED RINGER'S AND DEXTROSE INJECTION|Half-Strength Lactated Ringer's and Dextrose|Injection
+        HALOBETASOL PROPIONATE|Halobetasol Propionate|Raw Material (API)
+        HALOPERIDOL|Haloperidol|Raw Material (API)
+        HALOPERIDOL DECANOATE|Haloperidol Decanoate|Raw Material (API)
+        HALOPERIDOL INJECTION|Haloperidol|Injection
+        HALOPERIDOL ORAL SOLUTION|Haloperidol|Oral Solution
+        HALOPERIDOL TABLETS|Haloperidol|Tablets
+        HALOTHANE|Halothane|Raw Material (API)
+        HELIUM|Helium|Raw Material (API)
+        HEPARIN LOCK FLUSH SOLUTION|Heparin Lock Flush|Oral Solution
+        HEPARIN SODIUM|Heparin Sodium|Raw Material (API)
+        HEPARIN SODIUM INJECTION|Heparin Sodium|Injection
+        HEXACHLOROPHENE|Hexachlorophene|Raw Material (API)
+        HEXACHLOROPHENE CLEANSING EMULSION|Hexachlorophene Cleansing Emulsion|Raw Material (API)
+        HEXACHLOROPHENE LIQUID SOAP|Hexachlorophene Liquid Soap|Raw Material (API)
+        HEXYLRESORCINOL|Hexylresorcinol|Raw Material (API)
+        HEXYLRESORCINOL LOZENGES|Hexylresorcinol Lozenges|Raw Material (API)
+        HISTAMINE PHOSPHATE|Histamine Phosphate|Raw Material (API)
+        HISTAMINE PHOSPHATE INJECTION|Histamine Phosphate|Injection
+        HISTIDINE|Histidine|Raw Material (API)
+        HOMATROPINE HYDROBROMIDE|Homatropine Hydrobromide|Raw Material (API)
+        HOMATROPINE HYDROBROMIDE OPHTHALMIC SOLUTION|Homatropine Hydrobromide|Oral Solution
+        HOMATROPINE METHYLBROMIDE|Homatropine Methylbromide|Raw Material (API)
+        HOMATROPINE METHYLBROMIDE TABLETS|Homatropine Methylbromide|Tablets
+        HOMOSALATE|Homosalate|Raw Material (API)
+        HUMAN INSULIN ISOPHANE SUSPENSION AND HUMAN INSULIN INJECTION|Human Insulin Isophane Suspension and Human Insulin|Injection
+        HYALURONIDASE FOR INJECTION|Hyaluronidase|Injection
+        HYALURONIDASE INJECTION|Hyaluronidase|Injection
+        HYDRALAZINE HYDROCHLORIDE|Hydralazine HCl|Raw Material (API)
+        HYDRALAZINE HYDROCHLORIDE COMPOUNDED ORAL SOLUTION|Hydralazine HCl|Oral Solution
+        HYDRALAZINE HYDROCHLORIDE INJECTION|Hydralazine HCl|Injection
+        HYDRALAZINE HYDROCHLORIDE TABLETS|Hydralazine HCl|Tablets
+        HYDROCHLORIC ACID COMPOUNDED INJECTION|Hydrochloric Acid|Injection
+        HYDROCHLOROTHIAZIDE|Hydrochlorothiazide|Raw Material (API)
+        HYDROCHLOROTHIAZIDE CAPSULES|Hydrochlorothiazide|Capsules
+        HYDROCHLOROTHIAZIDE COMPOUNDED ORAL SUSPENSION|Hydrochlorothiazide|Oral Suspension
+        HYDROCHLOROTHIAZIDE TABLETS|Hydrochlorothiazide|Tablets
+        HYDROCODONE BITARTRATE|Hydrocodone Bitartrate|Raw Material (API)
+        HYDROCODONE BITARTRATE AND ACETAMINOPHEN TABLETS|Hydrocodone Bitartrate and Acetaminophen|Tablets
+        HYDROCODONE BITARTRATE AND HOMATROPINE METHYLBROMIDE TABLETS|Hydrocodone Bitartrate and Homatropine Methylbromide|Tablets
+        HYDROCODONE BITARTRATE TABLETS|Hydrocodone Bitartrate|Tablets
+        HYDROCORTISONE|Hydrocortisone|Raw Material (API)
+        HYDROCORTISONE ACETATE|Hydrocortisone Acetate|Raw Material (API)
+        HYDROCORTISONE ACETATE CREAM|Hydrocortisone Acetate|Cream
+        HYDROCORTISONE ACETATE LOTION|Hydrocortisone Acetate Lotion|Raw Material (API)
+        HYDROCORTISONE ACETATE OINTMENT|Hydrocortisone Acetate|Ointment
+        HYDROCORTISONE AND ACETIC ACID OTIC SOLUTION|Hydrocortisone and Acetic Acid|Oral Solution
+        HYDROCORTISONE BUTYRATE|Hydrocortisone Butyrate|Raw Material (API)
+        HYDROCORTISONE BUTYRATE CREAM|Hydrocortisone Butyrate|Cream
+        HYDROCORTISONE COMPOUNDED ORAL SUSPENSION|Hydrocortisone|Oral Suspension
+        HYDROCORTISONE CREAM|Hydrocortisone|Cream
+        HYDROCORTISONE GEL|Hydrocortisone|Gel
+        HYDROCORTISONE HEMISUCCINATE|Hydrocortisone Hemisuccinate|Raw Material (API)
+        HYDROCORTISONE LOTION|Hydrocortisone Lotion|Raw Material (API)
+        HYDROCORTISONE OINTMENT|Hydrocortisone|Ointment
+        HYDROCORTISONE RECTAL SUSPENSION|Hydrocortisone Rectal|Raw Material (API)
+        HYDROCORTISONE SODIUM PHOSPHATE|Hydrocortisone Sodium Phosphate|Raw Material (API)
+        HYDROCORTISONE SODIUM PHOSPHATE INJECTION|Hydrocortisone Sodium Phosphate|Injection
+        HYDROCORTISONE SODIUM SUCCINATE|Hydrocortisone Sodium Succinate|Raw Material (API)
+        HYDROCORTISONE SODIUM SUCCINATE FOR INJECTION|Hydrocortisone Sodium Succinate|Injection
+        HYDROCORTISONE TABLETS|Hydrocortisone|Tablets
+        HYDROCORTISONE VALERATE|Hydrocortisone Valerate|Raw Material (API)
+        HYDROCORTISONE VALERATE CREAM|Hydrocortisone Valerate|Cream
+        HYDROCORTISONE VALERATE OINTMENT|Hydrocortisone Valerate|Ointment
+        HYDROFLUMETHIAZIDE|Hydroflumethiazide|Raw Material (API)
+        HYDROFLUMETHIAZIDE TABLETS|Hydroflumethiazide|Tablets
+        HYDROGEN PEROXIDE CONCENTRATE|Hydrogen Peroxide Concentrate|Raw Material (API)
+        HYDROGEN PEROXIDE TOPICAL SOLUTION|Hydrogen Peroxide|Oral Solution
+        HYDROMORPHONE HYDROCHLORIDE|Hydromorphone HCl|Raw Material (API)
+        HYDROMORPHONE HYDROCHLORIDE INJECTION|Hydromorphone HCl|Injection
+        HYDROMORPHONE HYDROCHLORIDE ORAL SOLUTION|Hydromorphone HCl|Oral Solution
+        HYDROMORPHONE HYDROCHLORIDE TABLETS|Hydromorphone HCl|Tablets
+        HYDROPHILIC OINTMENT|Hydrophilic|Ointment
+        HYDROPHILIC PETROLATUM|Hydrophilic Petrolatum|Raw Material (API)
+        HYDROQUINONE|Hydroquinone|Raw Material (API)
+        HYDROQUINONE CREAM|Hydroquinone|Cream
+        HYDROQUINONE TOPICAL SOLUTION|Hydroquinone|Oral Solution
+        HYDROUS BENZOYL PEROXIDE|Hydrous Benzoyl Peroxide|Raw Material (API)
+        HYDROXOCOBALAMIN|Hydroxocobalamin|Raw Material (API)
+        HYDROXOCOBALAMIN INJECTION|Hydroxocobalamin|Injection
+        HYDROXYAMPHETAMINE HYDROBROMIDE|Hydroxyamphetamine Hydrobromide|Raw Material (API)
+        HYDROXYCHLOROQUINE SULFATE|Hydroxychloroquine Sulfate|Raw Material (API)
+        HYDROXYCHLOROQUINE SULFATE COMPOUNDED ORAL SUSPENSION|Hydroxychloroquine Sulfate|Oral Suspension
+        HYDROXYCHLOROQUINE SULFATE TABLETS|Hydroxychloroquine Sulfate|Tablets
+        HYDROXYPROGESTERONE CAPROATE|Hydroxyprogesterone Caproate|Raw Material (API)
+        HYDROXYPROGESTERONE CAPROATE INJECTION|Hydroxyprogesterone Caproate|Injection
+        HYDROXYPROPYL CELLULOSE OCULAR SYSTEM|Hydroxypropyl Cellulose Ocular System|Raw Material (API)
+        HYDROXYUREA|Hydroxyurea|Raw Material (API)
+        HYDROXYUREA CAPSULES|Hydroxyurea|Capsules
+        HYDROXYZINE HYDROCHLORIDE|Hydroxyzine HCl|Raw Material (API)
+        HYDROXYZINE HYDROCHLORIDE INJECTION|Hydroxyzine HCl|Injection
+        HYDROXYZINE HYDROCHLORIDE ORAL SOLUTION|Hydroxyzine HCl|Oral Solution
+        HYDROXYZINE HYDROCHLORIDE TABLETS|Hydroxyzine HCl|Tablets
+        HYDROXYZINE PAMOATE|Hydroxyzine Pamoate|Raw Material (API)
+        HYDROXYZINE PAMOATE CAPSULES|Hydroxyzine Pamoate|Capsules
+        HYOSCYAMINE|Hyoscyamine|Raw Material (API)
+        HYOSCYAMINE HYDROBROMIDE|Hyoscyamine Hydrobromide|Raw Material (API)
+        HYOSCYAMINE SULFATE|Hyoscyamine Sulfate|Raw Material (API)
+        HYOSCYAMINE SULFATE ELIXIR|Hyoscyamine Sulfate|Elixir
+        HYOSCYAMINE SULFATE INJECTION|Hyoscyamine Sulfate|Injection
+        HYOSCYAMINE SULFATE ORAL SOLUTION|Hyoscyamine Sulfate|Oral Solution
+        HYOSCYAMINE SULFATE TABLETS|Hyoscyamine Sulfate|Tablets
+        HYPROMELLOSE|Hypromellose|Raw Material (API)
+        HYPROMELLOSE OPHTHALMIC SOLUTION|Hypromellose|Oral Solution
+        IBUPROFEN|Ibuprofen|Raw Material (API)
+        IBUPROFEN AND PSEUDOEPHEDRINE HYDROCHLORIDE TABLETS|Ibuprofen and Pseudoephedrine HCl|Tablets
+        IBUPROFEN ORAL SUSPENSION|Ibuprofen|Oral Suspension
+        IBUPROFEN TABLETS|Ibuprofen|Tablets
+        IBUTILIDE FUMARATE|Ibutilide Fumarate|Raw Material (API)
+        ICHTHAMMOL|Ichthammol|Raw Material (API)
+        ICHTHAMMOL OINTMENT|Ichthammol|Ointment
+        IDARUBICIN HYDROCHLORIDE|Idarubicin HCl|Raw Material (API)
+        IDARUBICIN HYDROCHLORIDE FOR INJECTION|Idarubicin HCl|Injection
+        IDARUBICIN HYDROCHLORIDE INJECTION|Idarubicin HCl|Injection
+        IDOXURIDINE|Idoxuridine|Raw Material (API)
+        IDOXURIDINE OPHTHALMIC SOLUTION|Idoxuridine|Oral Solution
+        IFOSFAMIDE|Ifosfamide|Raw Material (API)
+        IFOSFAMIDE FOR INJECTION|Ifosfamide|Injection
+        IMIPENEM|Imipenem|Raw Material (API)
+        IMIPENEM AND CILASTATIN FOR INJECTABLE SUSPENSION|Imipenem and Cilastatin for|Raw Material (API)
+        IMIPENEM AND CILASTATIN FOR INJECTION|Imipenem and Cilastatin|Injection
+        IMIPRAMINE HYDROCHLORIDE|Imipramine HCl|Raw Material (API)
+        IMIPRAMINE HYDROCHLORIDE INJECTION|Imipramine HCl|Injection
+        IMIPRAMINE HYDROCHLORIDE TABLETS|Imipramine HCl|Tablets
+        IMIPRAMINE PAMOATE|Imipramine Pamoate|Raw Material (API)
+        IMIPRAMINE PAMOATE CAPSULES|Imipramine Pamoate|Capsules
+        IMIQUIMOD|Imiquimod|Raw Material (API)
+        IMIQUIMOD CREAM|Imiquimod|Cream
+        INAMRINONE|Inamrinone|Raw Material (API)
+        INAMRINONE INJECTION|Inamrinone|Injection
+        INDAPAMIDE|Indapamide|Raw Material (API)
+        INDAPAMIDE TABLETS|Indapamide|Tablets
+        INDIGOTINDISULFONATE SODIUM|Indigotindisulfonate Sodium|Raw Material (API)
+        INDIGOTINDISULFONATE SODIUM INJECTION|Indigotindisulfonate Sodium|Injection
+        INDINAVIR SULFATE|Indinavir Sulfate|Raw Material (API)
+        INDIUM IN 111 CAPROMAB PENDETIDE INJECTION|Indium In 111 Capromab Pendetide|Injection
+        INDIUM IN 111 CHLORIDE SOLUTION|Indium In 111 Chloride|Oral Solution
+        INDIUM IN 111 OXYQUINOLINE SOLUTION|Indium In 111 Oxyquinoline|Oral Solution
+        INDIUM IN 111 PENTETATE INJECTION|Indium In 111 Pentetate|Injection
+        INDIUM IN 111 PENTETREOTIDE INJECTION|Indium In 111 Pentetreotide|Injection
+        INDOCYANINE GREEN|Indocyanine Green|Raw Material (API)
+        INDOCYANINE GREEN FOR INJECTION|Indocyanine Green|Injection
+        INDOMETHACIN|Indomethacin|Raw Material (API)
+        INDOMETHACIN CAPSULES|Indomethacin|Capsules
+        INDOMETHACIN COMPOUNDED TOPICAL GEL|Indomethacin Compounded Topical|Gel
+        INDOMETHACIN EXTENDED-RELEASE CAPSULES|Indomethacin|Capsules
+        INDOMETHACIN FOR INJECTION|Indomethacin|Injection
+        INDOMETHACIN ORAL SUSPENSION|Indomethacin|Oral Suspension
+        INDOMETHACIN SODIUM|Indomethacin Sodium|Raw Material (API)
+        INDOMETHACIN SUPPOSITORIES|Indomethacin Suppositories|Suppositories
+        INSULIN|Insulin|Raw Material (API)
+        INSULIN ASPART|Insulin Aspart|Raw Material (API)
+        INSULIN ASPART INJECTION|Insulin Aspart|Injection
+        INSULIN GLARGINE|Insulin Glargine|Raw Material (API)
+        INSULIN GLARGINE INJECTION|Insulin Glargine|Injection
+        INSULIN HUMAN|Insulin Human|Raw Material (API)
+        INSULIN HUMAN INJECTION|Insulin Human|Injection
+        INSULIN INJECTION|Insulin|Injection
+        INSULIN LISPRO|Insulin Lispro|Raw Material (API)
+        INSULIN LISPRO INJECTION|Insulin Lispro|Injection
+        INSULIN ZINC SUSPENSION|Insulin Zinc|Raw Material (API)
+        INULIN|Inulin|Raw Material (API)
+        IOBENGUANE I 123 INJECTION|Iobenguane I 123|Injection
+        IODINATED I 125 ALBUMIN INJECTION|Iodinated I 125 Albumin|Injection
+        IODINATED I 131 ALBUMIN INJECTION|Iodinated I 131 Albumin|Injection
+        IODINE TINCTURE|Iodine Tincture|Raw Material (API)
+        IODINE TOPICAL SOLUTION|Iodine|Oral Solution
+        IODINE USP|Iodine|Raw Material (API)
+        IODIPAMIDE|Iodipamide|Raw Material (API)
+        IODIPAMIDE MEGLUMINE INJECTION|Iodipamide Meglumine|Injection
+        IODIXANOL|Iodixanol|Raw Material (API)
+        IODIXANOL INJECTION|Iodixanol|Injection
+        IODOFORM|Iodoform|Raw Material (API)
+        IODOQUINOL|Iodoquinol|Raw Material (API)
+        IOHEXOL|Iohexol|Raw Material (API)
+        IOHEXOL INJECTION|Iohexol|Injection
+        IOPAMIDOL|Iopamidol|Raw Material (API)
+        IOPAMIDOL INJECTION|Iopamidol|Injection
+        IOPROMIDE|Iopromide|Raw Material (API)
+        IOPROMIDE INJECTION|Iopromide|Injection
+        IOTHALAMATE MEGLUMINE INJECTION|Iothalamate Meglumine|Injection
+        IOTHALAMATE SODIUM I 125 INJECTION|Iothalamate Sodium I 125|Injection
+        IOTHALAMIC ACID|Iothalamic Acid|Raw Material (API)
+        IOVERSOL|Ioversol|Raw Material (API)
+        IOVERSOL INJECTION|Ioversol|Injection
+        IOXAGLATE MEGLUMINE AND IOXAGLATE SODIUM INJECTION|Ioxaglate Meglumine and Ioxaglate Sodium|Injection
+        IOXAGLIC ACID|Ioxaglic Acid|Raw Material (API)
+        IPECAC|Ipecac|Raw Material (API)
+        IPECAC ORAL SOLUTION|Ipecac|Oral Solution
+        IPRATROPIUM BROMIDE|Ipratropium Bromide|Raw Material (API)
+        IPRATROPIUM BROMIDE AND ALBUTEROL SULFATE INHALATION SOLUTION|Ipratropium Bromide and Albuterol Sulfate|Oral Solution
+        IPRATROPIUM BROMIDE INHALATION SOLUTION|Ipratropium Bromide|Oral Solution
+        IRBESARTAN|Irbesartan|Raw Material (API)
+        IRBESARTAN AND HYDROCHLOROTHIAZIDE TABLETS|Irbesartan and Hydrochlorothiazide|Tablets
+        IRBESARTAN TABLETS|Irbesartan|Tablets
+        IRINOTECAN HYDROCHLORIDE|Irinotecan HCl|Raw Material (API)
+        IRINOTECAN HYDROCHLORIDE INJECTION|Irinotecan HCl|Injection
+        IRON DEXTRAN INJECTION|Iron Dextran|Injection
+        IRON SUCROSE INJECTION|Iron Sucrose|Injection
+        IRON, CARBONYL|Iron, Carbonyl|Raw Material (API)
+        ISOFLUPREDONE ACETATE|Isoflupredone Acetate|Raw Material (API)
+        ISOFLUPREDONE ACETATE INJECTABLE SUSPENSION|Isoflupredone Acetate|Raw Material (API)
+        ISOFLURANE|Isoflurane|Raw Material (API)
+        ISOLEUCINE|Isoleucine|Raw Material (API)
+        ISOMETHEPTENE MUCATE|Isometheptene Mucate|Raw Material (API)
+        ISONIAZID|Isoniazid|Raw Material (API)
+        ISONIAZID INJECTION|Isoniazid|Injection
+        ISONIAZID ORAL SOLUTION|Isoniazid|Oral Solution
+        ISONIAZID TABLETS|Isoniazid|Tablets
+        ISOPHANE INSULIN HUMAN SUSPENSION|Isophane Insulin Human|Raw Material (API)
+        ISOPHANE INSULIN SUSPENSION|Isophane Insulin|Raw Material (API)
+        ISOPROPAMIDE IODIDE|Isopropamide Iodide|Raw Material (API)
+        ISOPROPYL ALCOHOL|Isopropyl Alcohol|Raw Material (API)
+        ISOPROPYL RUBBING ALCOHOL|Isopropyl Rubbing Alcohol|Raw Material (API)
+        ISOPROTERENOL HYDROCHLORIDE|Isoproterenol HCl|Raw Material (API)
+        ISOPROTERENOL HYDROCHLORIDE INJECTION|Isoproterenol HCl|Injection
+        ISOSORBIDE CONCENTRATE|Isosorbide Concentrate|Raw Material (API)
+        ISOSORBIDE DINITRATE EXTENDED-RELEASE CAPSULES|Isosorbide Dinitrate|Capsules
+        ISOSORBIDE DINITRATE EXTENDED-RELEASE TABLETS|Isosorbide Dinitrate|Tablets
+        ISOSORBIDE DINITRATE TABLETS|Isosorbide Dinitrate|Tablets
+        ISOSORBIDE MONONITRATE EXTENDED-RELEASE TABLETS|Isosorbide Mononitrate|Tablets
+        ISOSORBIDE MONONITRATE TABLETS|Isosorbide Mononitrate|Tablets
+        ISOSORBIDE ORAL SOLUTION|Isosorbide|Oral Solution
+        ISOTRETINOIN|Isotretinoin|Raw Material (API)
+        ISOTRETINOIN CAPSULES|Isotretinoin|Capsules
+        ISOXSUPRINE HYDROCHLORIDE|Isoxsuprine HCl|Raw Material (API)
+        ISOXSUPRINE HYDROCHLORIDE TABLETS|Isoxsuprine HCl|Tablets
+        ISRADIPINE|Isradipine|Raw Material (API)
+        ISRADIPINE CAPSULES|Isradipine|Capsules
+        ISRADIPINE COMPOUNDED ORAL SUSPENSION|Isradipine|Oral Suspension
+        ITRACONAZOLE|Itraconazole|Raw Material (API)
+        ITRACONAZOLE CAPSULES|Itraconazole|Capsules
+        IVERMECTIN|Ivermectin|Raw Material (API)
+        IVERMECTIN AND CLORSULON INJECTION|Ivermectin and Clorsulon|Injection
+        IVERMECTIN AND PYRANTEL PAMOATE TABLETS|Ivermectin and Pyrantel Pamoate|Tablets
+        IVERMECTIN COMPOUNDED ORAL SOLUTION, VETERINARY|Ivermectin Compounded Oral Solution, Veterinary|Oral Solution
+        IVERMECTIN INJECTION|Ivermectin|Injection
+        IVERMECTIN PASTE|Ivermectin Paste|Raw Material (API)
+        IVERMECTIN TABLETS|Ivermectin|Tablets
+        IVERMECTIN TOPICAL SOLUTION|Ivermectin|Oral Solution
+        IXABEPILONE|Ixabepilone|Raw Material (API)
+        KANAMYCIN INJECTION|Kanamycin|Injection
+        KANAMYCIN SULFATE|Kanamycin Sulfate|Raw Material (API)
+        KAOLIN|Kaolin|Raw Material (API)
+        KETAMINE COMPOUNDED ORAL SOLUTION|Ketamine|Oral Solution
+        KETAMINE HYDROCHLORIDE|Ketamine HCl|Raw Material (API)
+        KETAMINE HYDROCHLORIDE INJECTION|Ketamine HCl|Injection
+        KETOCONAZOLE|Ketoconazole|Raw Material (API)
+        KETOCONAZOLE COMPOUNDED ORAL SUSPENSION|Ketoconazole|Oral Suspension
+        KETOCONAZOLE TABLETS|Ketoconazole|Tablets
+        KETOPROFEN|Ketoprofen|Raw Material (API)
+        KETOPROFEN CAPSULES|Ketoprofen|Capsules
+        KETOPROFEN EXTENDED-RELEASE CAPSULES|Ketoprofen|Capsules
+        KETOROLAC TROMETHAMINE|Ketorolac Tromethamine|Raw Material (API)
+        KETOROLAC TROMETHAMINE INJECTION|Ketorolac Tromethamine|Injection
+        KETOROLAC TROMETHAMINE TABLETS|Ketorolac Tromethamine|Tablets
+        KETOTIFEN FUMARATE|Ketotifen Fumarate|Raw Material (API)
+        LABETALOL HYDROCHLORIDE|Labetalol HCl|Raw Material (API)
+        LABETALOL HYDROCHLORIDE COMPOUNDED ORAL SUSPENSION|Labetalol HCl|Oral Suspension
+        LABETALOL HYDROCHLORIDE INJECTION|Labetalol HCl|Injection
+        LABETALOL HYDROCHLORIDE TABLETS|Labetalol HCl|Tablets
+        LACOSAMIDE|Lacosamide|Raw Material (API)
+        LACOSAMIDE INJECTION|Lacosamide|Injection
+        LACOSAMIDE ORAL SOLUTION|Lacosamide|Oral Solution
+        LACOSAMIDE TABLETS|Lacosamide|Tablets
+        LACTASE|Lactase|Raw Material (API)
+        LACTATED RINGER'S AND DEXTROSE INJECTION|Lactated Ringer's and Dextrose|Injection
+        LACTATED RINGER'S INJECTION|Lactated Ringer's|Injection
+        LACTIC ACID|Lactic Acid|Raw Material (API)
+        LACTULOSE CONCENTRATE|Lactulose Concentrate|Raw Material (API)
+        LACTULOSE SOLUTION|Lactulose|Oral Solution
+        LAMIVUDINE|Lamivudine|Raw Material (API)
+        LAMIVUDINE AND ZIDOVUDINE TABLETS|Lamivudine and Zidovudine|Tablets
+        LAMIVUDINE ORAL SOLUTION|Lamivudine|Oral Solution
+        LAMIVUDINE TABLETS|Lamivudine|Tablets
+        LAMOTRIGINE|Lamotrigine|Raw Material (API)
+        LAMOTRIGINE COMPOUNDED ORAL SUSPENSION|Lamotrigine|Oral Suspension
+        LAMOTRIGINE EXTENDED-RELEASE TABLETS|Lamotrigine|Tablets
+        LAMOTRIGINE ORALLY DISINTEGRATING TABLETS|Lamotrigine|Tablets
+        LAMOTRIGINE TABLETS|Lamotrigine|Tablets
+        LAMOTRIGINE TABLETS FOR ORAL SUSPENSION|Lamotrigine Tablets for|Tablets
+        LANOLIN|Lanolin|Raw Material (API)
+        LANSOPRAZOLE|Lansoprazole|Raw Material (API)
+        LANSOPRAZOLE COMPOUNDED ORAL SUSPENSION|Lansoprazole|Oral Suspension
+        LANSOPRAZOLE DELAYED-RELEASE CAPSULES|Lansoprazole|Capsules
+        LATANOPROST|Latanoprost|Raw Material (API)
+        LATANOPROST COMPOUNDED TOPICAL SOLUTION|Latanoprost Compounded|Oral Solution
+        LEFLUNOMIDE|Leflunomide|Raw Material (API)
+        LEFLUNOMIDE COMPOUNDED ORAL SUSPENSION|Leflunomide|Oral Suspension
+        LEFLUNOMIDE TABLETS|Leflunomide|Tablets
+        LEMON TINCTURE|Lemon Tincture|Raw Material (API)
+        LETROZOLE|Letrozole|Raw Material (API)
+        LETROZOLE TABLETS|Letrozole|Tablets
+        LEUCINE|Leucine|Raw Material (API)
+        LEUCOVORIN CALCIUM|Leucovorin Calcium|Raw Material (API)
+        LEUCOVORIN CALCIUM COMPOUNDED ORAL SUSPENSION|Leucovorin Calcium|Oral Suspension
+        LEUCOVORIN CALCIUM FOR INJECTION|Leucovorin Calcium|Injection
+        LEUCOVORIN CALCIUM INJECTION|Leucovorin Calcium|Injection
+        LEUCOVORIN CALCIUM TABLETS|Leucovorin Calcium|Tablets
+        LEUPROLIDE ACETATE|Leuprolide Acetate|Raw Material (API)
+        LEVALBUTEROL HYDROCHLORIDE|Levalbuterol HCl|Raw Material (API)
+        LEVALBUTEROL INHALATION SOLUTION|Levalbuterol|Oral Solution
+        LEVAMISOLE HYDROCHLORIDE|Levamisole HCl|Raw Material (API)
+        LEVAMISOLE HYDROCHLORIDE TABLETS|Levamisole HCl|Tablets
+        LEVETIRACETAM|Levetiracetam|Raw Material (API)
+        LEVETIRACETAM EXTENDED-RELEASE TABLETS|Levetiracetam|Tablets
+        LEVETIRACETAM INJECTION|Levetiracetam|Injection
+        LEVETIRACETAM ORAL SOLUTION|Levetiracetam|Oral Solution
+        LEVETIRACETAM TABLETS|Levetiracetam|Tablets
+        LEVMETAMFETAMINE|Levmetamfetamine|Raw Material (API)
+        LEVOBUNOLOL HYDROCHLORIDE|Levobunolol HCl|Raw Material (API)
+        LEVOBUNOLOL HYDROCHLORIDE OPHTHALMIC SOLUTION|Levobunolol HCl|Oral Solution
+        LEVOCABASTINE HYDROCHLORIDE|Levocabastine HCl|Raw Material (API)
+        LEVOCARNITINE|Levocarnitine|Raw Material (API)
+        LEVOCARNITINE INJECTION|Levocarnitine|Injection
+        LEVOCARNITINE ORAL SOLUTION|Levocarnitine|Oral Solution
+        LEVOCARNITINE TABLETS|Levocarnitine|Tablets
+        LEVOCETIRIZINE DIHYDROCHLORIDE|Levocetirizine Dihydrochloride|Raw Material (API)
+        LEVOCETIRIZINE DIHYDROCHLORIDE TABLETS|Levocetirizine Dihydrochloride|Tablets
+        LEVODOPA|Levodopa|Raw Material (API)
+        LEVOFLOXACIN|Levofloxacin|Raw Material (API)
+        LEVOFLOXACIN ORAL SOLUTION|Levofloxacin|Oral Solution
+        LEVOFLOXACIN TABLETS|Levofloxacin|Tablets
+        LEVONORDEFRIN|Levonordefrin|Raw Material (API)
+        LEVONORGESTREL|Levonorgestrel|Raw Material (API)
+        LEVONORGESTREL AND ETHINYL ESTRADIOL TABLETS|Levonorgestrel and Ethinyl Estradiol|Tablets
+        LEVORPHANOL TARTRATE|Levorphanol Tartrate|Raw Material (API)
+        LEVORPHANOL TARTRATE TABLETS|Levorphanol Tartrate|Tablets
+        LEVOTHYROXINE SODIUM|Levothyroxine Sodium|Raw Material (API)
+        LEVOTHYROXINE SODIUM ORAL POWDER|Levothyroxine Sodium Oral Powder|Raw Material (API)
+        LEVOTHYROXINE SODIUM TABLETS|Levothyroxine Sodium|Tablets
+        LIDOCAINE|Lidocaine|Raw Material (API)
+        LIDOCAINE AND PRILOCAINE CREAM|Lidocaine and Prilocaine|Cream
+        LIDOCAINE HYDROCHLORIDE|Lidocaine HCl|Raw Material (API)
+        LIDOCAINE HYDROCHLORIDE AND DEXTROSE INJECTION|Lidocaine Hydrochloride and Dextrose|Injection
+        LIDOCAINE HYDROCHLORIDE AND EPINEPHRINE INJECTION|Lidocaine Hydrochloride and Epinephrine|Injection
+        LIDOCAINE HYDROCHLORIDE INJECTION|Lidocaine HCl|Injection
+        LIDOCAINE HYDROCHLORIDE JELLY|Lidocaine Hydrochloride Jelly|Raw Material (API)
+        LIDOCAINE HYDROCHLORIDE ORAL TOPICAL SOLUTION|Lidocaine Hydrochloride Oral|Oral Solution
+        LIDOCAINE HYDROCHLORIDE TOPICAL SOLUTION|Lidocaine HCl|Oral Solution
+        LIDOCAINE OINTMENT|Lidocaine|Ointment
+        LIDOCAINE ORAL TOPICAL SOLUTION|Lidocaine Oral|Oral Solution
+        LIDOCAINE TOPICAL AEROSOL|Lidocaine Topical Aerosol|Raw Material (API)
+        LIDOCAINE, RACEPINEPHRINE AND TETRACAINE HYDROCHLORIDES COMPOUNDED TOPICAL GEL|Lidocaine, Racepinephrine and Tetracaine Hydrochlorides Compounded Topical|Gel
+        LINCOMYCIN HYDROCHLORIDE|Lincomycin HCl|Raw Material (API)
+        LINCOMYCIN HYDROCHLORIDE CAPSULES|Lincomycin HCl|Capsules
+        LINCOMYCIN HYDROCHLORIDE SOLUBLE POWDER|Lincomycin Hydrochloride Soluble Powder|Raw Material (API)
+        LINCOMYCIN INJECTION|Lincomycin|Injection
+        LINCOMYCIN ORAL SOLUTION|Lincomycin|Oral Solution
+        LINDANE|Lindane|Raw Material (API)
+        LINDANE CREAM|Lindane|Cream
+        LINDANE SHAMPOO|Lindane Shampoo|Raw Material (API)
+        LINEZOLID|Linezolid|Raw Material (API)
+        LINEZOLID TABLETS|Linezolid|Tablets
+        LIOTHYRONINE SODIUM|Liothyronine Sodium|Raw Material (API)
+        LIOTHYRONINE SODIUM INJECTION|Liothyronine Sodium|Injection
+        LIOTHYRONINE SODIUM TABLETS|Liothyronine Sodium|Tablets
+        LIPID INJECTABLE EMULSION|Lipid Injectable Emulsion|Raw Material (API)
+        LIQUEFIED PHENOL|Liquefied Phenol|Raw Material (API)
+        LISINOPRIL|Lisinopril|Raw Material (API)
+        LISINOPRIL AND HYDROCHLOROTHIAZIDE TABLETS|Lisinopril and Hydrochlorothiazide|Tablets
+        LISINOPRIL COMPOUNDED ORAL SUSPENSION|Lisinopril|Oral Suspension
+        LISINOPRIL TABLETS|Lisinopril|Tablets
+        LITHIUM CARBONATE|Lithium Carbonate|Raw Material (API)
+        LITHIUM CARBONATE CAPSULES|Lithium Carbonate|Capsules
+        LITHIUM CARBONATE EXTENDED-RELEASE TABLETS|Lithium Carbonate|Tablets
+        LITHIUM CARBONATE TABLETS|Lithium Carbonate|Tablets
+        LITHIUM CITRATE|Lithium Citrate|Raw Material (API)
+        LITHIUM HYDROXIDE|Lithium Hydroxide|Raw Material (API)
+        LITHIUM ORAL SOLUTION|Lithium|Oral Solution
+        LOMUSTINE|Lomustine|Raw Material (API)
+        LOMUSTINE CAPSULES|Lomustine|Capsules
+        LOPERAMIDE HYDROCHLORIDE|Loperamide HCl|Raw Material (API)
+        LOPERAMIDE HYDROCHLORIDE CAPSULES|Loperamide HCl|Capsules
+        LOPERAMIDE HYDROCHLORIDE ORAL SOLUTION|Loperamide HCl|Oral Solution
+        LOPERAMIDE HYDROCHLORIDE TABLETS|Loperamide HCl|Tablets
+        LOPINAVIR|Lopinavir|Raw Material (API)
+        LOPINAVIR AND RITONAVIR ORAL SOLUTION|Lopinavir and Ritonavir|Oral Solution
+        LOPINAVIR AND RITONAVIR TABLETS|Lopinavir and Ritonavir|Tablets
+        LORATADINE|Loratadine|Raw Material (API)
+        LORATADINE CAPSULES|Loratadine|Capsules
+        LORATADINE CHEWABLE TABLETS|Loratadine Chewable|Tablets
+        LORATADINE ORAL SOLUTION|Loratadine|Oral Solution
+        LORATADINE ORALLY DISINTEGRATING TABLETS|Loratadine|Tablets
+        LORATADINE TABLETS|Loratadine|Tablets
+        LORAZEPAM|Lorazepam|Raw Material (API)
+        LORAZEPAM INJECTION|Lorazepam|Injection
+        LORAZEPAM ORAL CONCENTRATE|Lorazepam Oral Concentrate|Raw Material (API)
+        LORAZEPAM TABLETS|Lorazepam|Tablets
+        LOSARTAN POTASSIUM|Losartan Potassium|Raw Material (API)
+        LOSARTAN POTASSIUM AND HYDROCHLOROTHIAZIDE TABLETS|Losartan Potassium and Hydrochlorothiazide|Tablets
+        LOSARTAN POTASSIUM TABLETS|Losartan Potassium|Tablets
+        LOVASTATIN|Lovastatin|Raw Material (API)
+        LOVASTATIN TABLETS|Lovastatin|Tablets
+        LOXAPINE CAPSULES|Loxapine|Capsules
+        LOXAPINE SUCCINATE|Loxapine Succinate|Raw Material (API)
+        LUFENURON|Lufenuron|Raw Material (API)
+        LUMEFANTRINE|Lumefantrine|Raw Material (API)
+        LYSINE ACETATE|Lysine Acetate|Raw Material (API)
+        LYSINE HYDROCHLORIDE|Lysine HCl|Raw Material (API)
+        MAFENIDE ACETATE|Mafenide Acetate|Raw Material (API)
+        MAFENIDE ACETATE CREAM|Mafenide Acetate|Cream
+        MAFENIDE ACETATE FOR TOPICAL SOLUTION|Mafenide Acetate for|Oral Solution
+        MAGALDRATE|Magaldrate|Raw Material (API)
+        MAGALDRATE AND SIMETHICONE CHEWABLE TABLETS|Magaldrate and Simethicone Chewable|Tablets
+        MAGALDRATE AND SIMETHICONE ORAL SUSPENSION|Magaldrate and Simethicone|Oral Suspension
+        MAGNESIA TABLETS|Magnesia|Tablets
+        MAGNESIUM CARBONATE|Magnesium Carbonate|Raw Material (API)
+        MAGNESIUM CARBONATE AND CITRIC ACID FOR ORAL SOLUTION|Magnesium Carbonate and Citric Acid for|Oral Solution
+        MAGNESIUM CARBONATE AND SODIUM BICARBONATE FOR ORAL SUSPENSION|Magnesium Carbonate and Sodium Bicarbonate for|Oral Suspension
+        MAGNESIUM CARBONATE, CITRIC ACID, AND POTASSIUM CITRATE FOR ORAL SOLUTION|Magnesium Carbonate, Citric Acid, and Potassium Citrate for|Oral Solution
+        MAGNESIUM CHLORIDE|Magnesium Chloride|Raw Material (API)
+        MAGNESIUM CITRATE|Magnesium Citrate|Raw Material (API)
+        MAGNESIUM CITRATE FOR ORAL SOLUTION|Magnesium Citrate for|Oral Solution
+        MAGNESIUM CITRATE ORAL SOLUTION|Magnesium Citrate|Oral Solution
+        MAGNESIUM GLUCONATE|Magnesium Gluconate|Raw Material (API)
+        MAGNESIUM GLUCONATE TABLETS|Magnesium Gluconate|Tablets
+        MAGNESIUM HYDROXIDE|Magnesium Hydroxide|Raw Material (API)
+        MAGNESIUM HYDROXIDE PASTE|Magnesium Hydroxide Paste|Raw Material (API)
+        MAGNESIUM OXIDE|Magnesium Oxide|Raw Material (API)
+        MAGNESIUM OXIDE CAPSULES|Magnesium Oxide|Capsules
+        MAGNESIUM OXIDE TABLETS|Magnesium Oxide|Tablets
+        MAGNESIUM PHOSPHATE|Magnesium Phosphate|Raw Material (API)
+        MAGNESIUM SALICYLATE|Magnesium Salicylate|Raw Material (API)
+        MAGNESIUM SALICYLATE TABLETS|Magnesium Salicylate|Tablets
+        MAGNESIUM SULFATE|Magnesium Sulfate|Raw Material (API)
+        MAGNESIUM SULFATE IN DEXTROSE INJECTION|Magnesium Sulfate in Dextrose|Injection
+        MAGNESIUM SULFATE INJECTION|Magnesium Sulfate|Injection
+        MAGNESIUM TRISILICATE|Magnesium Trisilicate|Raw Material (API)
+        MAGNESIUM TRISILICATE TABLETS|Magnesium Trisilicate|Tablets
+        MALATHION|Malathion|Raw Material (API)
+        MALATHION LOTION|Malathion Lotion|Raw Material (API)
+        MANGANESE CHLORIDE|Manganese Chloride|Raw Material (API)
+        MANGANESE CHLORIDE INJECTION|Manganese Chloride|Injection
+        MANGANESE GLUCONATE|Manganese Gluconate|Raw Material (API)
+        MANGANESE SULFATE|Manganese Sulfate|Raw Material (API)
+        MANGANESE SULFATE INJECTION|Manganese Sulfate|Injection
+        MANNITOL|Mannitol|Raw Material (API)
+        MANNITOL COMPOUNDED INJECTION|Mannitol|Injection
+        MANNITOL IN SODIUM CHLORIDE INJECTION|Mannitol in Sodium Chloride|Injection
+        MANNITOL INJECTION|Mannitol|Injection
+        MAPROTILINE HYDROCHLORIDE|Maprotiline HCl|Raw Material (API)
+        MAPROTILINE HYDROCHLORIDE TABLETS|Maprotiline HCl|Tablets
+        MARBOFLOXACIN COMPOUNDED ORAL SUSPENSION, VETERINARY|Marbofloxacin|Oral Suspension
+        MEBENDAZOLE|Mebendazole|Raw Material (API)
+        MEBENDAZOLE ORAL SUSPENSION|Mebendazole|Oral Suspension
+        MEBENDAZOLE TABLETS|Mebendazole|Tablets
+        MEBROFENIN|Mebrofenin|Raw Material (API)
+        MECAMYLAMINE HYDROCHLORIDE|Mecamylamine HCl|Raw Material (API)
+        MECAMYLAMINE HYDROCHLORIDE TABLETS|Mecamylamine HCl|Tablets
+        MECHLORETHAMINE HYDROCHLORIDE|Mechlorethamine HCl|Raw Material (API)
+        MECHLORETHAMINE HYDROCHLORIDE FOR INJECTION|Mechlorethamine HCl|Injection
+        MECLIZINE HYDROCHLORIDE|Meclizine HCl|Raw Material (API)
+        MECLIZINE HYDROCHLORIDE TABLETS|Meclizine HCl|Tablets
+        MECLOFENAMATE SODIUM|Meclofenamate Sodium|Raw Material (API)
+        MECLOFENAMATE SODIUM CAPSULES|Meclofenamate Sodium|Capsules
+        MEDICAL AIR|Medical Air|Raw Material (API)
+        MEDROXYPROGESTERONE ACETATE|Medroxyprogesterone Acetate|Raw Material (API)
+        MEDROXYPROGESTERONE ACETATE INJECTABLE SUSPENSION|Medroxyprogesterone Acetate|Raw Material (API)
+        MEDROXYPROGESTERONE ACETATE TABLETS|Medroxyprogesterone Acetate|Tablets
+        MEFENAMIC ACID|Mefenamic Acid|Raw Material (API)
+        MEFENAMIC ACID CAPSULES|Mefenamic Acid|Capsules
+        MEFLOQUINE HYDROCHLORIDE|Mefloquine HCl|Raw Material (API)
+        MEFLOQUINE HYDROCHLORIDE TABLETS|Mefloquine HCl|Tablets
+        MEGESTROL ACETATE|Megestrol Acetate|Raw Material (API)
+        MEGESTROL ACETATE ORAL SUSPENSION|Megestrol Acetate|Oral Suspension
+        MEGESTROL ACETATE TABLETS|Megestrol Acetate|Tablets
+        MEGLUMINE|Meglumine|Raw Material (API)
+        MELENGESTROL ACETATE|Melengestrol Acetate|Raw Material (API)
+        MELOXICAM|Meloxicam|Raw Material (API)
+        MELOXICAM ORAL SUSPENSION|Meloxicam|Oral Suspension
+        MELOXICAM TABLETS|Meloxicam|Tablets
+        MELPHALAN|Melphalan|Raw Material (API)
+        MELPHALAN TABLETS|Melphalan|Tablets
+        MEMANTINE HYDROCHLORIDE|Memantine HCl|Raw Material (API)
+        MEMANTINE HYDROCHLORIDE TABLETS|Memantine HCl|Tablets
+        MENADIONE|Menadione|Raw Material (API)
+        MENTHOL|Menthol|Raw Material (API)
+        MENTHOL LOZENGES|Menthol Lozenges|Raw Material (API)
+        MEPERIDINE HYDROCHLORIDE|Meperidine HCl|Raw Material (API)
+        MEPERIDINE HYDROCHLORIDE INJECTION|Meperidine HCl|Injection
+        MEPERIDINE HYDROCHLORIDE ORAL SOLUTION|Meperidine HCl|Oral Solution
+        MEPERIDINE HYDROCHLORIDE TABLETS|Meperidine HCl|Tablets
+        MEPHOBARBITAL|Mephobarbital|Raw Material (API)
+        MEPIVACAINE HYDROCHLORIDE|Mepivacaine HCl|Raw Material (API)
+        MEPIVACAINE HYDROCHLORIDE AND LEVONORDEFRIN INJECTION|Mepivacaine Hydrochloride and Levonordefrin|Injection
+        MEPIVACAINE HYDROCHLORIDE INJECTION|Mepivacaine HCl|Injection
+        MEPROBAMATE|Meprobamate|Raw Material (API)
+        MEPROBAMATE TABLETS|Meprobamate|Tablets
+        MERADIMATE|Meradimate|Raw Material (API)
+        MERCAPTOPURINE|Mercaptopurine|Raw Material (API)
+        MERCAPTOPURINE TABLETS|Mercaptopurine|Tablets
+        MEROPENEM|Meropenem|Raw Material (API)
+        MEROPENEM FOR INJECTION|Meropenem|Injection
+        MESALAMINE|Mesalamine|Raw Material (API)
+        MESALAMINE DELAYED-RELEASE TABLETS|Mesalamine|Tablets
+        MESALAMINE EXTENDED-RELEASE CAPSULES|Mesalamine|Capsules
+        MESALAMINE RECTAL SUSPENSION|Mesalamine Rectal|Raw Material (API)
+        MESALAMINE SUPPOSITORIES|Mesalamine Suppositories|Suppositories
+        MESNA|Mesna|Raw Material (API)
+        MESNA TABLETS|Mesna|Tablets
+        MESTRANOL|Mestranol|Raw Material (API)
+        METACRESOL|Metacresol|Raw Material (API)
+        METAPROTERENOL SULFATE|Metaproterenol Sulfate|Raw Material (API)
+        METAPROTERENOL SULFATE ORAL SOLUTION|Metaproterenol Sulfate|Oral Solution
+        METAPROTERENOL SULFATE TABLETS|Metaproterenol Sulfate|Tablets
+        METARAMINOL BITARTRATE|Metaraminol Bitartrate|Raw Material (API)
+        METARAMINOL BITARTRATE INJECTION|Metaraminol Bitartrate|Injection
+        METAXALONE|Metaxalone|Raw Material (API)
+        METAXALONE TABLETS|Metaxalone|Tablets
+        METFORMIN HYDROCHLORIDE|Metformin HCl|Raw Material (API)
+        METFORMIN HYDROCHLORIDE EXTENDED-RELEASE TABLETS|Metformin HCl|Tablets
+        METFORMIN HYDROCHLORIDE TABLETS|Metformin HCl|Tablets
+        METHACHOLINE CHLORIDE|Methacholine Chloride|Raw Material (API)
+        METHACYCLINE HYDROCHLORIDE|Methacycline HCl|Raw Material (API)
+        METHADONE HYDROCHLORIDE|Methadone HCl|Raw Material (API)
+        METHADONE HYDROCHLORIDE INJECTION|Methadone HCl|Injection
+        METHADONE HYDROCHLORIDE ORAL CONCENTRATE|Methadone Hydrochloride Oral Concentrate|Raw Material (API)
+        METHADONE HYDROCHLORIDE ORAL SOLUTION|Methadone HCl|Oral Solution
+        METHADONE HYDROCHLORIDE TABLETS|Methadone HCl|Tablets
+        METHADONE HYDROCHLORIDE TABLETS FOR ORAL SUSPENSION|Methadone Hydrochloride Tablets for|Tablets
+        METHAMPHETAMINE HYDROCHLORIDE|Methamphetamine HCl|Raw Material (API)
+        METHAMPHETAMINE HYDROCHLORIDE TABLETS|Methamphetamine HCl|Tablets
+        METHAZOLAMIDE|Methazolamide|Raw Material (API)
+        METHAZOLAMIDE TABLETS|Methazolamide|Tablets
+        METHENAMINE|Methenamine|Raw Material (API)
+        METHENAMINE HIPPURATE|Methenamine Hippurate|Raw Material (API)
+        METHENAMINE HIPPURATE TABLETS|Methenamine Hippurate|Tablets
+        METHENAMINE MANDELATE|Methenamine Mandelate|Raw Material (API)
+        METHENAMINE MANDELATE TABLETS|Methenamine Mandelate|Tablets
+        METHIMAZOLE|Methimazole|Raw Material (API)
+        METHIMAZOLE TABLETS|Methimazole|Tablets
+        METHIONINE|Methionine|Raw Material (API)
+        METHOCARBAMOL|Methocarbamol|Raw Material (API)
+        METHOCARBAMOL INJECTION|Methocarbamol|Injection
+        METHOCARBAMOL TABLETS|Methocarbamol|Tablets
+        METHOHEXITAL|Methohexital|Raw Material (API)
+        METHOHEXITAL SODIUM FOR INJECTION|Methohexital Sodium|Injection
+        METHOTREXATE|Methotrexate|Raw Material (API)
+        METHOTREXATE FOR INJECTION|Methotrexate|Injection
+        METHOTREXATE INJECTION|Methotrexate|Injection
+        METHOTREXATE TABLETS|Methotrexate|Tablets
+        METHOTRIMEPRAZINE|Methotrimeprazine|Raw Material (API)
+        METHOTRIMEPRAZINE INJECTION|Methotrimeprazine|Injection
+        METHOXSALEN|Methoxsalen|Raw Material (API)
+        METHOXSALEN CAPSULES|Methoxsalen|Capsules
+        METHOXSALEN TOPICAL SOLUTION|Methoxsalen|Oral Solution
+        METHSCOPOLAMINE BROMIDE|Methscopolamine Bromide|Raw Material (API)
+        METHSCOPOLAMINE BROMIDE TABLETS|Methscopolamine Bromide|Tablets
+        METHSUXIMIDE|Methsuximide|Raw Material (API)
+        METHSUXIMIDE CAPSULES|Methsuximide|Capsules
+        METHYCLOTHIAZIDE|Methyclothiazide|Raw Material (API)
+        METHYCLOTHIAZIDE TABLETS|Methyclothiazide|Tablets
+        METHYLBENZETHONIUM CHLORIDE|Methylbenzethonium Chloride|Raw Material (API)
+        METHYLBENZETHONIUM CHLORIDE LOTION|Methylbenzethonium Chloride Lotion|Raw Material (API)
+        METHYLCELLULOSE|Methylcellulose|Raw Material (API)
+        METHYLCELLULOSE OPHTHALMIC SOLUTION|Methylcellulose|Oral Solution
+        METHYLCELLULOSE ORAL SOLUTION|Methylcellulose|Oral Solution
+        METHYLCELLULOSE TABLETS|Methylcellulose|Tablets
+        METHYLDOPA|Methyldopa|Raw Material (API)
+        METHYLDOPA AND HYDROCHLOROTHIAZIDE TABLETS|Methyldopa and Hydrochlorothiazide|Tablets
+        METHYLDOPA TABLETS|Methyldopa|Tablets
+        METHYLENE BLUE|Methylene Blue|Raw Material (API)
+        METHYLENE BLUE COMPOUNDED INJECTION, VETERINARY|Methylene Blue Compounded Injection, Veterinary|Injection
+        METHYLENE BLUE INJECTION|Methylene Blue|Injection
+        METHYLERGONOVINE MALEATE|Methylergonovine Maleate|Raw Material (API)
+        METHYLERGONOVINE MALEATE INJECTION|Methylergonovine Maleate|Injection
+        METHYLERGONOVINE MALEATE TABLETS|Methylergonovine Maleate|Tablets
+        METHYLNALTREXONE BROMIDE|Methylnaltrexone Bromide|Raw Material (API)
+        METHYLPHENIDATE HYDROCHLORIDE|Methylphenidate HCl|Raw Material (API)
+        METHYLPHENIDATE HYDROCHLORIDE EXTENDED-RELEASE TABLETS|Methylphenidate HCl|Tablets
+        METHYLPHENIDATE HYDROCHLORIDE TABLETS|Methylphenidate HCl|Tablets
+        METHYLPREDNISOLONE|Methylprednisolone|Raw Material (API)
+        METHYLPREDNISOLONE ACETATE|Methylprednisolone Acetate|Raw Material (API)
+        METHYLPREDNISOLONE ACETATE INJECTABLE SUSPENSION|Methylprednisolone Acetate|Raw Material (API)
+        METHYLPREDNISOLONE HEMISUCCINATE|Methylprednisolone Hemisuccinate|Raw Material (API)
+        METHYLPREDNISOLONE SODIUM SUCCINATE|Methylprednisolone Sodium Succinate|Raw Material (API)
+        METHYLPREDNISOLONE SODIUM SUCCINATE FOR INJECTION|Methylprednisolone Sodium Succinate|Injection
+        METHYLPREDNISOLONE TABLETS|Methylprednisolone|Tablets
+        METHYLTESTOSTERONE|Methyltestosterone|Raw Material (API)
+        METHYLTESTOSTERONE CAPSULES|Methyltestosterone|Capsules
+        METHYLTESTOSTERONE TABLETS|Methyltestosterone|Tablets
+        METHYSERGIDE MALEATE|Methysergide Maleate|Raw Material (API)
+        METOCLOPRAMIDE HYDROCHLORIDE|Metoclopramide HCl|Raw Material (API)
+        METOCLOPRAMIDE INJECTION|Metoclopramide|Injection
+        METOCLOPRAMIDE ORAL SOLUTION|Metoclopramide|Oral Solution
+        METOCLOPRAMIDE TABLETS|Metoclopramide|Tablets
+        METOLAZONE|Metolazone|Raw Material (API)
+        METOLAZONE COMPOUNDED ORAL SUSPENSION|Metolazone|Oral Suspension
+        METOLAZONE TABLETS|Metolazone|Tablets
+        METOPROLOL FUMARATE|Metoprolol Fumarate|Raw Material (API)
+        METOPROLOL SUCCINATE|Metoprolol Succinate|Raw Material (API)
+        METOPROLOL SUCCINATE EXTENDED-RELEASE TABLETS|Metoprolol Succinate|Tablets
+        METOPROLOL TARTRATE|Metoprolol Tartrate|Raw Material (API)
+        METOPROLOL TARTRATE AND HYDROCHLOROTHIAZIDE TABLETS|Metoprolol Tartrate and Hydrochlorothiazide|Tablets
+        METOPROLOL TARTRATE COMPOUNDED ORAL SOLUTION|Metoprolol Tartrate|Oral Solution
+        METOPROLOL TARTRATE COMPOUNDED ORAL SUSPENSION|Metoprolol Tartrate|Oral Suspension
+        METOPROLOL TARTRATE INJECTION|Metoprolol Tartrate|Injection
+        METOPROLOL TARTRATE TABLETS|Metoprolol Tartrate|Tablets
+        METRIFONATE|Metrifonate|Raw Material (API)
+        METRONIDAZOLE|Metronidazole|Raw Material (API)
+        METRONIDAZOLE BENZOATE|Metronidazole Benzoate|Raw Material (API)
+        METRONIDAZOLE BENZOATE COMPOUNDED ORAL SUSPENSION|Metronidazole Benzoate|Oral Suspension
+        METRONIDAZOLE CAPSULES|Metronidazole|Capsules
+        METRONIDAZOLE EXTENDED-RELEASE TABLETS|Metronidazole|Tablets
+        METRONIDAZOLE GEL|Metronidazole|Gel
+        METRONIDAZOLE INJECTION|Metronidazole|Injection
+        METRONIDAZOLE TABLETS|Metronidazole|Tablets
+        METYRAPONE|Metyrapone|Raw Material (API)
+        METYROSINE|Metyrosine|Raw Material (API)
+        METYROSINE CAPSULES|Metyrosine|Capsules
+        MEXILETINE HYDROCHLORIDE|Mexiletine HCl|Raw Material (API)
+        MEXILETINE HYDROCHLORIDE CAPSULES|Mexiletine HCl|Capsules
+        MIBOLERONE|Mibolerone|Raw Material (API)
+        MIBOLERONE ORAL SOLUTION|Mibolerone|Oral Solution
+        MICAFUNGIN FOR INJECTION|Micafungin|Injection
+        MICAFUNGIN SODIUM|Micafungin Sodium|Raw Material (API)
+        MICONAZOLE|Miconazole|Raw Material (API)
+        MICONAZOLE COMPOUNDED OPHTHALMIC SOLUTION|Miconazole Compounded|Oral Solution
+        MICONAZOLE NITRATE|Miconazole Nitrate|Raw Material (API)
+        MICONAZOLE NITRATE CREAM|Miconazole Nitrate|Cream
+        MICONAZOLE NITRATE TOPICAL POWDER|Miconazole Nitrate Topical Powder|Raw Material (API)
+        MICONAZOLE NITRATE VAGINAL SUPPOSITORIES|Miconazole Nitrate Vaginal Suppositories|Suppositories
+        MIDAZOLAM|Midazolam|Raw Material (API)
+        MIDAZOLAM INJECTION|Midazolam|Injection
+        MIDODRINE HYDROCHLORIDE|Midodrine HCl|Raw Material (API)
+        MIDODRINE HYDROCHLORIDE TABLETS|Midodrine HCl|Tablets
+        MILBEMYCIN OXIME|Milbemycin Oxime|Raw Material (API)
+        MILK OF BISMUTH|Milk of Bismuth|Raw Material (API)
+        MILK OF MAGNESIA|Milk of Magnesia|Raw Material (API)
+        MILRINONE|Milrinone|Raw Material (API)
+        MILRINONE LACTATE INJECTION|Milrinone Lactate|Injection
+        MINERAL OIL|Mineral Oil|Raw Material (API)
+        MINERAL OIL EMULSION|Mineral Oil Emulsion|Raw Material (API)
+        MINERAL OIL, RECTAL|Mineral Oil, Rectal|Raw Material (API)
+        MINOCYCLINE FOR INJECTION|Minocycline|Injection
+        MINOCYCLINE HYDROCHLORIDE|Minocycline HCl|Raw Material (API)
+        MINOCYCLINE HYDROCHLORIDE CAPSULES|Minocycline HCl|Capsules
+        MINOCYCLINE HYDROCHLORIDE EXTENDED-RELEASE TABLETS|Minocycline HCl|Tablets
+        MINOCYCLINE HYDROCHLORIDE TABLETS|Minocycline HCl|Tablets
+        MINOCYCLINE PERIODONTAL SYSTEM|Minocycline Periodontal System|Raw Material (API)
+        MINOXIDIL|Minoxidil|Raw Material (API)
+        MINOXIDIL TABLETS|Minoxidil|Tablets
+        MINOXIDIL TOPICAL SOLUTION|Minoxidil|Oral Solution
+        MIRTAZAPINE|Mirtazapine|Raw Material (API)
+        MIRTAZAPINE COMPOUNDED ORAL SUSPENSION, VETERINARY|Mirtazapine|Oral Suspension
+        MIRTAZAPINE ORALLY DISINTEGRATING TABLETS|Mirtazapine|Tablets
+        MIRTAZAPINE TABLETS|Mirtazapine|Tablets
+        MISOPROSTOL|Misoprostol|Raw Material (API)
+        MISOPROSTOL DISPERSION|Misoprostol Dispersion|Raw Material (API)
+        MITOMYCIN|Mitomycin|Raw Material (API)
+        MITOMYCIN FOR INJECTION|Mitomycin|Injection
+        MITOTANE|Mitotane|Raw Material (API)
+        MITOTANE TABLETS|Mitotane|Tablets
+        MITOXANTRONE HYDROCHLORIDE|Mitoxantrone HCl|Raw Material (API)
+        MITOXANTRONE INJECTION|Mitoxantrone|Injection
+        MODAFINIL|Modafinil|Raw Material (API)
+        MODAFINIL TABLETS|Modafinil|Tablets
+        MODIFIED LACTATED RINGER'S AND DEXTROSE INJECTION|Modified Lactated Ringer's and Dextrose|Injection
+        MODIFIED LANOLIN|Modified Lanolin|Raw Material (API)
+        MOEXIPRIL HYDROCHLORIDE|Moexipril HCl|Raw Material (API)
+        MOEXIPRIL HYDROCHLORIDE AND HYDROCHLOROTHIAZIDE TABLETS|Moexipril Hydrochloride and Hydrochlorothiazide|Tablets
+        MOEXIPRIL HYDROCHLORIDE TABLETS|Moexipril HCl|Tablets
+        MOLINDONE HYDROCHLORIDE|Molindone HCl|Raw Material (API)
+        MOLINDONE HYDROCHLORIDE TABLETS|Molindone HCl|Tablets
+        MOMETASONE FUROATE|Mometasone Furoate|Raw Material (API)
+        MOMETASONE FUROATE CREAM|Mometasone Furoate|Cream
+        MOMETASONE FUROATE OINTMENT|Mometasone Furoate|Ointment
+        MOMETASONE FUROATE TOPICAL SOLUTION|Mometasone Furoate|Oral Solution
+        MONENSIN|Monensin|Raw Material (API)
+        MONENSIN GRANULATED|Monensin Granulated|Raw Material (API)
+        MONENSIN SODIUM|Monensin Sodium|Raw Material (API)
+        MONENSIN TYPE A MEDICATED ARTICLE|Monensin Type A|Type A Medicated Article
+        MONOBASIC SODIUM PHOSPHATE|Monobasic Sodium Phosphate|Raw Material (API)
+        MONOBENZONE|Monobenzone|Raw Material (API)
+        MONTELUKAST SODIUM|Montelukast Sodium|Raw Material (API)
+        MONTELUKAST SODIUM CHEWABLE TABLETS|Montelukast Sodium Chewable|Tablets
+        MONTELUKAST SODIUM ORAL GRANULES|Montelukast Sodium Oral Granules|Raw Material (API)
+        MONTELUKAST SODIUM TABLETS|Montelukast Sodium|Tablets
+        MORANTEL TARTRATE|Morantel Tartrate|Raw Material (API)
+        MORPHINE SULFATE|Morphine Sulfate|Raw Material (API)
+        MORPHINE SULFATE COMPOUNDED INJECTION|Morphine Sulfate|Injection
+        MORPHINE SULFATE COMPOUNDED ORAL SOLUTION|Morphine Sulfate|Oral Solution
+        MORPHINE SULFATE COMPOUNDED SUPPOSITORIES|Morphine Sulfate Compounded Suppositories|Suppositories
+        MORPHINE SULFATE EXTENDED-RELEASE CAPSULES|Morphine Sulfate|Capsules
+        MORPHINE SULFATE INJECTION|Morphine Sulfate|Injection
+        MOXIDECTIN|Moxidectin|Raw Material (API)
+        MOXIFLOXACIN HYDROCHLORIDE|Moxifloxacin HCl|Raw Material (API)
+        MOXIFLOXACIN OPHTHALMIC SOLUTION|Moxifloxacin|Oral Solution
+        MOXIFLOXACIN TABLETS|Moxifloxacin|Tablets
+        MULTIPLE ELECTROLYTES AND DEXTROSE INJECTION TYPE 1|Multiple Electrolytes and Dextrose Injection Type 1|Injection
+        MULTIPLE ELECTROLYTES AND DEXTROSE INJECTION TYPE 2|Multiple Electrolytes and Dextrose Injection Type 2|Injection
+        MULTIPLE ELECTROLYTES AND DEXTROSE INJECTION TYPE 3|Multiple Electrolytes and Dextrose Injection Type 3|Injection
+        MULTIPLE ELECTROLYTES INJECTION TYPE 1|Multiple Electrolytes Injection Type 1|Injection
+        MULTIPLE ELECTROLYTES INJECTION TYPE 2|Multiple Electrolytes Injection Type 2|Injection
+        MUPIROCIN|Mupirocin|Raw Material (API)
+        MUPIROCIN CALCIUM|Mupirocin Calcium|Raw Material (API)
+        MUPIROCIN CREAM|Mupirocin|Cream
+        MUPIROCIN NASAL OINTMENT|Mupirocin Nasal|Ointment
+        MUPIROCIN OINTMENT|Mupirocin|Ointment
+        MYCOPHENOLATE MOFETIL|Mycophenolate Mofetil|Raw Material (API)
+        MYCOPHENOLATE MOFETIL CAPSULES|Mycophenolate Mofetil|Capsules
+        MYCOPHENOLATE MOFETIL FOR INJECTION|Mycophenolate Mofetil|Injection
+        MYCOPHENOLATE MOFETIL FOR ORAL SUSPENSION|Mycophenolate Mofetil for|Oral Suspension
+        MYCOPHENOLATE MOFETIL TABLETS|Mycophenolate Mofetil|Tablets
+        MYCOPHENOLATE SODIUM|Mycophenolate Sodium|Raw Material (API)
+        MYCOPHENOLIC ACID DELAYED-RELEASE TABLETS|Mycophenolic Acid|Tablets
+        MYRRH|Myrrh|Raw Material (API)
+        MYRRH TOPICAL SOLUTION|Myrrh|Oral Solution
+        NABUMETONE|Nabumetone|Raw Material (API)
+        NABUMETONE TABLETS|Nabumetone|Tablets
+        NADOLOL|Nadolol|Raw Material (API)
+        NADOLOL AND BENDROFLUMETHIAZIDE TABLETS|Nadolol and Bendroflumethiazide|Tablets
+        NADOLOL TABLETS|Nadolol|Tablets
+        NAFCILLIN FOR INJECTION|Nafcillin|Injection
+        NAFCILLIN INJECTION|Nafcillin|Injection
+        NAFCILLIN SODIUM|Nafcillin Sodium|Raw Material (API)
+        NAFTIFINE HYDROCHLORIDE|Naftifine HCl|Raw Material (API)
+        NAFTIFINE HYDROCHLORIDE CREAM|Naftifine HCl|Cream
+        NAFTIFINE HYDROCHLORIDE GEL|Naftifine HCl|Gel
+        NALORPHINE HYDROCHLORIDE|Nalorphine HCl|Raw Material (API)
+        NALORPHINE HYDROCHLORIDE INJECTION|Nalorphine HCl|Injection
+        NALOXONE HYDROCHLORIDE|Naloxone HCl|Raw Material (API)
+        NALOXONE HYDROCHLORIDE INJECTION|Naloxone HCl|Injection
+        NALTREXONE HYDROCHLORIDE|Naltrexone HCl|Raw Material (API)
+        NALTREXONE HYDROCHLORIDE COMPOUNDED CREAM|Naltrexone Hydrochloride Compounded|Cream
+        NALTREXONE HYDROCHLORIDE TABLETS|Naltrexone HCl|Tablets
+        NANDROLONE DECANOATE|Nandrolone Decanoate|Raw Material (API)
+        NANDROLONE DECANOATE INJECTION|Nandrolone Decanoate|Injection
+        NAPHAZOLINE HYDROCHLORIDE|Naphazoline HCl|Raw Material (API)
+        NAPHAZOLINE HYDROCHLORIDE AND PHENIRAMINE MALEATE OPHTHALMIC SOLUTION|Naphazoline Hydrochloride and Pheniramine Maleate|Oral Solution
+        NAPHAZOLINE HYDROCHLORIDE NASAL SOLUTION|Naphazoline Hydrochloride Nasal|Oral Solution
+        NAPHAZOLINE HYDROCHLORIDE OPHTHALMIC SOLUTION|Naphazoline HCl|Oral Solution
+        NAPROXEN|Naproxen|Raw Material (API)
+        NAPROXEN COMPOUNDED ORAL SUSPENSION|Naproxen|Oral Suspension
+        NAPROXEN DELAYED-RELEASE TABLETS|Naproxen|Tablets
+        NAPROXEN ORAL SUSPENSION|Naproxen|Oral Suspension
+        NAPROXEN SODIUM|Naproxen Sodium|Raw Material (API)
+        NAPROXEN SODIUM AND PSEUDOEPHEDRINE HYDROCHLORIDE EXTENDED-RELEASE TABLETS|Naproxen Sodium and Pseudoephedrine HCl|Tablets
+        NAPROXEN SODIUM TABLETS|Naproxen Sodium|Tablets
+        NAPROXEN TABLETS|Naproxen|Tablets
+        NARASIN GRANULAR|Narasin Granular|Raw Material (API)
+        NARASIN TYPE A MEDICATED ARTICLE|Narasin Type A|Type A Medicated Article
+        NARATRIPTAN COMPOUNDED ORAL SUSPENSION|Naratriptan|Oral Suspension
+        NARATRIPTAN HYDROCHLORIDE|Naratriptan HCl|Raw Material (API)
+        NARATRIPTAN TABLETS|Naratriptan|Tablets
+        NATAMYCIN|Natamycin|Raw Material (API)
+        NATAMYCIN OPHTHALMIC SUSPENSION|Natamycin|Ophthalmic
+        NATEGLINIDE|Nateglinide|Raw Material (API)
+        NATEGLINIDE TABLETS|Nateglinide|Tablets
+        NEFAZODONE HYDROCHLORIDE|Nefazodone HCl|Raw Material (API)
+        NEFAZODONE HYDROCHLORIDE TABLETS|Nefazodone HCl|Tablets
+        NEOMYCIN AND POLYMYXIN B SULFATES AND BACITRACIN OINTMENT|Neomycin and Polymyxin B Sulfates and Bacitracin|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES AND BACITRACIN OPHTHALMIC OINTMENT|Neomycin and Polymyxin B Sulfates and Bacitracin Ophthalmic|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES AND BACITRACIN ZINC OINTMENT|Neomycin and Polymyxin B Sulfates and Bacitracin Zinc|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES AND BACITRACIN ZINC OPHTHALMIC OINTMENT|Neomycin and Polymyxin B Sulfates and Bacitracin Zinc Ophthalmic|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES AND DEXAMETHASONE OPHTHALMIC OINTMENT|Neomycin and Polymyxin B Sulfates and Dexamethasone Ophthalmic|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES AND DEXAMETHASONE OPHTHALMIC SUSPENSION|Neomycin and Polymyxin B Sulfates and Dexamethasone|Ophthalmic
+        NEOMYCIN AND POLYMYXIN B SULFATES AND GRAMICIDIN OPHTHALMIC SOLUTION|Neomycin and Polymyxin B Sulfates and Gramicidin|Oral Solution
+        NEOMYCIN AND POLYMYXIN B SULFATES AND HYDROCORTISONE ACETATE CREAM|Neomycin and Polymyxin B Sulfates and Hydrocortisone Acetate|Cream
+        NEOMYCIN AND POLYMYXIN B SULFATES AND HYDROCORTISONE OPHTHALMIC SUSPENSION|Neomycin and Polymyxin B Sulfates and Hydrocortisone|Ophthalmic
+        NEOMYCIN AND POLYMYXIN B SULFATES AND HYDROCORTISONE OTIC SOLUTION|Neomycin and Polymyxin B Sulfates and Hydrocortisone|Oral Solution
+        NEOMYCIN AND POLYMYXIN B SULFATES AND HYDROCORTISONE OTIC SUSPENSION|Neomycin and Polymyxin B Sulfates and Hydrocortisone Otic|Raw Material (API)
+        NEOMYCIN AND POLYMYXIN B SULFATES AND LIDOCAINE CREAM|Neomycin and Polymyxin B Sulfates and Lidocaine|Cream
+        NEOMYCIN AND POLYMYXIN B SULFATES AND PRAMOXINE HYDROCHLORIDE CREAM|Neomycin and Polymyxin B Sulfates and Pramoxine HCl|Cream
+        NEOMYCIN AND POLYMYXIN B SULFATES AND PREDNISOLONE ACETATE OPHTHALMIC SUSPENSION|Neomycin and Polymyxin B Sulfates and Prednisolone Acetate|Ophthalmic
+        NEOMYCIN AND POLYMYXIN B SULFATES OPHTHALMIC OINTMENT|Neomycin and Polymyxin B Sulfates Ophthalmic|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES OPHTHALMIC SOLUTION|Neomycin and Polymyxin B Sulfates|Oral Solution
+        NEOMYCIN AND POLYMYXIN B SULFATES SOLUTION FOR IRRIGATION|Neomycin and Polymyxin B Sulfates Solution for Irrigation|Oral Solution
+        NEOMYCIN AND POLYMYXIN B SULFATES, BACITRACIN ZINC, AND HYDROCORTISONE ACETATE OPHTHALMIC OINTMENT|Neomycin and Polymyxin B Sulfates, Bacitracin Zinc, and Hydrocortisone Acetate Ophthalmic|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES, BACITRACIN ZINC, AND HYDROCORTISONE OINTMENT|Neomycin and Polymyxin B Sulfates, Bacitracin Zinc, and Hydrocortisone|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES, BACITRACIN ZINC, AND HYDROCORTISONE OPHTHALMIC OINTMENT|Neomycin and Polymyxin B Sulfates, Bacitracin Zinc, and Hydrocortisone Ophthalmic|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES, BACITRACIN ZINC, AND LIDOCAINE OINTMENT|Neomycin and Polymyxin B Sulfates, Bacitracin Zinc, and Lidocaine|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES, BACITRACIN, AND HYDROCORTISONE ACETATE OINTMENT|Neomycin and Polymyxin B Sulfates, Bacitracin, and Hydrocortisone Acetate|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES, BACITRACIN, AND HYDROCORTISONE ACETATE OPHTHALMIC OINTMENT|Neomycin and Polymyxin B Sulfates, Bacitracin, and Hydrocortisone Acetate Ophthalmic|Ointment
+        NEOMYCIN AND POLYMYXIN B SULFATES, BACITRACIN, AND LIDOCAINE OINTMENT|Neomycin and Polymyxin B Sulfates, Bacitracin, and Lidocaine|Ointment
+        NEOMYCIN BOLUSES|Neomycin|Raw Material (API)
+        NEOMYCIN FOR INJECTION|Neomycin|Injection
+        NEOMYCIN SULFATE|Neomycin Sulfate|Raw Material (API)
+        NEOMYCIN SULFATE AND BACITRACIN OINTMENT|Neomycin Sulfate and Bacitracin|Ointment
+        NEOMYCIN SULFATE AND BACITRACIN ZINC OINTMENT|Neomycin Sulfate and Bacitracin Zinc|Ointment
+        NEOMYCIN SULFATE AND DEXAMETHASONE SODIUM PHOSPHATE OPHTHALMIC OINTMENT|Neomycin Sulfate and Dexamethasone Sodium Phosphate Ophthalmic|Ointment
+        NEOMYCIN SULFATE AND DEXAMETHASONE SODIUM PHOSPHATE OPHTHALMIC SOLUTION|Neomycin Sulfate and Dexamethasone Sodium Phosphate|Oral Solution
+        NEOMYCIN SULFATE AND FLUOCINOLONE ACETONIDE CREAM|Neomycin Sulfate and Fluocinolone Acetonide|Cream
+        NEOMYCIN SULFATE AND FLUOROMETHOLONE OINTMENT|Neomycin Sulfate and Fluorometholone|Ointment
+        NEOMYCIN SULFATE AND FLURANDRENOLIDE OINTMENT|Neomycin Sulfate and Flurandrenolide|Ointment
+        NEOMYCIN SULFATE AND GRAMICIDIN OINTMENT|Neomycin Sulfate and Gramicidin|Ointment
+        NEOMYCIN SULFATE AND HYDROCORTISONE ACETATE OINTMENT|Neomycin Sulfate and Hydrocortisone Acetate|Ointment
+        NEOMYCIN SULFATE AND HYDROCORTISONE ACETATE OPHTHALMIC SUSPENSION|Neomycin Sulfate and Hydrocortisone Acetate|Ophthalmic
+        NEOMYCIN SULFATE AND HYDROCORTISONE CREAM|Neomycin Sulfate and Hydrocortisone|Cream
+        NEOMYCIN SULFATE AND HYDROCORTISONE OINTMENT|Neomycin Sulfate and Hydrocortisone|Ointment
+        NEOMYCIN SULFATE AND HYDROCORTISONE OTIC SUSPENSION|Neomycin Sulfate and Hydrocortisone Otic|Raw Material (API)
+        NEOMYCIN SULFATE AND METHYLPREDNISOLONE ACETATE CREAM|Neomycin Sulfate and Methylprednisolone Acetate|Cream
+        NEOMYCIN SULFATE AND PREDNISOLONE ACETATE OINTMENT|Neomycin Sulfate and Prednisolone Acetate|Ointment
+        NEOMYCIN SULFATE AND PREDNISOLONE ACETATE OPHTHALMIC SUSPENSION|Neomycin Sulfate and Prednisolone Acetate|Ophthalmic
+        NEOMYCIN SULFATE AND TRIAMCINOLONE ACETONIDE CREAM|Neomycin Sulfate and Triamcinolone Acetonide|Cream
+        NEOMYCIN SULFATE CREAM|Neomycin Sulfate|Cream
+        NEOMYCIN SULFATE OINTMENT|Neomycin Sulfate|Ointment
+        NEOMYCIN SULFATE OPHTHALMIC OINTMENT|Neomycin Sulfate Ophthalmic|Ointment
+        NEOMYCIN SULFATE ORAL SOLUTION|Neomycin Sulfate|Oral Solution
+        NEOMYCIN SULFATE TABLETS|Neomycin Sulfate|Tablets
+        NEOMYCIN SULFATE, ISOFLUPREDONE ACETATE, AND TETRACAINE HYDROCHLORIDE OINTMENT|Neomycin Sulfate, Isoflupredone Acetate, and Tetracaine HCl|Ointment
+        NEOMYCIN SULFATE, ISOFLUPREDONE ACETATE, AND TETRACAINE HYDROCHLORIDE TOPICAL POWDER|Neomycin Sulfate, Isoflupredone Acetate, and Tetracaine Hydrochloride Topical Powder|Raw Material (API)
+        NEOSTIGMINE BROMIDE|Neostigmine Bromide|Raw Material (API)
+        NEOSTIGMINE BROMIDE TABLETS|Neostigmine Bromide|Tablets
+        NEOSTIGMINE METHYLSULFATE|Neostigmine Methylsulfate|Raw Material (API)
+        NEOSTIGMINE METHYLSULFATE INJECTION|Neostigmine Methylsulfate|Injection
+        NEVIRAPINE|Nevirapine|Raw Material (API)
+        NEVIRAPINE EXTENDED-RELEASE TABLETS|Nevirapine|Tablets
+        NEVIRAPINE ORAL SUSPENSION|Nevirapine|Oral Suspension
+        NEVIRAPINE TABLETS|Nevirapine|Tablets
+        NIACIN|Niacin|Raw Material (API)
+        NIACIN EXTENDED-RELEASE TABLETS|Niacin|Tablets
+        NIACIN INJECTION|Niacin|Injection
+        NIACIN TABLETS|Niacin|Tablets
+        NIACINAMIDE|Niacinamide|Raw Material (API)
+        NIACINAMIDE INJECTION|Niacinamide|Injection
+        NIACINAMIDE TABLETS|Niacinamide|Tablets
+        NICARDIPINE HYDROCHLORIDE|Nicardipine HCl|Raw Material (API)
+        NICARDIPINE HYDROCHLORIDE INJECTION|Nicardipine HCl|Injection
+        NICOTINE|Nicotine|Raw Material (API)
+        NICOTINE POLACRILEX|Nicotine Polacrilex|Raw Material (API)
+        NICOTINE POLACRILEX GUM|Nicotine Polacrilex Gum|Raw Material (API)
+        NICOTINE TRANSDERMAL SYSTEM|Nicotine Transdermal System|Raw Material (API)
+        NIFEDIPINE|Nifedipine|Raw Material (API)
+        NIFEDIPINE CAPSULES|Nifedipine|Capsules
+        NIFEDIPINE EXTENDED-RELEASE TABLETS|Nifedipine|Tablets
+        NILUTAMIDE|Nilutamide|Raw Material (API)
+        NIMODIPINE|Nimodipine|Raw Material (API)
+        NITROFURANTOIN|Nitrofurantoin|Raw Material (API)
+        NITROFURANTOIN CAPSULES|Nitrofurantoin|Capsules
+        NITROFURANTOIN ORAL SUSPENSION|Nitrofurantoin|Oral Suspension
+        NITROFURANTOIN TABLETS|Nitrofurantoin|Tablets
+        NITROFURAZONE|Nitrofurazone|Raw Material (API)
+        NITROFURAZONE OINTMENT|Nitrofurazone|Ointment
+        NITROGLYCERIN INJECTION|Nitroglycerin|Injection
+        NITROGLYCERIN OINTMENT|Nitroglycerin|Ointment
+        NITROGLYCERIN SUBLINGUAL TABLETS|Nitroglycerin Sublingual|Tablets
+        NITROMERSOL|Nitromersol|Raw Material (API)
+        NITROMERSOL TOPICAL SOLUTION|Nitromersol|Oral Solution
+        NITROUS OXIDE|Nitrous Oxide|Raw Material (API)
+        NIZATIDINE|Nizatidine|Raw Material (API)
+        NIZATIDINE CAPSULES|Nizatidine|Capsules
+        NONABSORBABLE SURGICAL SUTURE|Nonabsorbable Surgical|Raw Material (API)
+        NORELGESTROMIN|Norelgestromin|Raw Material (API)
+        NOREPINEPHRINE BITARTRATE|Norepinephrine Bitartrate|Raw Material (API)
+        NOREPINEPHRINE BITARTRATE INJECTION|Norepinephrine Bitartrate|Injection
+        NORETHINDRONE|Norethindrone|Raw Material (API)
+        NORETHINDRONE ACETATE|Norethindrone Acetate|Raw Material (API)
+        NORETHINDRONE ACETATE AND ETHINYL ESTRADIOL TABLETS|Norethindrone Acetate and Ethinyl Estradiol|Tablets
+        NORETHINDRONE ACETATE TABLETS|Norethindrone Acetate|Tablets
+        NORETHINDRONE AND ETHINYL ESTRADIOL TABLETS|Norethindrone and Ethinyl Estradiol|Tablets
+        NORETHINDRONE AND MESTRANOL TABLETS|Norethindrone and Mestranol|Tablets
+        NORETHINDRONE TABLETS|Norethindrone|Tablets
+        NORGESTIMATE|Norgestimate|Raw Material (API)
+        NORGESTIMATE AND ETHINYL ESTRADIOL TABLETS|Norgestimate and Ethinyl Estradiol|Tablets
+        NORGESTREL|Norgestrel|Raw Material (API)
+        NORGESTREL AND ETHINYL ESTRADIOL TABLETS|Norgestrel and Ethinyl Estradiol|Tablets
+        NORGESTREL TABLETS|Norgestrel|Tablets
+        NORTRIPTYLINE HYDROCHLORIDE|Nortriptyline HCl|Raw Material (API)
+        NORTRIPTYLINE HYDROCHLORIDE CAPSULES|Nortriptyline HCl|Capsules
+        NORTRIPTYLINE HYDROCHLORIDE ORAL SOLUTION|Nortriptyline HCl|Oral Solution
+        NOSCAPINE|Noscapine|Raw Material (API)
+        NOVOBIOCIN SODIUM|Novobiocin Sodium|Raw Material (API)
+        NOVOBIOCIN SODIUM INTRAMAMMARY INFUSION|Novobiocin Sodium Intramammary Infusion|Raw Material (API)
+        NYSTATIN|Nystatin|Raw Material (API)
+        NYSTATIN AND TRIAMCINOLONE ACETONIDE CREAM|Nystatin and Triamcinolone Acetonide|Cream
+        NYSTATIN AND TRIAMCINOLONE ACETONIDE OINTMENT|Nystatin and Triamcinolone Acetonide|Ointment
+        NYSTATIN CREAM|Nystatin|Cream
+        NYSTATIN FOR ORAL SUSPENSION|Nystatin for|Oral Suspension
+        NYSTATIN LOTION|Nystatin Lotion|Raw Material (API)
+        NYSTATIN LOZENGES|Nystatin Lozenges|Raw Material (API)
+        NYSTATIN OINTMENT|Nystatin|Ointment
+        NYSTATIN ORAL SUSPENSION|Nystatin|Oral Suspension
+        NYSTATIN TABLETS|Nystatin|Tablets
+        NYSTATIN TOPICAL POWDER|Nystatin Topical Powder|Raw Material (API)
+        NYSTATIN VAGINAL INSERTS|Nystatin Vaginal Inserts|Raw Material (API)
+        NYSTATIN VAGINAL SUPPOSITORIES|Nystatin Vaginal Suppositories|Suppositories
+        NYSTATIN, NEOMYCIN SULFATE, GRAMICIDIN, AND TRIAMCINOLONE ACETONIDE CREAM|Nystatin, Neomycin Sulfate, Gramicidin, and Triamcinolone Acetonide|Cream
+        NYSTATIN, NEOMYCIN SULFATE, GRAMICIDIN, AND TRIAMCINOLONE ACETONIDE OINTMENT|Nystatin, Neomycin Sulfate, Gramicidin, and Triamcinolone Acetonide|Ointment
+        NYSTATIN, NEOMYCIN SULFATE, THIOSTREPTON, AND TRIAMCINOLONE ACETONIDE CREAM|Nystatin, Neomycin Sulfate, Thiostrepton, and Triamcinolone Acetonide|Cream
+        NYSTATIN, NEOMYCIN SULFATE, THIOSTREPTON, AND TRIAMCINOLONE ACETONIDE OINTMENT|Nystatin, Neomycin Sulfate, Thiostrepton, and Triamcinolone Acetonide|Ointment
         OCTINOXATE|Octinoxate|Raw Material (API)
         OCTISALATE|Octisalate|Raw Material (API)
         OCTOCRYLENE|Octocrylene|Raw Material (API)
