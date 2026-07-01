@@ -4,6 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pharma SOP & Guidelines Portal</title>
+  <script>
+    // Separate standalone error logger to catch compile/parse-time errors
+    window.onerror = function(msg, url, line, col, error) {
+      const errDiv = document.createElement('div');
+      errDiv.style.position = 'fixed';
+      errDiv.style.bottom = '12px';
+      errDiv.style.left = '12px';
+      errDiv.style.right = '12px';
+      errDiv.style.background = '#991b1b'; // Red-800
+      errDiv.style.border = '2px solid #ef4444'; // Red-500
+      errDiv.style.color = '#fecaca'; // Red-200
+      errDiv.style.padding = '14px';
+      errDiv.style.borderRadius = '12px';
+      errDiv.style.zIndex = '999999';
+      errDiv.style.fontSize = '11px';
+      errDiv.style.fontFamily = 'monospace';
+      errDiv.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.5)';
+      errDiv.style.maxHeight = '250px';
+      errDiv.style.overflowY = 'auto';
+      errDiv.innerHTML = '<div style="font-weight:bold;margin-bottom:6px;color:#fca5a5;">⚠️ WEB APP RUNTIME ERROR DETECTED:</div>' + 
+                         '<strong>Message:</strong> ' + msg + '<br>' +
+                         '<strong>Source:</strong> ' + url + '<br>' +
+                         '<strong>Line:</strong> ' + line + ' | <strong>Col:</strong> ' + col + 
+                         (error ? '<br><strong>Stack:</strong> ' + error.stack : '');
+      document.body.appendChild(errDiv);
+      return false;
+    };
+    window.addEventListener('unhandledrejection', function(event) {
+      window.onerror(event.reason ? event.reason.message : 'Unhandled Promise Rejection', '', '', '', event.reason);
+    });
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -523,31 +554,23 @@
   </footer>
 
   <script>
-    // Global Error Logger for UI diagnostics
-    window.onerror = function(msg, url, line, col, error) {
-      const errDiv = document.createElement('div');
-      errDiv.style.position = 'fixed';
-      errDiv.style.bottom = '12px';
-      errDiv.style.left = '12px';
-      errDiv.style.right = '12px';
-      errDiv.style.background = '#991b1b'; // Red-800
-      errDiv.style.border = '2px solid #ef4444'; // Red-500
-      errDiv.style.color = '#fecaca'; // Red-200
-      errDiv.style.padding = '14px';
-      errDiv.style.borderRadius = '12px';
-      errDiv.style.zIndex = '99999';
-      errDiv.style.fontSize = '11px';
-      errDiv.style.fontFamily = 'monospace';
-      errDiv.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.5)';
-      errDiv.style.maxHeight = '200px';
-      errDiv.style.overflowY = 'auto';
-      errDiv.innerHTML = '<div style="font-weight:bold;margin-bottom:6px;color:#fca5a5;">⚠️ WEB APP RUNTIME ERROR DETECTED:</div>' + 
-                         '<strong>Message:</strong> ' + msg + '<br>' +
-                         '<strong>Source:</strong> ' + url + '<br>' +
-                         '<strong>Line:</strong> ' + line + ' | <strong>Col:</strong> ' + col;
-      document.body.appendChild(errDiv);
-      return false;
-    };
+    function safeGetItem(key, fallback) {
+      try {
+        const item = localStorage.getItem(key);
+        return item !== null ? item : fallback;
+      } catch (e) {
+        console.warn("localStorage access denied:", e);
+        return fallback;
+      }
+    }
+
+    function safeSetItem(key, val) {
+      try {
+        localStorage.setItem(key, val);
+      } catch (e) {
+        console.warn("localStorage write denied:", e);
+      }
+    }
 
     const columnsDb = /*COLUMNS_DATA_PLACEHOLDER*/;
     const monographsDb = /*MONOGRAPHS_DATA_PLACEHOLDER*/;
@@ -603,9 +626,9 @@
     let videoProgress = 0;
     let videoTimerId = null;
 
-    let customMonoDb = JSON.parse(localStorage.getItem('custom_mono') || '[]');
-    let contactInquiries = JSON.parse(localStorage.getItem('contact_inquiries') || '[]');
-    let signOffs = JSON.parse(localStorage.getItem('sop_signoffs') || '{}');
+    let customMonoDb = JSON.parse(safeGetItem('custom_mono', '[]'));
+    let contactInquiries = JSON.parse(safeGetItem('contact_inquiries', '[]'));
+    let signOffs = JSON.parse(safeGetItem('sop_signoffs', '{}'));
 
     const videosDb = [
       { id: "vid_01", title: "HPLC Peak Integration & Calibration", duration: "12 mins", author: "Dr. Sarah Jenkins", views: "1.2K views", desc: "Covers Peak area calibration, baseline integration, chromatography RSD limits, and USP system suitability." },
@@ -918,7 +941,7 @@
       } else {
         signOffs[code] = { byRole: 'Authorized User', time: new Date().toLocaleString() };
       }
-      localStorage.setItem('sop_signoffs', JSON.stringify(signOffs));
+      safeSetItem('sop_signoffs', JSON.stringify(signOffs));
       loadSop(activeSop.id);
       renderSopStats();
     }
@@ -1061,7 +1084,7 @@
         }]
       };
       customMonoDb.unshift(newD);
-      localStorage.setItem('custom_mono', JSON.stringify(customMonoDb));
+      safeSetItem('custom_mono', JSON.stringify(customMonoDb));
       e.target.reset();
       renderUsp();
       renderSopStats();
@@ -1683,7 +1706,7 @@
         timestamp: Date.now()
       };
       contactInquiries.unshift(newI);
-      localStorage.setItem('contact_inquiries', JSON.stringify(contactInquiries));
+      safeSetItem('contact_inquiries', JSON.stringify(contactInquiries));
       e.target.reset();
       renderSupportHistory();
       alert("Support Inquiry Registered Locally!");
