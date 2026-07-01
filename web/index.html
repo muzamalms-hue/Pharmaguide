@@ -523,6 +523,32 @@
   </footer>
 
   <script>
+    // Global Error Logger for UI diagnostics
+    window.onerror = function(msg, url, line, col, error) {
+      const errDiv = document.createElement('div');
+      errDiv.style.position = 'fixed';
+      errDiv.style.bottom = '12px';
+      errDiv.style.left = '12px';
+      errDiv.style.right = '12px';
+      errDiv.style.background = '#991b1b'; // Red-800
+      errDiv.style.border = '2px solid #ef4444'; // Red-500
+      errDiv.style.color = '#fecaca'; // Red-200
+      errDiv.style.padding = '14px';
+      errDiv.style.borderRadius = '12px';
+      errDiv.style.zIndex = '99999';
+      errDiv.style.fontSize = '11px';
+      errDiv.style.fontFamily = 'monospace';
+      errDiv.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.5)';
+      errDiv.style.maxHeight = '200px';
+      errDiv.style.overflowY = 'auto';
+      errDiv.innerHTML = '<div style="font-weight:bold;margin-bottom:6px;color:#fca5a5;">⚠️ WEB APP RUNTIME ERROR DETECTED:</div>' + 
+                         '<strong>Message:</strong> ' + msg + '<br>' +
+                         '<strong>Source:</strong> ' + url + '<br>' +
+                         '<strong>Line:</strong> ' + line + ' | <strong>Col:</strong> ' + col;
+      document.body.appendChild(errDiv);
+      return false;
+    };
+
     const columnsDb = [{
   "code": "L1",
   "name": "Octadecyl Silane (C18)",
@@ -48088,17 +48114,4 @@
   "scope": "This standard operating procedure is applicable to all standard processes, operations, validations, or documentation executed inside the Regulatory Compliance & Documentation division of the pharmaceutical site.",
   "responsibility": "All QA Officer personnel are responsible for strict compliance. Supervisors are responsible for review and QA is responsible for oversight.",
   "procedure": "To outline daily or weekly audit trail log reviews;Tracking changes;And reporting unauthorized entries.;Ensure all tools and relevant documentation are ready and verified prior to commencing the procedure.;Perform the primary tasks sequentially with strict double-checks and contemporaneous data recordings.;Verify the final results meet current Good Manufacturing Practice (cGMP) limit specifications.;Clean the operational area, document the physical results inside the logbooks, and submit to QA supervisor for review.",
-  "safetyPrecautions": "Always wear appropriate personal protective equipment (PPE).;Follow standard Lock-Out-Tag-Out (LOTO) and ESD protections where applicable.",
-  "frequency": "Biennially (Every 2 years) or after major changes.",
-  "effectiveDate": "2026-06-28",
-  "roleRequired": "QA Officer"
-}, {
-  "id": 0,
-  "code": "SOP-GEN-256",
-  "title": "SOP for GXP Data Integrity ALCOA+ Standard Implementation",
-  "department": "SOPs",
-  "section": "Regulatory Compliance & Documentation",
-  "objective": "To define site-wide training, double-witness balance slip checks, and direct archiving of analytical files.",
-  "scope": "This standard operating procedure is applicable to all standard processes, operations, validations, or documentation executed inside the Regulatory Compliance & Documentation division of the pharmaceutical site.",
-  "responsibility": "All QA Officer personnel are responsible for strict compliance. Supervisors are responsible for review and QA is responsible for oversight.",
-  "procedure": "To define site-wide training;Double-witness balance slip checks;And direct archiving of analytical files.;Ensure all tools and relevant documentation are ready and verified prior to commencing the procedure.;Perform the primary tasks 
+ 
