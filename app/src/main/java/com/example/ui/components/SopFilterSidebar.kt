@@ -237,7 +237,7 @@ fun SopFilterSidebar(
             }
         }
 
-        // 4. SIMULATOR & METRICS (Bottom Section on Dark grey background card)
+        // 4. METRICS (Bottom Section on Dark grey background card)
         Card(
             colors = CardDefaults.cardColors(containerColor = Color(0xFF25252D)),
             shape = RoundedCornerShape(12.dp),
@@ -249,70 +249,6 @@ fun SopFilterSidebar(
                 modifier = Modifier.padding(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Text(
-                    text = "Role & Access Simulator",
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF81C784)
-                )
-
-                // Role switcher dropdown
-                ExposedDropdownMenuBox(
-                    expanded = dropdownExpanded,
-                    onExpandedChange = { dropdownExpanded = it },
-                    modifier = Modifier.fillMaxWidth().testTag("role_dropdown_container")
-                ) {
-                    OutlinedTextField(
-                        value = currentRole,
-                        onValueChange = {},
-                        readOnly = true,
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = Color(0xFF1E1E24),
-                            unfocusedContainerColor = Color(0xFF1E1E24),
-                            focusedTextColor = Color.White,
-                            unfocusedTextColor = Color.White,
-                            focusedBorderColor = Color(0xFF2E7D32),
-                            unfocusedBorderColor = Color.White.copy(alpha = 0.2f)
-                        ),
-                        leadingIcon = {
-                            Icon(
-                                imageVector = if (currentRole == "Administrator") Icons.Default.SupervisorAccount else Icons.Default.Person,
-                                contentDescription = "Role Icon",
-                                tint = Color.LightGray
-                            )
-                        },
-                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = dropdownExpanded) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .menuAnchor()
-                            .testTag("role_selector_field"),
-                        textStyle = TextStyle(fontSize = 12.sp)
-                    )
-                    ExposedDropdownMenu(
-                        expanded = dropdownExpanded,
-                        onDismissRequest = { dropdownExpanded = false },
-                        modifier = Modifier.background(Color(0xFF25252D))
-                    ) {
-                        rolesList.forEach { role ->
-                            DropdownMenuItem(
-                                text = {
-                                    Text(
-                                        text = role,
-                                        color = Color.White,
-                                        fontWeight = if (role == currentRole) FontWeight.Bold else FontWeight.Normal
-                                    )
-                                },
-                                onClick = {
-                                    viewModel.selectUserRole(role)
-                                    dropdownExpanded = false
-                                }
-                            )
-                        }
-                    }
-                }
-
-                Divider(color = Color.White.copy(alpha = 0.08f))
-
                 // Stats rows
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,

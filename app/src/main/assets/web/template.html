@@ -29,13 +29,6 @@
         </div>
       </div>
       <div class="flex items-center gap-3">
-        <label class="text-[10px] text-slate-400 font-bold uppercase">Role:</label>
-        <select id="role-selector" onchange="changeRole()" class="bg-slate-800 text-xs font-bold text-slate-100 px-2 py-1.5 rounded border border-slate-700 focus:outline-none">
-          <option value="Analyst">Analyst</option>
-          <option value="Operator">Operator</option>
-          <option value="QA Officer">QA Officer</option>
-          <option value="Guest">Guest</option>
-        </select>
         <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-400 hover:text-white text-lg px-2"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>
@@ -62,19 +55,15 @@
         <div class="bg-gradient-to-r from-emerald-950 to-emerald-900 border border-emerald-800/50 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <span class="bg-amber-400 text-slate-950 text-[9px] font-black tracking-widest px-2 py-0.5 rounded uppercase">cGMP COMPLIANT</span>
-            <h2 class="text-xl md:text-2xl font-black text-white mt-1.5" id="welcome-title">Welcome back, Analyst!</h2>
+            <h2 class="text-xl md:text-2xl font-black text-white mt-1.5" id="welcome-title">Welcome back!</h2>
             <p class="text-xs text-emerald-200 mt-1 max-w-xl">Access standard operating procedures, validation guidelines, active USP columns, and calculation utilities instantly.</p>
-          </div>
-          <div class="bg-slate-900/60 border border-slate-700/50 p-3 rounded-lg text-center flex flex-col min-w-[120px]">
-            <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Active Status</span>
-            <span class="text-xs font-black text-emerald-400 mt-1 flex items-center gap-1.5 justify-center"><i class="fa-solid fa-circle text-[8px] animate-pulse"></i> Online</span>
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <input type="text" id="dash-search" oninput="doSearch()" placeholder="Search SOPs, codes, or procedures..." class="md:col-span-2 bg-slate-900 border border-slate-800 text-xs px-4 py-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-100 placeholder-slate-500">
           <button onclick="switchTab('sops'); filterDept('ALL');" class="bg-slate-900 border border-slate-800 text-slate-300 rounded-xl px-4 py-3 text-xs font-bold hover:bg-slate-800 transition flex justify-between items-center">
-            <span>SOP Catalog (${sopsDb ? sopsDb.length : 0} items)</span>
+            <span id="sop-catalog-btn-count">SOP Catalog</span>
             <i class="fa-solid fa-chevron-right text-[10px]"></i>
           </button>
         </div>
@@ -360,7 +349,7 @@
     let filterLetter = 'ALL';
     let filterForm = 'ALL';
     let activeDept = 'ALL';
-    let currentRole = 'Analyst';
+    let currentRole = 'QA Officer';
     let activeSop = null;
     let playingVideoIdx = 0;
     let videoPlaying = false;
@@ -386,9 +375,14 @@
     ];
 
     function init() {
-      // Role selector init
-      document.getElementById('role-selector').value = currentRole;
-      changeRole();
+      // Set default role
+      currentRole = 'QA Officer';
+
+      // Update SOP catalog count dynamically
+      const catalogBtnCount = document.getElementById('sop-catalog-btn-count');
+      if (catalogBtnCount) {
+        catalogBtnCount.innerText = "SOP Catalog (" + sopsDb.length + " items)";
+      }
 
       // USP columns list comparison drop-downs
       const lSelect = document.getElementById('comp-left');
@@ -415,8 +409,11 @@
     }
 
     function changeRole() {
-      currentRole = document.getElementById('role-selector').value;
-      document.getElementById('welcome-title').innerText = "Welcome back, " + currentRole + "!";
+      currentRole = 'QA Officer';
+      const welcomeTitle = document.getElementById('welcome-title');
+      if (welcomeTitle) {
+        welcomeTitle.innerText = "Welcome back!";
+      }
       renderSops();
     }
 
@@ -535,11 +532,9 @@
       const isSigned = !!signOffs[s.code];
       const signDetails = signOffs[s.code] || null;
 
-      // Role authorization assessment
-      let isAuth = (s.roleRequired === 'All' || s.roleRequired === currentRole || currentRole === 'QA Officer');
-      const authBadge = isAuth ? 
-        '<span class="bg-emerald-950 text-emerald-400 text-[10px] font-bold border border-emerald-800 px-2.5 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-circle-check text-[8px]"></i> Qualified Role</span>' :
-        '<span class="bg-amber-950 text-amber-400 text-[10px] font-bold border border-amber-800 px-2.5 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-circle-exclamation text-[8px]"></i> Unqualified to Sign-off</span>';
+      // Role authorization assessment (Always open for all users)
+      let isAuth = true;
+      const authBadge = '<span class="bg-emerald-950 text-emerald-400 text-[10px] font-bold border border-emerald-800 px-2.5 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-circle-check text-[8px]"></i> Authorized to Sign-off</span>';
 
       const stepsHtml = s.procedure.split(';').map((pt, idx) => `
         <li class="flex gap-2.5 text-slate-300">
@@ -588,7 +583,7 @@
       if (signOffs[code]) {
         delete signOffs[code];
       } else {
-        signOffs[code] = { byRole: currentRole, time: new Date().toLocaleString() };
+        signOffs[code] = { byRole: 'Authorized User', time: new Date().toLocaleString() };
       }
       localStorage.setItem('sop_signoffs', JSON.stringify(signOffs));
       loadSop(activeSop.id);
