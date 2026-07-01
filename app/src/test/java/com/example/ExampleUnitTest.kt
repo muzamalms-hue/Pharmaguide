@@ -3291,10 +3291,14 @@ class ExampleUnitTest {
     }
     val templateContent = templateFile.readText()
 
+    val b64Columns = java.util.Base64.getEncoder().encodeToString(escapedColumns.toByteArray(Charsets.UTF_8))
+    val b64Monographs = java.util.Base64.getEncoder().encodeToString(escapedMonographs.toByteArray(Charsets.UTF_8))
+    val b64Sops = java.util.Base64.getEncoder().encodeToString(escapedSops.toByteArray(Charsets.UTF_8))
+
     val htmlContent = templateContent
-      .replace("/*COLUMNS_DATA_PLACEHOLDER*/", escapedColumns)
-      .replace("/*MONOGRAPHS_DATA_PLACEHOLDER*/", escapedMonographs)
-      .replace("/*SOPS_DATA_PLACEHOLDER*/", escapedSops)
+      .replace("/*COLUMNS_DATA_PLACEHOLDER*/", b64Columns)
+      .replace("/*MONOGRAPHS_DATA_PLACEHOLDER*/", b64Monographs)
+      .replace("/*SOPS_DATA_PLACEHOLDER*/", b64Sops)
 
     val rootWebFile = java.io.File(rootDir, "web/index.html")
     rootWebFile.parentFile?.mkdirs()
@@ -3316,6 +3320,80 @@ class ExampleUnitTest {
         .replace("\"", "\\\"")
         .replace("\n", "\\n")
         .replace("\r", "")
+  }
+
+  @org.junit.Test
+  fun validateHtmlScript() {
+    var rootDir = java.io.File(".").absoluteFile
+    while (rootDir != null && !java.io.File(rootDir, "settings.gradle.kts").exists()) {
+      rootDir = rootDir.parentFile
+    }
+    if (rootDir == null) {
+      rootDir = java.io.File(".").absoluteFile
+    }
+    
+    val indexFile = java.io.File(rootDir, "index.html")
+    if (!indexFile.exists()) {
+      throw java.lang.RuntimeException("index.html does not exist yet at: " + indexFile.absolutePath)
+    }
+    val html = indexFile.readText()
+    
+    val regex = java.util.regex.Pattern.compile("<script>([\\s\\S]*?)</script>")
+    val matcher = regex.matcher(html)
+    var count = 0
+    val resultsList = mutableListOf<String>()
+    var hasError = false
+    while (matcher.find()) {
+      count++
+      var scriptContent = matcher.group(1)
+      
+      // Prepend mock DOM globals to test real execution in Node
+      scriptContent = """
+        const localStorage = {
+          getItem: () => null,
+          setItem: () => {}
+        };
+        const window = {
+          onload: null,
+          addEventListener: () => {},
+          onerror: null
+        };
+        const document = {
+          getElementById: () => ({ value: '', addEventListener: () => {}, querySelectorAll: () => [], classList: { add: () => {}, remove: () => {}, toggle: () => {} } }),
+          querySelectorAll: () => [],
+          createElement: () => ({ style: {} }),
+          body: { appendChild: () => {} }
+        };
+        const navigator = {
+          userAgent: "Mozilla"
+        };
+        $scriptContent
+      """.trimIndent()
+      
+      val tempFile = java.io.File(rootDir, "temp_script_$count.js")
+      tempFile.writeText(scriptContent)
+      
+      // Run node to execute and catch runtime errors
+      val process = java.lang.Runtime.getRuntime().exec(arrayOf("node", tempFile.absolutePath))
+      process.waitFor()
+      val errorStream = process.errorStream.bufferedReader().readText()
+      
+      tempFile.delete()
+      
+      if (errorStream.isNotEmpty()) {
+        resultsList.add("Script $count threw a runtime error:\n$errorStream")
+        hasError = true
+      } else {
+        resultsList.add("Script $count executed successfully with no runtime errors.")
+      }
+    }
+    
+    val finalReport = resultsList.joinToString("\n")
+    if (hasError) {
+      throw java.lang.RuntimeException("VALIDATION REPORT:\n$finalReport\nHas Error: $hasError")
+    } else {
+      println("All scripts validated perfectly:\n$finalReport")
+    }
   }
 }
 
