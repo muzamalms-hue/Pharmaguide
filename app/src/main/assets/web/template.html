@@ -3,187 +3,394 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>USP Column & Monograph Finder Portal</title>
+  <title>Pharma SOP & Guidelines Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
-    .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
-    @keyframes slideUp { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .animate-slide { animation: slideUp 0.2s ease-out forwards; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: #f8fafc; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+<body class="bg-slate-950 text-slate-100 flex flex-col min-h-screen custom-scrollbar">
+
   <!-- Header -->
-  <header class="bg-gradient-to-r from-emerald-800 to-teal-950 text-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-full bg-emerald-600 border border-amber-400 flex items-center justify-center shadow">
-          <i class="fa-solid fa-flask text-white text-sm"></i>
+  <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-emerald-700 border border-amber-400 flex items-center justify-center shadow">
+          <i class="fa-solid fa-file-shield text-white text-base"></i>
         </div>
         <div>
-          <h1 class="text-lg font-black tracking-tight">USP Monograph Web Portal</h1>
-          <p class="text-emerald-300 text-[10px] tracking-wide uppercase font-semibold">USP Chromatographic Column Finder</p>
+          <h1 class="text-base font-extrabold tracking-tight">Pharma SOP Web Portal</h1>
+          <p class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">cGMP & FDA Compliance Hub</p>
         </div>
       </div>
-      <div class="flex flex-wrap gap-1.5">
-        <button onclick="switchTab('monographs')" id="btn-monographs" class="px-3 py-1.5 text-xs font-bold rounded bg-emerald-600 text-white shadow shadow-emerald-900/20">Monographs</button>
-        <button onclick="switchTab('lcodes')" id="btn-lcodes" class="px-3 py-1.5 text-xs font-semibold rounded text-emerald-100 hover:bg-emerald-800/30">L-Codes</button>
-        <button onclick="switchTab('compare')" id="btn-compare" class="px-3 py-1.5 text-xs font-semibold rounded text-emerald-100 hover:bg-emerald-800/30">Compare</button>
-        <button onclick="switchTab('sops')" id="btn-sops" class="px-3 py-1.5 text-xs font-semibold rounded text-emerald-100 hover:bg-emerald-800/30">SOP Guide</button>
+      <div class="flex items-center gap-3">
+        <label class="text-[10px] text-slate-400 font-bold uppercase">Role:</label>
+        <select id="role-selector" onchange="changeRole()" class="bg-slate-800 text-xs font-bold text-slate-100 px-2 py-1.5 rounded border border-slate-700 focus:outline-none">
+          <option value="Analyst">Analyst</option>
+          <option value="Operator">Operator</option>
+          <option value="QA Officer">QA Officer</option>
+          <option value="Guest">Guest</option>
+        </select>
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-400 hover:text-white text-lg px-2"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>
   </header>
 
-  <!-- Metrics -->
-  <section class="bg-white border-b border-slate-200 py-3 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-      <div class="bg-emerald-50/50 p-2.5 rounded-lg border border-emerald-100 flex items-center gap-2">
-        <i class="fa-solid fa-capsules text-emerald-600 text-sm"></i>
-        <div><p class="text-[9px] text-emerald-800 uppercase font-bold tracking-wider">Monographs</p><p class="text-sm font-black" id="stat-total">0</p></div>
-      </div>
-      <div class="bg-blue-50/50 p-2.5 rounded-lg border border-blue-100 flex items-center gap-2">
-        <i class="fa-solid fa-table-list text-blue-600 text-sm"></i>
-        <div><p class="text-[9px] text-blue-800 uppercase font-bold tracking-wider">USP L-Codes</p><p class="text-sm font-black" id="stat-lcodes">0</p></div>
-      </div>
-      <div class="bg-amber-50/50 p-2.5 rounded-lg border border-amber-100 flex items-center gap-2">
-        <i class="fa-solid fa-vial text-amber-600 text-sm"></i>
-        <div><p class="text-[9px] text-amber-800 uppercase font-bold tracking-wider">Primary Column</p><p class="text-sm font-black text-slate-700">L1 (C18)</p></div>
-      </div>
-      <div class="bg-purple-50/50 p-2.5 rounded-lg border border-purple-100 flex items-center gap-2">
-        <i class="fa-solid fa-circle-plus text-purple-600 text-sm"></i>
-        <div><p class="text-[9px] text-purple-800 uppercase font-bold tracking-wider">User Additions</p><p class="text-sm font-black" id="stat-custom">0</p></div>
-      </div>
-    </div>
-  </section>
+  <div class="flex-grow flex max-w-7xl mx-auto w-full relative">
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="bg-slate-900 border-r border-slate-800 w-64 p-4 flex flex-col gap-1 shrink-0 absolute md:relative z-40 h-full md:h-auto hidden md:flex transition-all duration-200">
+      <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest px-3 mb-2">Navigation</p>
+      <button onclick="switchTab('home')" id="nav-home" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded font-bold bg-emerald-800 text-white flex items-center gap-2.5"><i class="fa-solid fa-house w-4"></i>Dashboard</button>
+      <button onclick="switchTab('sops')" id="nav-sops" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-list-check w-4"></i>SOPs Database</button>
+      <button onclick="switchTab('ask')" id="nav-ask" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-robot w-4"></i>AI Advisor</button>
+      <button onclick="switchTab('usp')" id="nav-usp" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-flask w-4"></i>USP Column Finder</button>
+      <button onclick="switchTab('videos')" id="nav-videos" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-circle-play w-4"></i>Video Training</button>
+      <button onclick="switchTab('calculators')" id="nav-calculators" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-calculator w-4"></i>Lab Calculators</button>
+      <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-circle-question w-4"></i>Support Desk</button>
+    </aside>
 
-  <!-- Body -->
-  <main class="flex-grow max-w-7xl mx-auto px-4 py-4 w-full">
-    <!-- 1. MONOGRAPHS TAB -->
-    <div id="section-monographs" class="tab-content animate-slide">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        <!-- Search, filters & form -->
-        <div class="lg:col-span-3 flex flex-col gap-3">
-          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-3">
-            <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5 border-b pb-1.5"><i class="fa-solid fa-magnifying-glass text-emerald-600"></i> Search Filters</h3>
-            <input type="text" id="input-search" oninput="onSearchInput()" placeholder="Search active ingredient, drug, L-code..." class="w-full px-2.5 py-1.5 text-xs rounded border border-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+    <!-- Main Content Panel -->
+    <main class="flex-grow p-4 md:p-6 w-full overflow-hidden">
+      
+      <!-- 1. DASHBOARD / HOME -->
+      <section id="sec-home" class="tab-sec flex flex-col gap-4">
+        <div class="bg-gradient-to-r from-emerald-950 to-emerald-900 border border-emerald-800/50 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="bg-amber-400 text-slate-950 text-[9px] font-black tracking-widest px-2 py-0.5 rounded uppercase">cGMP COMPLIANT</span>
+            <h2 class="text-xl md:text-2xl font-black text-white mt-1.5" id="welcome-title">Welcome back, Analyst!</h2>
+            <p class="text-xs text-emerald-200 mt-1 max-w-xl">Access standard operating procedures, validation guidelines, active USP columns, and calculation utilities instantly.</p>
+          </div>
+          <div class="bg-slate-900/60 border border-slate-700/50 p-3 rounded-lg text-center flex flex-col min-w-[120px]">
+            <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Active Status</span>
+            <span class="text-xs font-black text-emerald-400 mt-1 flex items-center gap-1.5 justify-center"><i class="fa-solid fa-circle text-[8px] animate-pulse"></i> Online</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <input type="text" id="dash-search" oninput="doSearch()" placeholder="Search SOPs, codes, or procedures..." class="md:col-span-2 bg-slate-900 border border-slate-800 text-xs px-4 py-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-100 placeholder-slate-500">
+          <button onclick="switchTab('sops'); filterDept('ALL');" class="bg-slate-900 border border-slate-800 text-slate-300 rounded-xl px-4 py-3 text-xs font-bold hover:bg-slate-800 transition flex justify-between items-center">
+            <span>SOP Catalog (${sopsDb ? sopsDb.length : 0} items)</span>
+            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 mt-2">
+          <div onclick="switchTab('sops'); filterDept('Quality Control');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-microscope text-emerald-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Quality Control</p><p class="text-[9px] text-slate-500 mt-0.5">Specifications & HPLC</p></div></div>
+          <div onclick="switchTab('sops'); filterDept('Quality Assurance');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-file-contract text-blue-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Quality Assurance</p><p class="text-[9px] text-slate-500 mt-0.5">Deviation & CAPA</p></div></div>
+          <div onclick="switchTab('sops'); filterDept('Microlab');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-disease text-purple-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Microbiology</p><p class="text-[9px] text-slate-500 mt-0.5">EM & Sterility Test</p></div></div>
+          <div onclick="switchTab('sops'); filterDept('Production');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-industry text-amber-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Production</p><p class="text-[9px] text-slate-500 mt-0.5">Granulation & Sterile</p></div></div>
+          <div onclick="switchTab('sops'); filterDept('ALL');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-folder-open text-teal-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">All SOPs List</p><p class="text-[9px] text-slate-500 mt-0.5">Comprehensive index</p></div></div>
+          <div onclick="switchTab('sops'); filterDept('Validation');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-circle-check text-cyan-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Validation</p><p class="text-[9px] text-slate-500 mt-0.5">Cleaning & Process</p></div></div>
+          <div onclick="switchTab('sops'); filterDept('GMP');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-circle-info text-pink-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">GMP Guide</p><p class="text-[9px] text-slate-500 mt-0.5">Regulatory reference</p></div></div>
+          <div onclick="switchTab('sops'); filterDept('Audit');" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-chart-line text-yellow-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Audits</p><p class="text-[9px] text-slate-500 mt-0.5">Checklists & Reviews</p></div></div>
+          <div onclick="switchTab('usp')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-table text-red-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">USP Columns</p><p class="text-[9px] text-slate-500 mt-0.5">Chromatography tools</p></div></div>
+          <div onclick="switchTab('videos')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-play text-orange-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">SOP Videos</p><p class="text-[9px] text-slate-500 mt-0.5">Aseptic training courses</p></div></div>
+          <div onclick="switchTab('calculators')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-calculator text-blue-500 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Lab Calculators</p><p class="text-[9px] text-slate-500 mt-0.5">15 active validation modules</p></div></div>
+          <div onclick="switchTab('contact')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 p-4 rounded-xl cursor-pointer transition flex flex-col gap-3"><i class="fa-solid fa-envelope-open-text text-teal-400 text-xl"></i><div><p class="text-xs font-bold text-slate-200">Contact Us</p><p class="text-[9px] text-slate-500 mt-0.5">Form & Support team</p></div></div>
+        </div>
+
+        <div class="mt-4 bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
+          <h3 class="text-xs font-bold text-slate-300 flex items-center gap-2 mb-3"><i class="fa-solid fa-fire text-amber-500"></i> Featured Regulatory SOPs</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="featured-sops-container"></div>
+        </div>
+      </section>
+
+      <!-- 2. SOPS DATABASE -->
+      <section id="sec-sops" class="tab-sec hidden flex flex-col gap-4">
+        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+          <div>
+            <h2 class="text-lg font-black text-white">Standard Operating Guidelines</h2>
+            <p class="text-[10px] text-slate-500">Select departments, search protocols, and execute digital sign-offs.</p>
+          </div>
+          <span class="text-xs bg-slate-900 border border-slate-800 px-3 py-1 rounded-full font-bold text-slate-400" id="sop-count-badge">0 SOPs</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+          <!-- Filters & List -->
+          <div class="lg:col-span-1 flex flex-col gap-3">
+            <input type="text" id="sop-search-input" oninput="renderSops()" placeholder="Search active title, code, required role..." class="bg-slate-900 border border-slate-800 text-xs px-3 py-2 rounded-lg text-white">
+            <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col gap-1">
+              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-1 px-1">Departments</span>
+              <button onclick="filterDept('ALL')" id="dept-all" class="dept-btn text-left text-xs px-2.5 py-1.5 rounded font-bold bg-emerald-800 text-white flex justify-between"><span>All Guidelines</span><span id="all-count">0</span></button>
+              <button onclick="filterDept('Quality Control')" id="dept-qc" class="dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between"><span>Quality Control</span><span id="qc-count">0</span></button>
+              <button onclick="filterDept('Quality Assurance')" id="dept-qa" class="dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between"><span>Quality Assurance</span><span id="qa-count">0</span></button>
+              <button onclick="filterDept('Microlab')" id="dept-micro" class="dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between"><span>Microbiology</span><span id="micro-count">0</span></button>
+              <button onclick="filterDept('Production')" id="dept-prod" class="dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between"><span>Production</span><span id="prod-count">0</span></button>
+              <button onclick="filterDept('Validation')" id="dept-val" class="dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between"><span>Validation</span><span id="val-count">0</span></button>
+              <button onclick="filterDept('GMP')" id="dept-gmp" class="dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between"><span>GMP Guides</span><span id="gmp-count">0</span></button>
+              <button onclick="filterDept('Audit')" id="dept-audit" class="dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between"><span>Audits</span><span id="audit-count">0</span></button>
+            </div>
+            <div id="sop-list-container" class="flex flex-col gap-2 max-h-[350px] overflow-y-auto custom-scrollbar pr-1"></div>
+          </div>
+
+          <!-- Document Reader -->
+          <div class="lg:col-span-2 bg-slate-900 border border-slate-800 p-5 rounded-2xl flex flex-col gap-4 min-h-[480px]" id="sop-reader">
+            <div class="flex flex-col items-center justify-center text-center h-full text-slate-500 py-12 gap-3">
+              <i class="fa-solid fa-file-invoice text-4xl text-slate-700"></i>
+              <p class="text-sm">Select any Standard Operating Procedure from the list to launch the secure document viewer and verify compliance steps.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. AI COMPLIANCE ADVISOR -->
+      <section id="sec-ask" class="tab-sec hidden flex flex-col gap-4">
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white text-base"><i class="fa-solid fa-user-tie"></i></div>
+          <div>
+            <h3 class="text-xs font-bold text-slate-100">Compliance & Regulatory AI Advisor</h3>
+            <p class="text-[10px] text-slate-400">Ask any questions about OOS phases, aseptic sterile gowning, QA/QC audits, and FDA guidelines.</p>
+          </div>
+        </div>
+
+        <div id="chat-messages" class="bg-slate-950 border border-slate-800 p-4 rounded-xl h-[350px] overflow-y-auto custom-scrollbar flex flex-col gap-3">
+          <div class="flex justify-start">
+            <div class="bg-slate-900 border border-slate-800 text-xs px-3 py-2.5 rounded-r-xl rounded-bl-xl max-w-lg leading-relaxed text-slate-200">
+              Welcome to the Compliance Assistant. I can clarify requirements regarding WHO cleanrooms, sterile gowning, OOS, and FDA GMP compliance. Try a preset below or type anything!
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="flex flex-wrap gap-2 py-1">
+          <button onclick="sendSugg('What is the difference between QA and QC?')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 px-3 py-1.5 rounded-full text-[10px] font-bold text-emerald-400 transition">QA vs QC?</button>
+          <button onclick="sendSugg('What are the phases of an OOS Investigation?')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 px-3 py-1.5 rounded-full text-[10px] font-bold text-emerald-400 transition">OOS Phases?</button>
+          <button onclick="sendSugg('Explain the cleanroom gowning sequence.')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 px-3 py-1.5 rounded-full text-[10px] font-bold text-emerald-400 transition">Cleanroom Gowning?</button>
+          <button onclick="sendSugg('How is the FEFO policy enforced in warehouse?')" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 px-3 py-1.5 rounded-full text-[10px] font-bold text-emerald-400 transition">FEFO Policy?</button>
+        </div>
+
+        <div class="flex gap-2">
+          <input type="text" id="chat-input" onkeypress="handleChatKey(event)" placeholder="Ask compliance query..." class="flex-grow bg-slate-900 border border-slate-800 text-xs px-3.5 py-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-emerald-500 text-slate-100">
+          <button onclick="sendChat()" class="bg-emerald-700 hover:bg-emerald-600 text-white px-4 py-3 rounded-xl text-xs font-bold transition flex items-center gap-1.5"><i class="fa-solid fa-paper-plane"></i> Send</button>
+        </div>
+      </section>
+
+      <!-- 4. USP COLUMN DATABASE -->
+      <section id="sec-usp" class="tab-sec hidden flex flex-col gap-4">
+        <div class="bg-gradient-to-r from-teal-950 to-slate-950 border border-teal-900 p-4 rounded-xl flex justify-between items-center">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-teal-700 flex items-center justify-center text-white"><i class="fa-solid fa-vial"></i></div>
             <div>
-              <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Dosage Form</label>
-              <div class="flex flex-col gap-0.5" id="form-filters">
-                <button onclick="setFormFilter('ALL')" id="ff-ALL" class="text-left text-xs px-2 py-1 rounded bg-emerald-50 text-emerald-800 font-bold flex justify-between w-full"><span>All Forms</span><span id="ff-count-all">0</span></button>
-                <button onclick="setFormFilter('Tablets')" id="ff-Tablets" class="text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full"><span>Tablets</span><span id="ff-count-tablets">0</span></button>
-                <button onclick="setFormFilter('Capsules')" id="ff-Capsules" class="text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full"><span>Capsules</span><span id="ff-count-capsules">0</span></button>
-                <button onclick="setFormFilter('Injection')" id="ff-Injection" class="text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full"><span>Injections</span><span id="ff-count-injections">0</span></button>
-                <button onclick="setFormFilter('Raw')" id="ff-Raw" class="text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full"><span>Raw Materials</span><span id="ff-count-raw">0</span></button>
+              <h3 class="text-xs font-bold text-white">USP Chromatographic Column Finder</h3>
+              <p class="text-[9px] text-teal-300">Monographs, L-Codes equivalents, and compare boards.</p>
+            </div>
+          </div>
+          <div class="flex gap-1.5 text-[10px]">
+            <button onclick="switchUspSub('mono')" id="btn-sub-mono" class="px-2.5 py-1 rounded bg-teal-600 text-white font-bold">Monographs</button>
+            <button onclick="switchUspSub('codes')" id="btn-sub-codes" class="px-2.5 py-1 rounded text-slate-400 hover:text-white font-semibold">L-Codes</button>
+            <button onclick="switchUspSub('comp')" id="btn-sub-comp" class="px-2.5 py-1 rounded text-slate-400 hover:text-white font-semibold">Compare Board</button>
+          </div>
+        </div>
+
+        <!-- Monographs sub-panel -->
+        <div id="usp-mono" class="usp-sub-sec flex flex-col gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+            <div class="md:col-span-3 bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col gap-3">
+              <span class="text-[10px] font-bold text-slate-400">Search Drugs</span>
+              <input type="text" id="usp-search" oninput="renderUsp()" placeholder="Search active drug..." class="bg-slate-800 text-xs px-2.5 py-1.5 rounded text-white focus:outline-none">
+              <div>
+                <span class="text-[9px] font-bold text-slate-500 uppercase">Dosage Form</span>
+                <select id="usp-dosage-filter" onchange="renderUsp()" class="w-full bg-slate-800 text-xs px-2 py-1.5 mt-1 rounded text-slate-200 focus:outline-none">
+                  <option value="ALL">All Dosage Forms</option>
+                  <option value="Tablets">Tablets</option>
+                  <option value="Capsules">Capsules</option>
+                  <option value="Injection">Injection</option>
+                  <option value="Raw Material (API)">Raw API</option>
+                </select>
+              </div>
+
+              <!-- Add Form -->
+              <div class="border-t border-slate-800 pt-3 flex flex-col gap-2">
+                <span class="text-[10px] font-bold text-slate-400">Add Drug Record</span>
+                <form onsubmit="addCustomDrug(event)" class="flex flex-col gap-1.5 text-xs text-slate-200">
+                  <input type="text" id="add-mono-name" required placeholder="Drug Name (e.g. Paracetamol Tablets)" class="bg-slate-800 px-2 py-1.5 rounded placeholder-slate-500 text-white focus:outline-none">
+                  <input type="text" id="add-mono-active" required placeholder="Active Ingredient" class="bg-slate-800 px-2 py-1.5 rounded placeholder-slate-500 text-white focus:outline-none">
+                  <select id="add-mono-form" class="bg-slate-800 px-2 py-1.5 rounded text-white focus:outline-none">
+                    <option value="Tablets">Tablets</option>
+                    <option value="Capsules">Capsules</option>
+                    <option value="Injection">Injection</option>
+                    <option value="Raw Material (API)">API</option>
+                  </select>
+                  <input type="text" id="add-mono-brand" required placeholder="Column Brand (e.g. Luna C18)" class="bg-slate-800 px-2 py-1.5 rounded placeholder-slate-500 text-white focus:outline-none">
+                  <button type="submit" class="bg-teal-700 hover:bg-teal-600 py-1.5 rounded font-bold text-white transition">Save Entry</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="md:col-span-9 flex flex-col gap-3">
+              <div class="text-xs text-slate-400" id="mono-count-label">Loading monographs...</div>
+              <div id="usp-mono-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[400px] overflow-y-auto custom-scrollbar"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- L-Codes sub-panel -->
+        <div id="usp-codes" class="usp-sub-sec hidden grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex flex-col gap-1 pr-2 max-h-[400px] overflow-y-auto custom-scrollbar" id="lcode-buttons"></div>
+          <div class="md:col-span-2 bg-slate-900 border border-slate-800 p-4 rounded-xl flex flex-col gap-3.5" id="lcode-detail">
+            <p class="text-xs text-slate-500">Select an L-code to view details, typical applications, and popular brands.</p>
+          </div>
+        </div>
+
+        <!-- Compare board sub-panel -->
+        <div id="usp-comp" class="usp-sub-sec hidden bg-slate-900 border border-slate-800 p-4 rounded-xl flex flex-col gap-3">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h4 class="text-xs font-bold text-white">Compare Chromatographic L-Codes</h4>
+            <div class="flex items-center gap-2 text-xs">
+              <select id="comp-left" onchange="runCompare()" class="bg-slate-850 border border-slate-700 rounded px-2 py-1 text-slate-200 focus:outline-none"></select>
+              <span class="text-slate-500 font-bold">vs</span>
+              <select id="comp-right" onchange="runCompare()" class="bg-slate-850 border border-slate-700 rounded px-2 py-1 text-slate-200 focus:outline-none"></select>
+            </div>
+          </div>
+          <div class="overflow-x-auto" id="compare-board-result"></div>
+        </div>
+      </section>
+
+      <!-- 5. VIDEO TRAINING -->
+      <section id="sec-videos" class="tab-sec hidden flex flex-col gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div class="lg:col-span-4 flex flex-col gap-3">
+            <h3 class="text-xs font-bold text-slate-200">SOP Video Modules</h3>
+            <div class="flex flex-col gap-2" id="videos-list"></div>
+          </div>
+
+          <div class="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-4">
+            <h3 class="text-xs font-bold text-slate-200" id="video-player-title">Select a video to launch training</h3>
+            <!-- Video Mock Player -->
+            <div class="bg-black aspect-video rounded-lg flex flex-col justify-center items-center relative overflow-hidden group">
+              <div class="absolute inset-0 bg-gradient-to-b from-emerald-950/20 to-black/85 flex flex-col justify-center items-center gap-2">
+                <button onclick="toggleVideoPlayback()" id="play-pause-btn" class="text-slate-200 hover:text-white text-5xl transition"><i class="fa-regular fa-circle-play"></i></button>
+                <div class="text-center">
+                  <p class="text-xs font-bold text-slate-300" id="video-state-label">Ready</p>
+                  <p class="text-[10px] text-slate-500 mt-0.5" id="video-timer-label">0:00 / 0:00</p>
+                </div>
+              </div>
+              <div class="absolute bottom-0 inset-x-0 p-3 bg-black/60 flex flex-col gap-1.5">
+                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-emerald-500 h-full w-0 transition-all duration-300" id="video-progress-bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. LAB CALCULATORS -->
+      <section id="sec-calculators" class="tab-sec hidden flex flex-col gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+          <!-- Left list -->
+          <div class="lg:col-span-3 bg-slate-900 border border-slate-800 p-3 rounded-xl flex flex-col gap-1">
+            <span class="text-[9px] font-bold text-slate-500 uppercase mb-2 px-1">15 Lab Calculators</span>
+            <button onclick="selectCalc(0)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded font-bold bg-emerald-800 text-white flex items-center gap-1.5"><i class="fa-solid fa-flask text-[10px]"></i>Molarity Calculator</button>
+            <button onclick="selectCalc(1)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-water text-[10px]"></i>Acid-Base Molarity</button>
+            <button onclick="selectCalc(2)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-[10px]"></i>RSD Calculator</button>
+            <button onclick="selectCalc(3)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-compress text-[10px]"></i>C1V1 = C2V2</button>
+            <button onclick="selectCalc(4)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-temperature-empty text-[10px]"></i>P-T Nomograph</button>
+            <button onclick="selectCalc(5)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-scale-balanced text-[10px]"></i>Volume Converter</button>
+            <button onclick="selectCalc(6)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-gauge text-[10px]"></i>Pressure Converter</button>
+            <button onclick="selectCalc(7)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-weight-hanging text-[10px]"></i>Mass Converter</button>
+            <button onclick="selectCalc(8)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-droplet text-[10px]"></i>Density Converter</button>
+            <button onclick="selectCalc(9)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-ruler text-[10px]"></i>Length Converter</button>
+            <button onclick="selectCalc(10)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-shuffle text-[10px]"></i>HPLC Method Scale</button>
+            <button onclick="selectCalc(11)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-repeat text-[10px]"></i>A to T% Convert</button>
+            <button onclick="selectCalc(12)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-thermometer text-[10px]"></i>Temp Converter</button>
+            <button onclick="selectCalc(13)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-arrow-trend-up text-[10px]"></i>3-Variable Equation</button>
+            <button onclick="selectCalc(14)" class="calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-cubes text-[10px]"></i>HPLC Column Vol</button>
+          </div>
+
+          <!-- Right panel with interactive calculators -->
+          <div class="lg:col-span-9 bg-slate-900 border border-slate-800 p-5 rounded-xl min-h-[350px]" id="calculator-panel"></div>
+        </div>
+      </section>
+
+      <!-- 7. CONTACT US -->
+      <section id="sec-contact" class="tab-sec hidden flex flex-col gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div class="md:col-span-5 flex flex-col gap-3">
+            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
+              <h3 class="text-xs font-bold text-slate-100 flex items-center gap-2"><i class="fa-solid fa-headset text-emerald-500"></i> Direct Support</h3>
+              <p class="text-[10px] text-slate-400 mt-1">If you require customized GMP manuals, validation protocols or SOP draft templates, reach out directly.</p>
+              <div class="flex flex-col gap-2 mt-3.5 text-xs text-slate-300">
+                <a href="mailto:muzamalms@gmail.com" class="bg-slate-800 hover:bg-slate-750 px-3 py-2 rounded-lg flex items-center gap-2.5"><i class="fa-solid fa-envelope text-blue-400"></i> muzamalms@gmail.com</a>
+                <a href="https://whatsapp.com/channel/0029Vb7MWziGzzKLWWP2283I" target="_blank" class="bg-slate-800 hover:bg-slate-750 px-3 py-2 rounded-lg flex items-center gap-2.5"><i class="fa-brands fa-whatsapp text-emerald-400"></i> Join WhatsApp Support Channel</a>
               </div>
             </div>
           </div>
 
-          <!-- Add Form -->
-          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
-            <h3 class="text-xs font-bold text-slate-800 flex items-center gap-1.5 border-b pb-1.5"><i class="fa-solid fa-plus text-emerald-600"></i> Add Drug</h3>
-            <form onsubmit="submitCustom(event)" class="flex flex-col gap-2 mt-2">
-              <input type="text" id="add-name" required placeholder="Drug Name (e.g. Paracetamol Tablets)" class="w-full px-2 py-1 text-xs rounded border border-slate-200">
-              <input type="text" id="add-active" required placeholder="Active (e.g. Paracetamol)" class="w-full px-2 py-1 text-xs rounded border border-slate-200">
-              <div class="grid grid-cols-2 gap-1.5">
-                <select id="add-form" class="px-1 py-1 text-xs rounded border border-slate-200 bg-white">
-                  <option value="Tablets">Tablets</option><option value="Capsules">Capsules</option><option value="Injection">Injection</option><option value="Raw Material (API)">API</option>
-                </select>
-                <select id="add-lcode" class="px-1 py-1 text-xs rounded border border-slate-200 bg-white">
-                  <option value="L1">L1 (C18)</option><option value="L7">L7 (C8)</option><option value="L10">L10 (CN)</option><option value="L11">L11</option><option value="L3">L3</option>
-                </select>
+          <div class="md:col-span-7 bg-slate-900 border border-slate-800 p-4 rounded-xl flex flex-col gap-3">
+            <h3 class="text-xs font-bold text-slate-100"><i class="fa-solid fa-paper-plane text-emerald-500"></i> Submit Support Inquiry</h3>
+            <form onsubmit="submitSupportForm(event)" class="flex flex-col gap-2 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <input type="text" id="sup-name" required placeholder="Full Name" class="bg-slate-800 px-3 py-2 rounded text-white border border-slate-700/50 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                <input type="email" id="sup-email" required placeholder="Email Address" class="bg-slate-800 px-3 py-2 rounded text-white border border-slate-700/50 focus:outline-none focus:ring-1 focus:ring-emerald-500">
               </div>
-              <input type="text" id="add-brand" required placeholder="Column Brand (e.g. Luna C18)" class="w-full px-2 py-1 text-xs rounded border border-slate-200">
-              <input type="text" id="add-comments" placeholder="Comments..." class="w-full px-2 py-1 text-xs rounded border border-slate-200">
-              <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-1.5 rounded text-xs transition shadow">Save Entry</button>
+              <input type="text" id="sup-subject" required placeholder="Subject of inquiry" class="bg-slate-800 px-3 py-2 rounded text-white border border-slate-700/50 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+              <textarea id="sup-message" required placeholder="Describe your SOP request or compliance question..." class="bg-slate-800 px-3 py-2 rounded text-white h-24 border border-slate-700/50 focus:outline-none focus:ring-1 focus:ring-emerald-500"></textarea>
+              <button type="submit" class="bg-emerald-700 hover:bg-emerald-600 font-bold text-white py-2 rounded-lg transition shadow">Send Message</button>
             </form>
           </div>
         </div>
 
-        <!-- Right Side list -->
-        <div class="lg:col-span-9 flex flex-col gap-3">
-          <div class="bg-white p-2 rounded-lg border border-slate-200 shadow-sm flex flex-wrap gap-1 items-center" id="alphabet-jumps">
-            <!-- Alphabets injected here -->
-          </div>
-          <div class="flex justify-between items-center text-[11px] text-slate-500 font-semibold px-1">
-            <span id="results-count">Showing monographs...</span>
-            <button onclick="clearCustom()" id="btn-reset-db" class="hidden text-red-600 hover:underline"><i class="fa-solid fa-trash-can mr-1"></i>Reset Database</button>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="monographs-container">
-            <!-- Cards injected here -->
-          </div>
+        <!-- History list -->
+        <div class="mt-2 bg-slate-900/40 border border-slate-800 p-4 rounded-xl flex flex-col gap-2.5">
+          <h3 class="text-xs font-bold text-slate-300"><i class="fa-solid fa-clock-rotate-left"></i> Submitted Inquiries history</h3>
+          <div id="support-history-container" class="flex flex-col gap-2.5 max-h-[220px] overflow-y-auto custom-scrollbar pr-1"></div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- 2. L-CODES TAB -->
-    <div id="section-lcodes" class="tab-content hidden animate-slide">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-3 flex flex-col gap-2">
-          <h3 class="text-xs font-bold text-slate-800 border-b pb-1.5"><i class="fa-solid fa-list-ol mr-1"></i>USP L-Codes</h3>
-          <div class="flex flex-col gap-1" id="lcodes-list"></div>
-        </div>
-        <div class="lg:col-span-2 bg-white rounded-lg border border-slate-200 shadow-sm p-4 flex flex-col gap-3.5" id="lcode-detail"></div>
-      </div>
-    </div>
+    </main>
+  </div>
 
-    <!-- 3. COMPARE TAB -->
-    <div id="section-compare" class="tab-content hidden animate-slide">
-      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 flex flex-col gap-3">
-        <div class="flex justify-between items-center border-b pb-2">
-          <h2 class="text-sm font-bold text-slate-900"><i class="fa-solid fa-scale-balanced mr-1"></i>Columns Comparison Board</h2>
-          <div class="flex gap-2">
-            <select id="comp-left" onchange="compare()" class="text-xs px-2 py-1 rounded border bg-slate-50 font-bold"></select>
-            <span class="text-xs font-black text-slate-400">vs</span>
-            <select id="comp-right" onchange="compare()" class="text-xs px-2 py-1 rounded border bg-slate-50 font-bold"></select>
-          </div>
-        </div>
-        <div class="overflow-x-auto" id="compare-table-wrapper"></div>
-      </div>
-    </div>
-
-    <!-- 4. SOP TAB -->
-    <div id="section-sops" class="tab-content hidden animate-slide">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-3 flex flex-col gap-1.5">
-          <h3 class="text-xs font-bold text-slate-800 border-b pb-1.5">Guidelines Index</h3>
-          <button onclick="showSop('qc-col')" id="sop-btn-qc-col" class="sop-btn text-xs text-left px-2 py-1.5 rounded font-semibold bg-emerald-50 text-emerald-800 border-l-2 border-emerald-600">Column Storage SOP</button>
-          <button onclick="showSop('qc-hplc')" id="sop-btn-qc-hplc" class="sop-btn text-xs text-left px-2 py-1.5 rounded text-slate-600 hover:bg-slate-50">HPLC Suitability Testing</button>
-          <button onclick="showSop('qa-oos')" id="sop-btn-qa-oos" class="sop-btn text-xs text-left px-2 py-1.5 rounded text-slate-600 hover:bg-slate-50">OOS Investigation SOP</button>
-        </div>
-        <div class="md:col-span-2 bg-white rounded-lg border border-slate-200 shadow-sm p-4" id="sop-detail-content"></div>
-      </div>
-    </div>
-  </main>
-
-  <footer class="bg-slate-900 text-slate-400 py-4 border-t border-slate-800 text-[10px] text-center mt-auto">
-    <p class="font-bold text-slate-200">USP Chromatography Database & SOP Web Portal</p>
-    <p class="text-slate-600 mt-0.5">WHO • CGMP • FDA Compliant Guidelines Reference Tool</p>
+  <footer class="bg-slate-900 border-t border-slate-800 py-3.5 text-center text-[10px] text-slate-500 mt-auto px-4">
+    <p class="font-bold text-slate-300">Pharma SOP & cGMP Compliance Portal</p>
+    <p class="mt-0.5">WHO • US-FDA • cGMP Guidelines Reference Website Dashboard</p>
   </footer>
 
   <script>
     const columnsDb = /*COLUMNS_DATA_PLACEHOLDER*/;
     const monographsDb = /*MONOGRAPHS_DATA_PLACEHOLDER*/;
+    const sopsDb = /*SOPS_DATA_PLACEHOLDER*/;
 
+    let activeTab = 'home';
     let filterLetter = 'ALL';
     let filterForm = 'ALL';
-    let searchQuery = '';
-    let selectedLCode = 'L1';
-    let customDb = JSON.parse(localStorage.getItem('custom_mono') || '[]');
+    let activeDept = 'ALL';
+    let currentRole = 'Analyst';
+    let activeSop = null;
+    let playingVideoIdx = 0;
+    let videoPlaying = false;
+    let videoProgress = 0;
+    let videoTimerId = null;
+
+    let customMonoDb = JSON.parse(localStorage.getItem('custom_mono') || '[]');
+    let contactInquiries = JSON.parse(localStorage.getItem('contact_inquiries') || '[]');
+    let signOffs = JSON.parse(localStorage.getItem('sop_signoffs') || '{}');
+
+    const videosDb = [
+      { id: "vid_01", title: "HPLC Peak Integration & Calibration", duration: "12 mins", author: "Dr. Sarah Jenkins", views: "1.2K views", desc: "Covers Peak area calibration, baseline integration, chromatography RSD limits, and USP system suitability." },
+      { id: "vid_02", title: "Grade A Cleanroom Sterile Gowning Sequence", duration: "8 mins", author: "Senior Operator Ahmed", views: "3.4K views", desc: "Detailed video demonstrating correct WHO aseptic gowning without touching outer fabrics." },
+      { id: "vid_03", title: "Environmental Monitoring Active Air Sampling Methods", duration: "15 mins", author: "Aisha Khan (Micro)", views: "920 views", desc: "Explains TSA/SDA media plate handling, air sampler aspiration volume 1000L, and colony calculation." }
+    ];
+
+    const chemicalSuite = [
+      { name: "Hydrochloric Acid (HCl)", density: 1.19, formulaWeight: 36.46, weightPercent: 37.0 },
+      { name: "Sulfuric Acid (H2SO4)", density: 1.84, formulaWeight: 98.08, weightPercent: 96.0 },
+      { name: "Nitric Acid (HNO3)", density: 1.42, formulaWeight: 63.01, weightPercent: 70.0 },
+      { name: "Phosphoric Acid (H3PO4)", density: 1.685, formulaWeight: 98.0, weightPercent: 85.0 },
+      { name: "Ammonium Hydroxide", density: 0.90, formulaWeight: 35.05, weightPercent: 28.0 }
+    ];
 
     function init() {
-      // Alphabet Row
-      const chars = ['ALL', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
-      const alphContainer = document.getElementById('alphabet-jumps');
-      alphContainer.innerHTML = chars.map(c => {
-        const activeClass = filterLetter === c ? 'bg-emerald-600 text-white' : 'hover:bg-slate-100 text-slate-600';
-        return `<button onclick="setLetter('${c}')" id="jump-${c}" class="px-2 py-1 text-[10px] font-bold rounded ${activeClass}">${c}</button>`;
-      }).join('');
+      // Role selector init
+      document.getElementById('role-selector').value = currentRole;
+      changeRole();
 
-      // Dropdowns
+      // USP columns list comparison drop-downs
       const lSelect = document.getElementById('comp-left');
       const rSelect = document.getElementById('comp-right');
       columnsDb.forEach(col => {
@@ -191,294 +398,990 @@
         rSelect.add(new Option(col.code + ' - ' + col.name, col.code, col.code === 'L7', col.code === 'L7'));
       });
 
-      refreshStats();
-      renderMonographs();
+      renderFeaturedSops();
+      renderSopStats();
+      renderSops();
+      renderUsp();
       renderLCodes();
-      compare();
-      showSop('qc-col');
+      runCompare();
+      renderVideos();
+      selectCalc(0);
+      renderSupportHistory();
+    }
+
+    function toggleMobileMenu() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('hidden');
+    }
+
+    function changeRole() {
+      currentRole = document.getElementById('role-selector').value;
+      document.getElementById('welcome-title').innerText = "Welcome back, " + currentRole + "!";
+      renderSops();
     }
 
     function switchTab(id) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.getElementById('section-' + id).classList.remove('hidden');
-      const tabs = ['monographs', 'lcodes', 'compare', 'sops'];
-      tabs.forEach(t => {
-        const btn = document.getElementById('btn-' + t);
-        if (t === id) {
-          btn.className = "px-3 py-1.5 text-xs font-bold rounded bg-emerald-600 text-white shadow";
-        } else {
-          btn.className = "px-3 py-1.5 text-xs font-semibold rounded text-emerald-100 hover:bg-emerald-800/30";
-        }
+      activeTab = id;
+      document.querySelectorAll('.tab-sec').forEach(el => el.classList.add('hidden'));
+      document.getElementById('sec-' + id).classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.className = "nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5";
       });
-    }
+      document.getElementById('nav-' + id).className = "nav-btn w-full text-left text-xs px-3 py-2.5 rounded font-bold bg-emerald-800 text-white flex items-center gap-2.5";
 
-    function setLetter(c) {
-      filterLetter = c;
-      document.querySelectorAll('#alphabet-jumps button').forEach(b => {
-        b.className = "px-2 py-1 text-[10px] font-bold rounded text-slate-600 hover:bg-slate-100";
-      });
-      const targetBtn = document.getElementById('jump-' + c);
-      if (targetBtn) {
-        targetBtn.className = "px-2 py-1 text-[10px] font-bold rounded bg-emerald-600 text-white shadow-sm";
-      }
-      renderMonographs();
-    }
-
-    function setFormFilter(formName) {
-      filterForm = formName;
-      document.querySelectorAll('#form-filters button').forEach(b => {
-        b.className = "text-left text-xs px-2 py-1 rounded text-slate-600 flex justify-between w-full";
-      });
-      const formKey = formName === 'Raw' ? 'Raw' : formName;
-      const targetBtn = document.getElementById('ff-' + formKey);
-      if (targetBtn) {
-        targetBtn.className = "text-left text-xs px-2 py-1 rounded bg-emerald-50 text-emerald-800 font-bold flex justify-between w-full";
-      }
-      renderMonographs();
-    }
-
-    function onSearchInput() {
-      searchQuery = document.getElementById('input-search').value.trim().toLowerCase();
-      renderMonographs();
-    }
-
-    function getCombined() { return [...customDb, ...monographsDb]; }
-
-    function refreshStats() {
-      const combined = getCombined();
-      document.getElementById('stat-total').innerText = combined.length;
-      document.getElementById('stat-lcodes').innerText = columnsDb.length;
-      document.getElementById('stat-custom').innerText = customDb.length;
-
-      document.getElementById('ff-count-all').innerText = combined.length;
-      document.getElementById('ff-count-tablets').innerText = combined.filter(m => m.dosageForm.toLowerCase().includes('tablet')).length;
-      document.getElementById('ff-count-capsules').innerText = combined.filter(m => m.dosageForm.toLowerCase().includes('capsule')).length;
-      document.getElementById('ff-count-injections').innerText = combined.filter(m => m.dosageForm.toLowerCase().includes('injection')).length;
-      document.getElementById('ff-count-raw').innerText = combined.filter(m => m.dosageForm.toLowerCase().includes('raw') || m.dosageForm.toLowerCase().includes('api')).length;
-
-      const resetBtn = document.getElementById('btn-reset-db');
-      if (customDb.length > 0) {
-        resetBtn.className = "text-red-600 hover:underline inline-block";
-      } else {
-        resetBtn.className = "hidden";
+      // Hide sidebar on mobile after clicking
+      if (window.innerWidth < 768) {
+        document.getElementById('sidebar').classList.add('hidden');
       }
     }
 
-    function renderMonographs() {
-      const combined = getCombined();
-      const container = document.getElementById('monographs-container');
+    function doSearch() {
+      const q = document.getElementById('dash-search').value.trim().toLowerCase();
+      if (!q) return;
+      switchTab('sops');
+      document.getElementById('sop-search-input').value = q;
+      renderSops();
+    }
+
+    function renderFeaturedSops() {
+      const container = document.getElementById('featured-sops-container');
+      container.innerHTML = '';
+      const featured = sopsDb.slice(0, 4);
+      featured.forEach(sop => {
+        const d = document.createElement('div');
+        d.className = "bg-slate-900 border border-slate-800 p-3.5 rounded-xl hover:border-emerald-700/50 transition cursor-pointer flex justify-between items-center";
+        d.onclick = () => { switchTab('sops'); loadSop(sop.id); };
+        d.innerHTML = `
+          <div>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">${sop.code}</span>
+            <h4 class="text-xs font-black text-slate-200 mt-1.5">${sop.title}</h4>
+            <p class="text-[9px] text-slate-500">Dept: ${sop.department} • Role: ${sop.roleRequired}</p>
+          </div>
+          <i class="fa-solid fa-arrow-right text-[10px] text-slate-600"></i>
+        `;
+        container.appendChild(d);
+      });
+    }
+
+    function renderSopStats() {
+      const combined = [...customMonoDb, ...monographsDb];
+      document.getElementById('all-count').innerText = sopsDb.length;
+      document.getElementById('qc-count').innerText = sopsDb.filter(s => s.department === 'Quality Control').length;
+      document.getElementById('qa-count').innerText = sopsDb.filter(s => s.department === 'Quality Assurance').length;
+      document.getElementById('micro-count').innerText = sopsDb.filter(s => s.department === 'Microlab').length;
+      document.getElementById('prod-count').innerText = sopsDb.filter(s => s.department === 'Production').length;
+      document.getElementById('val-count').innerText = sopsDb.filter(s => s.department === 'Validation').length;
+      document.getElementById('gmp-count').innerText = sopsDb.filter(s => s.department === 'GMP').length;
+      document.getElementById('audit-count').innerText = sopsDb.filter(s => s.department === 'Audit').length;
+    }
+
+    function filterDept(dept) {
+      activeDept = dept;
+      document.querySelectorAll('.dept-btn').forEach(btn => {
+        btn.className = "dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between";
+      });
+      const keys = { 'ALL': 'all', 'Quality Control': 'qc', 'Quality Assurance': 'qa', 'Microlab': 'micro', 'Production': 'prod', 'Validation': 'val', 'GMP': 'gmp', 'Audit': 'audit' };
+      document.getElementById('dept-' + keys[dept]).className = "dept-btn text-left text-xs px-2.5 py-1.5 rounded font-bold bg-emerald-800 text-white flex justify-between";
+      renderSops();
+    }
+
+    function renderSops() {
+      const container = document.getElementById('sop-list-container');
+      const q = document.getElementById('sop-search-input').value.trim().toLowerCase();
       container.innerHTML = '';
 
-      const filtered = combined.filter(m => {
-        if (searchQuery) {
-          const matchName = m.productName.toLowerCase().includes(searchQuery);
-          const matchActive = m.activeIngredient.toLowerCase().includes(searchQuery);
-          const matchForm = m.dosageForm.toLowerCase().includes(searchQuery);
-          const matchCols = m.columnsUsed && m.columnsUsed.some(c => c.lgsCode.toLowerCase().includes(searchQuery) || c.brand.toLowerCase().includes(searchQuery));
-          if (!matchName && !matchActive && !matchForm && !matchCols) return false;
-        }
-        if (filterLetter !== 'ALL' && !m.productName.toUpperCase().startsWith(filterLetter)) return false;
-        if (filterForm !== 'ALL') {
-          if (filterForm === 'Raw') {
-            if (!m.dosageForm.toLowerCase().includes('raw') && !m.dosageForm.toLowerCase().includes('api')) return false;
-          } else if (!m.dosageForm.toLowerCase().includes(filterForm.toLowerCase())) return false;
+      const filtered = sopsDb.filter(s => {
+        if (activeDept !== 'ALL' && s.department !== activeDept) return false;
+        if (q) {
+          const matchCode = s.code.toLowerCase().includes(q);
+          const matchTitle = s.title.toLowerCase().includes(q);
+          const matchRole = s.roleRequired.toLowerCase().includes(q);
+          if (!matchCode && !matchTitle && !matchRole) return false;
         }
         return true;
       });
 
-      document.getElementById('results-count').innerText = "Found " + filtered.length + " matching monographs";
+      document.getElementById('sop-count-badge').innerText = filtered.length + " SOPs";
 
-      filtered.forEach(m => {
-        const isCustom = customDb.some(c => c.productName === m.productName);
+      filtered.forEach(s => {
+        const isSigned = !!signOffs[s.code];
         const card = document.createElement('div');
-        card.className = "bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 animate-slide";
-        
-        const badgeClass = isCustom ? 'bg-purple-100 text-purple-700' : 'bg-emerald-50 text-emerald-700';
-        const customLabel = isCustom ? '<span class="text-[8px] text-purple-500 font-semibold"><i class="fa-solid fa-cloud-arrow-up"></i> Custom</span>' : '';
-        
-        const columnsHtml = m.columnsUsed.map(c => `
-          <div class="flex justify-between py-0.5">
-            <span>Ref: <strong class="font-mono">${c.pf}</strong></span>
-            <span>Type: <button onclick="viewLCode('${c.lgsCode}')" class="text-emerald-600 hover:underline font-bold">${c.lgsCode}</button></span>
-          </div>
-          <p class="font-semibold text-slate-800">${c.brand}</p>
-          <p class="text-[9px] italic text-slate-400 leading-tight mb-2">${c.comments}</p>
-        `).join('');
-
+        const isActive = activeSop && activeSop.code === s.code;
+        card.className = `p-2.5 rounded-lg border cursor-pointer transition flex justify-between items-center ${isActive ? 'bg-emerald-950/40 border-emerald-700' : 'bg-slate-900/50 border-slate-800 hover:border-slate-700'}`;
+        card.onclick = () => loadSop(s.id);
         card.innerHTML = `
-          <div>
-            <div class="flex justify-between items-center">
-              <span class="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ${badgeClass}">${m.dosageForm}</span>
-              ${customLabel}
+          <div class="truncate">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[8px] font-mono px-1 rounded bg-slate-800 text-slate-300 border border-slate-700">${s.code}</span>
+              ${isSigned ? '<span class="text-[8px] px-1 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Signed Off</span>' : ''}
             </div>
-            <h4 class="text-xs font-black text-slate-900 mt-1">${m.productName}</h4>
-            <p class="text-[10px] text-slate-500">Active: <span class="font-bold text-slate-700">${m.activeIngredient}</span></p>
+            <h4 class="text-xs font-bold text-slate-200 truncate mt-1">${s.title}</h4>
+            <p class="text-[9px] text-slate-500">Required: ${s.roleRequired}</p>
           </div>
-          <div class="border-t border-slate-100 pt-1.5 text-[10px] text-slate-600">
-            ${columnsHtml}
-          </div>
+          <i class="fa-solid fa-chevron-right text-[10px] text-slate-600"></i>
         `;
         container.appendChild(card);
       });
     }
 
-    function viewLCode(code) {
-      selectedLCode = code;
-      switchTab('lcodes');
-      renderLCodes();
+    function loadSop(id) {
+      const s = sopsDb.find(sop => sop.id === id);
+      if (!s) return;
+      activeSop = s;
+      renderSops();
+
+      const reader = document.getElementById('sop-reader');
+      const isSigned = !!signOffs[s.code];
+      const signDetails = signOffs[s.code] || null;
+
+      // Role authorization assessment
+      let isAuth = (s.roleRequired === 'All' || s.roleRequired === currentRole || currentRole === 'QA Officer');
+      const authBadge = isAuth ? 
+        '<span class="bg-emerald-950 text-emerald-400 text-[10px] font-bold border border-emerald-800 px-2.5 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-circle-check text-[8px]"></i> Qualified Role</span>' :
+        '<span class="bg-amber-950 text-amber-400 text-[10px] font-bold border border-amber-800 px-2.5 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-circle-exclamation text-[8px]"></i> Unqualified to Sign-off</span>';
+
+      const stepsHtml = s.procedure.split(';').map((pt, idx) => `
+        <li class="flex gap-2.5 text-slate-300">
+          <span class="text-emerald-500 font-bold font-mono shrink-0">${idx+1}.</span>
+          <span>${pt.trim()}</span>
+        </li>
+      `).join('');
+
+      reader.innerHTML = `
+        <div class="flex justify-between items-start border-b border-slate-800 pb-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">${s.code}</span>
+              ${authBadge}
+            </div>
+            <h3 class="text-base font-black text-white mt-2">${s.title}</h3>
+            <p class="text-[10px] text-slate-500">Effective: ${s.effectiveDate} • Version: 1.0 • Freq: ${s.frequency}</p>
+          </div>
+        </div>
+
+        <div class="flex-grow flex flex-col gap-4 text-xs overflow-y-auto custom-scrollbar max-h-[350px] pr-1 py-1">
+          <div><p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">1. OBJECTIVE & SCOPE</p><p class="text-slate-300 leading-relaxed">${s.objective} ${s.scope}</p></div>
+          <div><p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">2. RESPONSIBILITY</p><p class="text-slate-300 leading-relaxed">${s.responsibility}</p></div>
+          <div><p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-2">3. STEP-BY-STEP PROCEDURE</p><ul class="flex flex-col gap-2">${stepsHtml}</ul></div>
+          <div><p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">4. SAFETY PRECAUTIONS</p><p class="text-amber-400/90 leading-relaxed"><i class="fa-solid fa-triangle-exclamation mr-1"></i>${s.safetyPrecautions}</p></div>
+        </div>
+
+        <div class="border-t border-slate-800 pt-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div id="sign-off-status">
+            ${isSigned ? `
+              <div class="text-xs text-slate-400 leading-normal"><p class="text-emerald-400 font-bold flex items-center gap-1"><i class="fa-solid fa-signature"></i> Digitally Signed Off</p><p class="text-[9px]">By: ${signDetails.byRole} on ${signDetails.time}</p></div>
+            ` : `
+              <p class="text-[10px] text-slate-500 leading-tight">By signing off, you affirm that you have read, comprehended, and agree to execute this standard procedure.</p>
+            `}
+          </div>
+          <button onclick="signOffActive()" id="sign-btn" class="w-full sm:w-auto text-xs font-bold px-4 py-2 rounded-lg transition shrink-0 ${isSigned ? 'bg-slate-800 hover:bg-slate-750 text-slate-400' : 'bg-emerald-700 hover:bg-emerald-600 text-white'}" ${!isAuth ? 'disabled' : ''}>
+            ${isSigned ? 'Revoke Sign-off' : 'Sign-off Document'}
+          </button>
+        </div>
+      `;
     }
 
-    function renderLCodes() {
-      const list = document.getElementById('lcodes-list');
-      const detail = document.getElementById('lcode-detail');
-      list.innerHTML = '';
+    function signOffActive() {
+      if (!activeSop) return;
+      const code = activeSop.code;
+      if (signOffs[code]) {
+        delete signOffs[code];
+      } else {
+        signOffs[code] = { byRole: currentRole, time: new Date().toLocaleString() };
+      }
+      localStorage.setItem('sop_signoffs', JSON.stringify(signOffs));
+      loadSop(activeSop.id);
+      renderSopStats();
+    }
 
-      columnsDb.forEach(col => {
-        const isActive = selectedLCode === col.code;
-        const count = getCombined().filter(m => m.columnsUsed && m.columnsUsed.some(c => c.lgsCode === col.code)).length;
+    // AI Q&A Chat Functions
+    function handleChatKey(e) {
+      if (e.key === 'Enter') sendChat();
+    }
+
+    function sendSugg(txt) {
+      document.getElementById('chat-input').value = txt;
+      sendChat();
+    }
+
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendMsg("You", text);
+      input.value = '';
+
+      // Typing Indicator
+      const chat = document.getElementById('chat-messages');
+      const loader = document.createElement('div');
+      loader.id = 'chat-loader';
+      loader.className = 'flex justify-start';
+      loader.innerHTML = `<div class="bg-slate-900 border border-slate-800 text-xs px-3 py-2 rounded-xl text-slate-500 italic"><i class="fa-solid fa-circle-notch animate-spin mr-1.5"></i>Advisor is reviewing guidelines...</div>`;
+      chat.appendChild(loader);
+      chat.scrollTop = chat.scrollHeight;
+
+      setTimeout(() => {
+        document.getElementById('chat-loader').remove();
+        let ans = "I have scanned the cGMP regulatory SOP guidelines for your query. All analytical procedures must follow strict calibration parameters, validation, and be approved by Quality Assurance under FDA CFR Part 211 limits. Let me know if you would like me to read specific SOP protocols!";
         
-        const btnClass = isActive ? 'bg-emerald-600 text-white font-bold shadow-sm' : 'bg-white border hover:bg-slate-50';
-        const countBadgeClass = isActive ? 'bg-emerald-700 text-white' : 'bg-slate-100 text-slate-600';
-        
-        list.innerHTML += `
-          <button onclick="viewLCode('${col.code}')" class="text-left text-xs px-2.5 py-2 rounded flex justify-between w-full items-center ${btnClass}">
-            <span><strong>${col.code}</strong> - ${col.name.substring(0,18)}...</span>
-            <span class="text-[9px] px-1.5 py-0.5 rounded font-bold ${countBadgeClass}">${count}</span>
-          </button>
-        `;
+        const q = text.toLowerCase();
+        if (q.includes("qa") && q.includes("qc")) {
+          ans = "<strong>Quality Assurance (QA)</strong> is process-oriented and focuses on error prevention. It includes audits, document controls, and validation setups.<br><br><strong>Quality Control (QC)</strong> is product-oriented, executing physical and chemical laboratory testing of raw materials and final batches.";
+        } else if (q.includes("oos") || q.includes("specification")) {
+          ans = "<strong>Out of Specification (OOS)</strong> investigation follows FDA's 2-Step guideline:<br><strong>1. Phase I (Lab Investigation):</strong> Immediate audit of standard solutions, instrument calibrations, and calculations. Do not throw away samples.<br><strong>2. Phase II (Full investigation):</strong> Includes manufacturing processes audits and duplicate re-testing authorized by QA.";
+        } else if (q.includes("gowning") || q.includes("sterile") || q.includes("cleanroom")) {
+          ans = "Sterile cleanroom entry sequence according to WHO:<br>1. Remove jewelry & hand washing.<br>2. Sanitize hands with 70% IPA.<br>3. Wear hairnet & sterile face mask.<br>4. Wear goggles.<br>5. Wear sterile coverall jumpsuits without letting fabric touch floors.<br>6. Slip on boots.<br>7. Wear double sterile gloves, pulling cuffs over sleeves.";
+        } else if (q.includes("fefo") || q.includes("warehouse")) {
+          ans = "<strong>First Expired, First Out (FEFO)</strong> ensures nearby expiry drug batches are stored at the front lines of shelves. This prevents inventory degradation, meets batch specification shelf-life, and ensures patients receive fresh stock.";
+        }
+        appendMsg("AI", ans);
+      }, 1000);
+    }
+
+    function appendMsg(sender, text) {
+      const chat = document.getElementById('chat-messages');
+      const d = document.createElement('div');
+      d.className = `flex ${sender === 'You' ? 'justify-end' : 'justify-start'}`;
+      d.innerHTML = `
+        <div class="text-xs px-3.5 py-2.5 rounded-xl max-w-lg leading-relaxed ${sender === 'You' ? 'bg-emerald-700 text-white rounded-br-none' : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-bl-none'}">
+          <p class="text-[9px] font-bold text-slate-400 mb-1 flex items-center gap-1">${sender === 'You' ? '<i class="fa-solid fa-user"></i> You' : '<i class="fa-solid fa-user-tie text-emerald-400"></i> Compliance Advisor'}</p>
+          <p>${text}</p>
+        </div>
+      `;
+      chat.appendChild(d);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    // USP sub-tab switcher
+    function switchUspSub(sub) {
+      document.querySelectorAll('.usp-sub-sec').forEach(el => el.classList.add('hidden'));
+      document.getElementById('usp-' + sub).classList.remove('hidden');
+
+      document.getElementById('btn-sub-mono').className = "px-2.5 py-1 rounded text-slate-400 hover:text-white font-semibold";
+      document.getElementById('btn-sub-codes').className = "px-2.5 py-1 rounded text-slate-400 hover:text-white font-semibold";
+      document.getElementById('btn-sub-comp').className = "px-2.5 py-1 rounded text-slate-400 hover:text-white font-semibold";
+
+      const btnId = sub === 'mono' ? 'btn-sub-mono' : (sub === 'codes' ? 'btn-sub-codes' : 'btn-sub-comp');
+      document.getElementById(btnId).className = "px-2.5 py-1 rounded bg-teal-600 text-white font-bold";
+    }
+
+    function getCombinedMono() { return [...customMonoDb, ...monographsDb]; }
+
+    function renderUsp() {
+      const container = document.getElementById('usp-mono-container');
+      const q = document.getElementById('usp-search').value.trim().toLowerCase();
+      const dosage = document.getElementById('usp-dosage-filter').value;
+      container.innerHTML = '';
+
+      const combined = getCombinedMono();
+      const filtered = combined.filter(m => {
+        if (q) {
+          const matchName = m.productName.toLowerCase().includes(q);
+          const matchActive = m.activeIngredient.toLowerCase().includes(q);
+          if (!matchName && !matchActive) return false;
+        }
+        if (dosage !== 'ALL') {
+          if (!m.dosageForm.toLowerCase().includes(dosage.toLowerCase())) return false;
+        }
+        return true;
       });
 
-      const active = columnsDb.find(c => c.code === selectedLCode);
+      document.getElementById('mono-count-label').innerText = "Found " + filtered.length + " matching drugs";
+
+      filtered.forEach(m => {
+        const isCustom = customMonoDb.some(c => c.productName === m.productName);
+        const card = document.createElement('div');
+        card.className = "bg-slate-900 border border-slate-800 p-3 rounded-lg flex flex-col gap-2";
+        const colsHtml = m.columnsUsed.map(c => `
+          <div class="flex justify-between text-[10px] text-slate-400 border-t border-slate-800/40 pt-1.5 mt-1">
+            <span>Ref: <strong>${c.pf}</strong></span>
+            <span>Type: <button onclick="viewLCode('${c.lgsCode}')" class="text-teal-400 hover:underline font-bold">${c.lgsCode}</button></span>
+          </div>
+          <p class="text-xs font-bold text-slate-200 mt-1">${c.brand}</p>
+          <p class="text-[9px] italic text-slate-500 leading-normal">${c.comments}</p>
+        `).join('');
+
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-center text-[9px]">
+              <span class="px-1.5 py-0.5 rounded bg-teal-950 text-teal-400 border border-teal-800 font-bold uppercase">${m.dosageForm}</span>
+              ${isCustom ? '<span class="text-purple-400"><i class="fa-solid fa-cloud-arrow-up"></i> Custom</span>' : ''}
+            </div>
+            <h4 class="text-xs font-extrabold text-white mt-1.5">${m.productName}</h4>
+            <p class="text-[10px] text-slate-400">Active: ${m.activeIngredient}</p>
+          </div>
+          ${colsHtml}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function addCustomDrug(e) {
+      e.preventDefault();
+      const newD = {
+        productName: document.getElementById('add-mono-name').value.trim().toUpperCase(),
+        activeIngredient: document.getElementById('add-mono-active').value.trim(),
+        dosageForm: document.getElementById('add-mono-form').value,
+        columnsUsed: [{
+          pf: "USP 48",
+          lgsCode: "L1",
+          brand: document.getElementById('add-mono-brand').value.trim(),
+          testType: "Assay",
+          comments: "User Custom column record"
+        }]
+      };
+      customMonoDb.unshift(newD);
+      localStorage.setItem('custom_mono', JSON.stringify(customMonoDb));
+      e.target.reset();
+      renderUsp();
+      renderSopStats();
+      alert("Custom Monograph Added!");
+    }
+
+    function viewLCode(code) {
+      switchUspSub('codes');
+      renderLCodes(code);
+    }
+
+    function renderLCodes(selectedCode = 'L1') {
+      const btnContainer = document.getElementById('lcode-buttons');
+      btnContainer.innerHTML = '';
+
+      columnsDb.forEach(col => {
+        const isActive = col.code === selectedCode;
+        const b = document.createElement('button');
+        b.className = `text-left text-xs px-2 py-1.5 rounded flex justify-between items-center w-full transition ${isActive ? 'bg-teal-900 text-white font-bold border border-teal-700' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}`;
+        b.onclick = () => renderLCodes(col.code);
+        b.innerHTML = `<span><strong>${col.code}</strong> - ${col.name.substring(0, 16)}...</span>`;
+        btnContainer.appendChild(b);
+      });
+
+      const active = columnsDb.find(c => c.code === selectedCode);
+      const detail = document.getElementById('lcode-detail');
       if (!active) return;
-      
-      const matchingDrugs = getCombined().filter(m => m.columnsUsed && m.columnsUsed.some(c => c.lgsCode === active.code));
 
       detail.innerHTML = `
-        <div class="border-b pb-2 animate-slide">
-          <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold font-mono px-2 py-0.5 rounded border">${active.code}</span>
-          <h2 class="text-sm font-extrabold text-slate-900 mt-1">${active.name}</h2>
-          <p class="text-xs text-slate-500 italic leading-snug mt-1">${active.description}</p>
+        <div class="border-b border-slate-800 pb-2">
+          <span class="bg-teal-950 text-teal-400 text-[10px] font-mono font-bold border border-teal-800 px-2 py-0.5 rounded">${active.code}</span>
+          <h4 class="text-sm font-black text-white mt-1.5">${active.name}</h4>
+          <p class="text-xs text-slate-400 mt-1 italic">${active.description}</p>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px] leading-tight animate-slide">
-          <div class="bg-slate-50 p-2 rounded"><strong>Packing:</strong><p class="text-slate-600">${active.packingMaterial}</p></div>
-          <div class="bg-slate-50 p-2 rounded"><strong>pH range:</strong><p class="text-slate-600">${active.phRange}</p></div>
-          <div class="bg-slate-50 p-2 rounded"><strong>Carbon load:</strong><p class="text-slate-600">${active.carbonLoadRange}</p></div>
-          <div class="bg-slate-50 p-2 rounded"><strong>Max Temp:</strong><p class="text-slate-600">${active.maxTemp}</p></div>
+        <div class="grid grid-cols-2 gap-2 text-[10px]">
+          <div class="bg-slate-850 p-2 rounded"><strong>Packing:</strong><p class="text-slate-300 mt-0.5">${active.packingMaterial}</p></div>
+          <div class="bg-slate-850 p-2 rounded"><strong>pH range:</strong><p class="text-slate-300 mt-0.5">${active.phRange}</p></div>
+          <div class="bg-slate-850 p-2 rounded"><strong>Carbon load:</strong><p class="text-slate-300 mt-0.5">${active.carbonLoadRange}</p></div>
+          <div class="bg-slate-850 p-2 rounded"><strong>Max Temp:</strong><p class="text-slate-300 mt-0.5">${active.maxTemp}</p></div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs animate-slide">
-          <div class="bg-slate-50 p-3 rounded">
-            <strong class="text-slate-800 block mb-1">Typical Applications</strong>
-            <ul class="list-disc list-inside text-slate-600 flex flex-col gap-1 text-[11px]">${active.typicalApplications.map(app => `<li>${app}</li>`).join('')}</ul>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="bg-slate-850 p-2.5 rounded">
+            <span class="text-[10px] font-bold text-slate-400 block mb-1">Typical Applications</span>
+            <ul class="list-disc list-inside text-slate-300 flex flex-col gap-0.5 text-[11px]">${active.typicalApplications.map(app => `<li>${app}</li>`).join('')}</ul>
           </div>
-          <div class="bg-slate-50 p-3 rounded">
-            <strong class="text-slate-800 block mb-1">Equivalent Brands</strong>
-            <div class="flex flex-wrap gap-1">${active.popularBrands.map(b => `<span class="bg-white border px-1.5 py-0.5 rounded text-[10px] font-bold shadow-xs">${b}</span>`).join('')}</div>
-          </div>
-        </div>
-        <div class="animate-slide">
-          <strong class="text-xs block mb-1 font-bold text-slate-800">Drug monographs requiring ${active.code} (${matchingDrugs.length})</strong>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-1.5 max-h-[140px] overflow-y-auto custom-scrollbar p-1">
-            ${matchingDrugs.map(m => `
-              <button onclick="jumpToDrug('${m.productName}')" class="text-left text-xs bg-slate-50 border hover:bg-emerald-50/50 p-2 rounded flex justify-between items-center">
-                <span class="font-bold truncate">${m.productName}</span>
-                <i class="fa-solid fa-chevron-right text-slate-300 text-[10px]"></i>
-              </button>
-            `).join('')}
+          <div class="bg-slate-850 p-2.5 rounded">
+            <span class="text-[10px] font-bold text-slate-400 block mb-1">Equivalent Brands</span>
+            <div class="flex flex-wrap gap-1 mt-1">${active.popularBrands.map(b => `<span class="bg-slate-900 px-1.5 py-0.5 rounded text-[10px] border border-slate-800 text-slate-300">${b}</span>`).join('')}</div>
           </div>
         </div>
       `;
     }
 
-    function jumpToDrug(name) {
-      switchTab('monographs');
-      document.getElementById('input-search').value = name;
-      onSearchInput();
-    }
+    function runCompare() {
+      const leftCode = document.getElementById('comp-left').value || 'L1';
+      const rightCode = document.getElementById('comp-right').value || 'L7';
 
-    function compare() {
-      const left = columnsDb.find(c => c.code === document.getElementById('comp-left').value);
-      const right = columnsDb.find(c => c.code === document.getElementById('comp-right').value);
+      const left = columnsDb.find(c => c.code === leftCode);
+      const right = columnsDb.find(c => c.code === rightCode);
       if (!left || !right) return;
 
-      document.getElementById('compare-table-wrapper').innerHTML = `
-        <table class="w-full text-left text-xs border-collapse rounded-lg overflow-hidden border">
-          <tr class="bg-slate-100 font-bold text-slate-700 border-b">
-            <th class="p-2.5">Factor</th>
-            <th class="p-2.5 bg-emerald-50/20">${left.code} - ${left.name}</th>
-            <th class="p-2.5 bg-blue-50/20">${right.code} - ${right.name}</th>
-          </tr>
-          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">Packing</td><td class="p-2">${left.packingMaterial}</td><td class="p-2">${right.packingMaterial}</td></tr>
-          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">pH range</td><td class="p-2">${left.phRange}</td><td class="p-2">${right.phRange}</td></tr>
-          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">Carbon load</td><td class="p-2">${left.carbonLoadRange}</td><td class="p-2">${right.carbonLoadRange}</td></tr>
-          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">Max Temp</td><td class="p-2">${left.maxTemp}</td><td class="p-2">${right.maxTemp}</td></tr>
-          <tr class="border-b"><td class="p-2 font-semibold text-slate-500">Applications</td><td class="p-2 text-[10px] leading-snug">${left.typicalApplications.join(', ')}</td><td class="p-2 text-[10px] leading-snug">${right.typicalApplications.join(', ')}</td></tr>
-          <tr><td class="p-2 font-semibold text-slate-500">Popular Brands</td><td class="p-2"><div class="flex flex-wrap gap-1">${left.popularBrands.map(b=>`<span class="bg-slate-50 px-1 rounded text-[9px] font-bold border">${b}</span>`).join('')}</div></td><td class="p-2"><div class="flex flex-wrap gap-1">${right.popularBrands.map(b=>`<span class="bg-slate-50 px-1 rounded text-[9px] font-bold border">${b}</span>`).join('')}</div></td></tr>
+      document.getElementById('compare-board-result').innerHTML = `
+        <table class="w-full text-left text-xs border border-slate-800 rounded-lg overflow-hidden">
+          <thead>
+            <tr class="bg-slate-850 border-b border-slate-800 text-slate-300">
+              <th class="p-2.5">Factor</th>
+              <th class="p-2.5 bg-teal-950/20 text-teal-400">${left.code}</th>
+              <th class="p-2.5 bg-blue-950/20 text-blue-400">${right.code}</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-300 divide-y divide-slate-800">
+            <tr><td class="p-2 font-bold text-slate-400">Packing</td><td class="p-2">${left.packingMaterial}</td><td class="p-2">${right.packingMaterial}</td></tr>
+            <tr><td class="p-2 font-bold text-slate-400">pH range</td><td class="p-2">${left.phRange}</td><td class="p-2">${right.phRange}</td></tr>
+            <tr><td class="p-2 font-bold text-slate-400">Carbon load</td><td class="p-2">${left.carbonLoadRange}</td><td class="p-2">${right.carbonLoadRange}</td></tr>
+            <tr><td class="p-2 font-bold text-slate-400">Max Temp</td><td class="p-2">${left.maxTemp}</td><td class="p-2">${right.maxTemp}</td></tr>
+            <tr><td class="p-2 font-bold text-slate-400">Popular Brands</td><td class="p-2"><div class="flex flex-wrap gap-1">${left.popularBrands.map(b => `<span class="bg-slate-800 text-[10px] px-1 rounded border border-slate-700">${b}</span>`).join('')}</div></td><td class="p-2"><div class="flex flex-wrap gap-1">${right.popularBrands.map(b => `<span class="bg-slate-800 text-[10px] px-1 rounded border border-slate-700">${b}</span>`).join('')}</div></td></tr>
+          </tbody>
         </table>
       `;
     }
 
-    function submitCustom(e) {
-      e.preventDefault();
-      const newM = {
-        productName: document.getElementById('add-name').value.trim().toUpperCase(),
-        activeIngredient: document.getElementById('add-active').value.trim(),
-        dosageForm: document.getElementById('add-form').value,
-        columnsUsed: [{
-          pf: "48(1)", lgsCode: document.getElementById('add-lcode').value,
-          brand: document.getElementById('add-brand').value.trim(),
-          testType: "Assay / Impurities", comments: document.getElementById('add-comments').value.trim() || "User Custom Column Equivalents"
-        }]
-      };
-
-      customDb.unshift(newM);
-      localStorage.setItem('custom_mono', JSON.stringify(customDb));
-      e.target.reset();
-
-      refreshStats();
-      renderMonographs();
-      renderLCodes();
-      alert("Added Custom Monograph: " + newM.productName);
-    }
-
-    function clearCustom() {
-      if(confirm("Confirm reset? This deletes all custom listings.")) {
-        customDb = [];
-        localStorage.removeItem('custom_mono');
-        refreshStats();
-        renderMonographs();
-        renderLCodes();
-      }
-    }
-
-    const sopsDb = {
-      'qc-col': {
-        title: "QC Column Care & Handling SOP",
-        text: "HPLC Columns are highly sensitive analytical core components. Flush with 50:50 organic solvent / water for 30 minutes after buffer salts usage. Store L1 columns in 100% Acetonitrile or Methanol. Maintain pressure below 400 bar and avoid drastic mobile phase changes."
-      },
-      'qc-hplc': {
-        title: "HPLC Suitability & Qualification Testing",
-        text: "Pre-requisite criteria before sample injection: Injection precision RSD of replicate injections must not exceed 2.0% under standard requirements. Theoretical plate count N must exceed 2000 plates, and tailing factor T must lie between 0.8 and 2.0."
-      },
-      'qa-oos': {
-        title: "OOS Investigation Standard Procedures",
-        text: "When an Out-of-Specification laboratory outcome is obtained, immediately halt operations. Phase Ia: Laboratory analytical review, verify dilution errors, column cleanliness, calculations, and standards calibration. Phase Ib: Manufacturing batch review and formulation verification."
-      }
-    };
-
-    function showSop(id) {
-      document.querySelectorAll('.sop-btn').forEach(b => {
-        b.className = "sop-btn text-xs text-left px-2 py-1.5 rounded text-slate-600 hover:bg-slate-50 w-full";
+    // Video Training
+    function renderVideos() {
+      const container = document.getElementById('videos-list');
+      container.innerHTML = '';
+      videosDb.forEach((vid, idx) => {
+        const isCurrent = idx === playingVideoIdx;
+        const d = document.createElement('button');
+        d.className = `text-left text-xs p-3 rounded-lg border w-full transition flex flex-col gap-1 ${isCurrent ? 'bg-emerald-950/30 border-emerald-700' : 'bg-slate-900 border-slate-800 hover:border-slate-700'}`;
+        d.onclick = () => loadVideo(idx);
+        d.innerHTML = `
+          <div class="flex justify-between items-center w-full">
+            <span class="text-[9px] font-bold text-emerald-400 uppercase">Module 0${idx+1}</span>
+            <span class="text-[9px] text-slate-500">${vid.duration}</span>
+          </div>
+          <h4 class="font-bold text-slate-100">${vid.title}</h4>
+          <p class="text-[10px] text-slate-400">By ${vid.author}</p>
+        `;
+        container.appendChild(d);
       });
-      const activeBtn = document.getElementById('sop-btn-' + id);
-      if (activeBtn) {
-        activeBtn.className = "sop-btn text-xs text-left px-2 py-1.5 rounded font-semibold bg-emerald-50 text-emerald-800 border-l-2 border-emerald-600 w-full";
+      loadVideo(playingVideoIdx);
+    }
+
+    function loadVideo(idx) {
+      playingVideoIdx = idx;
+      videoPlaying = false;
+      videoProgress = 0;
+      clearInterval(videoTimerId);
+
+      const vid = videosDb[idx];
+      document.getElementById('video-player-title').innerText = vid.title + " • " + vid.desc;
+      document.getElementById('play-pause-btn').innerHTML = '<i class="fa-regular fa-circle-play"></i>';
+      document.getElementById('video-state-label').innerText = "Paused";
+      document.getElementById('video-timer-label').innerText = "0:00 / " + vid.duration;
+      document.getElementById('video-progress-bar').style.width = '0%';
+    }
+
+    function toggleVideoPlayback() {
+      const vid = videosDb[playingVideoIdx];
+      videoPlaying = !videoPlaying;
+
+      if (videoPlaying) {
+        document.getElementById('play-pause-btn').innerHTML = '<i class="fa-regular fa-circle-pause"></i>';
+        document.getElementById('video-state-label').innerText = "Playing...";
+        
+        const totalSecs = parseInt(vid.duration) * 60;
+        let elapsed = Math.floor((videoProgress / 100) * totalSecs);
+
+        videoTimerId = setInterval(() => {
+          elapsed++;
+          videoProgress = (elapsed / totalSecs) * 100;
+          if (videoProgress >= 100) {
+            videoProgress = 100;
+            videoPlaying = false;
+            document.getElementById('play-pause-btn').innerHTML = '<i class="fa-regular fa-circle-play"></i>';
+            document.getElementById('video-state-label').innerText = "Completed";
+            clearInterval(videoTimerId);
+          }
+          document.getElementById('video-progress-bar').style.width = videoProgress + '%';
+          
+          const m = Math.floor(elapsed / 60);
+          const s = elapsed % 60;
+          document.getElementById('video-timer-label').innerText = `${m}:${s < 10 ? '0' : ''}${s} / ${vid.duration}`;
+        }, 1000);
+      } else {
+        document.getElementById('play-pause-btn').innerHTML = '<i class="fa-regular fa-circle-play"></i>';
+        document.getElementById('video-state-label').innerText = "Paused";
+        clearInterval(videoTimerId);
       }
-      const sop = sopsDb[id];
-      if (!sop) return;
-      document.getElementById('sop-detail-content').innerHTML = `
-        <h2 class="text-sm font-bold text-slate-900 border-b pb-2 flex items-center"><i class="fa-solid fa-file-invoice text-emerald-600 mr-2"></i> ${sop.title}</h2>
-        <p class="text-xs text-slate-600 leading-relaxed mt-2 bg-slate-50 p-3 rounded border border-slate-100">${sop.text}</p>
-      `;
+    }
+
+    // Interactive Calculators
+    function selectCalc(idx) {
+      document.querySelectorAll('.calc-btn').forEach(b => {
+        b.className = "calc-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex items-center gap-1.5";
+      });
+      document.querySelectorAll('.calc-btn')[idx].className = "calc-btn text-left text-xs px-2.5 py-1.5 rounded font-bold bg-emerald-800 text-white flex items-center gap-1.5";
+
+      const panel = document.getElementById('calculator-panel');
+      
+      switch (idx) {
+        case 0:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-flask"></i> Molarity Calculator</span>
+              <p class="text-[10px] text-slate-400">Calculate necessary Mass based on target Molarity, Volume, and Molecular Weight.</p>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Molarity (M)</label><input type="number" id="c-molar" value="0.1" oninput="runMolarity()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Volume (mL)</label><input type="number" id="c-vol" value="500" oninput="runMolarity()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">MW (g/mol)</label><input type="number" id="c-mw" value="58.44" oninput="runMolarity()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Mass Required (g)</label><input type="text" id="c-mass-res" readonly class="w-full bg-slate-800 px-2 py-1.5 rounded text-emerald-400 font-bold outline-none"></div>
+              </div>
+            </div>
+          `;
+          runMolarity();
+          break;
+        case 1:
+          let optStr = chemicalSuite.map((c, i) => `<option value="${i}">${c.name}</option>`).join('');
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-water"></i> Acid-Base Concentrated Molarity</span>
+              <p class="text-[10px] text-slate-400">Select standard laboratory chemical or manually override constants to calculate actual target stock dilutions.</p>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="col-span-2"><label class="block text-[10px] text-slate-400 font-bold mb-1">Select Chemical Profile</label><select id="chem-select" onchange="loadChemProfile()" class="w-full bg-slate-850 px-2 py-1.5 rounded text-slate-200 border border-slate-700 focus:outline-none">${optStr}</select></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Density (g/mL)</label><input type="number" step="0.01" id="ab-dens" oninput="runAbMolar()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Assay Purity (%)</label><input type="number" step="0.1" id="ab-pur" oninput="runAbMolar()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Formula Weight</label><input type="number" step="0.01" id="ab-mw" oninput="runAbMolar()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Concentration (M)</label><input type="text" id="ab-res-molar" readonly class="w-full bg-slate-800 px-2 py-1.5 rounded text-emerald-400 font-bold outline-none"></div>
+              </div>
+            </div>
+          `;
+          loadChemProfile();
+          break;
+        case 2:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-chart-line"></i> Replicate HPLC Injection % RSD Calculator</span>
+              <p class="text-[10px] text-slate-400">Enter up to 10 chromatographic peak areas (comma or newline separated). USP suitability limit is % RSD ≤ 2.0%.</p>
+              <textarea id="rsd-input" oninput="runRsd()" placeholder="100432, 100521, 100398, 100411" class="w-full bg-slate-850 px-3 py-2 text-xs rounded border border-slate-700 h-20 text-white focus:outline-none"></textarea>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="bg-slate-850 p-2 rounded"><p class="text-[10px] text-slate-400">Mean Area:</p><p id="rsd-mean" class="font-bold text-slate-200 mt-0.5">0.00</p></div>
+                <div class="bg-slate-850 p-2 rounded"><p class="text-[10px] text-slate-400">% RSD:</p><p id="rsd-percent" class="font-bold text-slate-200 mt-0.5">0.00%</p></div>
+                <div class="col-span-2 text-center py-1.5 rounded font-black text-xs" id="rsd-status-badge">Input values...</div>
+              </div>
+            </div>
+          `;
+          runRsd();
+          break;
+        case 3:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-compress"></i> C1V1 = C2V2 Stock Dilution</span>
+              <p class="text-[10px] text-slate-400">Enter three values to automatically compute the remaining variable.</p>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">C1 (Concentration)</label><input type="number" id="dil-c1" oninput="runDilution()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">V1 (Volume)</label><input type="number" id="dil-v1" oninput="runDilution()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">C2 (Concentration)</label><input type="number" id="dil-c2" oninput="runDilution()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">V2 (Volume)</label><input type="number" id="dil-v2" oninput="runDilution()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          break;
+        case 4:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-temperature-empty"></i> Pressure-Temperature Nomograph</span>
+              <p class="text-[10px] text-slate-400">Estimate Boiling point at reduced pressures (Clausius-Clapeyron approximation).</p>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Normal B.P. (°C)</label><input type="number" id="pt-nbp" value="100" oninput="runNomograph()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Target Vacuum (Torr)</label><input type="number" id="pt-vac" value="100" oninput="runNomograph()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div class="col-span-2 bg-slate-850 p-2.5 rounded text-center"><p class="text-[10px] text-slate-400">Estimated B.P. at Vacuum:</p><p id="pt-bp-res" class="font-extrabold text-amber-400 text-sm mt-1">0.00 °C</p></div>
+              </div>
+            </div>
+          `;
+          runNomograph();
+          break;
+        case 5:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-scale-balanced"></i> Volume Unit Converter</span>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Liters (L)</label><input type="number" id="v-l" oninput="convertVol('l')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Milliliters (mL)</label><input type="number" id="v-ml" oninput="convertVol('ml')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Microliters (µL)</label><input type="number" id="v-ul" oninput="convertVol('ul')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Gallons (US)</label><input type="number" id="v-gal" oninput="convertVol('gal')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          document.getElementById('v-l').value = 1;
+          convertVol('l');
+          break;
+        case 6:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-gauge"></i> Pressure Unit Converter</span>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">bar</label><input type="number" id="p-bar" oninput="convertPres('bar')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">psi</label><input type="number" id="p-psi" oninput="convertPres('psi')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">kPa</label><input type="number" id="p-kpa" oninput="convertPres('kpa')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          document.getElementById('p-bar').value = 1;
+          convertPres('bar');
+          break;
+        case 7:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-weight-hanging"></i> Mass Unit Converter</span>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">kg</label><input type="number" id="m-kg" oninput="convertMass('kg')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">grams (g)</label><input type="number" id="m-g" oninput="convertMass('g')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">mg</label><input type="number" id="m-mg" oninput="convertMass('mg')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          document.getElementById('m-kg').value = 1;
+          convertMass('kg');
+          break;
+        case 8:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-droplet"></i> Density Unit Converter</span>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">g/mL</label><input type="number" id="d-gml" oninput="convertDens('gml')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">kg/m³</label><input type="number" id="d-kgm" oninput="convertDens('kgm')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          document.getElementById('d-gml').value = 1;
+          convertDens('gml');
+          break;
+        case 9:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-ruler"></i> Length Unit Converter</span>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">meters (m)</label><input type="number" id="l-m" oninput="convertLen('m')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">mm</label><input type="number" id="l-mm" oninput="convertLen('mm')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">microns (µm)</label><input type="number" id="l-um" oninput="convertLen('um')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          document.getElementById('l-m').value = 1;
+          convertLen('m');
+          break;
+        case 10:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-shuffle"></i> HPLC Method Transfer Scale</span>
+              <p class="text-[10px] text-slate-400">Scale analytical parameters when moving to a smaller particle high efficiency HPLC column.</p>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Orig Particle Size (µm)</label><input type="number" id="h-dp1" value="5" oninput="runHplcScale()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">New Particle Size (µm)</label><input type="number" id="h-dp2" value="3" oninput="runHplcScale()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Orig Flow Rate (mL/min)</label><input type="number" id="h-f1" value="1.0" oninput="runHplcScale()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">New Flow Scale (mL/min)</label><input type="text" id="h-f2-res" readonly class="w-full bg-slate-800 px-2 py-1.5 rounded text-emerald-400 font-bold outline-none"></div>
+              </div>
+            </div>
+          `;
+          runHplcScale();
+          break;
+        case 11:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-repeat"></i> Absorbance / Transmittance Converter</span>
+              <p class="text-[10px] text-slate-400">Convert spectrophotometer Absorbance (A) directly to Transmittance (T%) and vice versa.</p>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Absorbance (A)</label><input type="number" step="0.001" id="c-abs" value="0.4" oninput="convertAbsToTrans()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[10px] text-slate-400 font-bold mb-1">Transmittance (T%)</label><input type="number" step="0.1" id="c-trans" oninput="convertTransToAbs()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          convertAbsToTrans();
+          break;
+        case 12:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-thermometer"></i> Temperature Unit Converter</span>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Celsius (°C)</label><input type="number" id="t-c" oninput="convertTemp('c')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Fahrenheit (°F)</label><input type="number" id="t-f" oninput="convertTemp('f')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Kelvin (K)</label><input type="number" id="t-k" oninput="convertTemp('k')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          document.getElementById('t-c').value = 25;
+          convertTemp('c');
+          break;
+        case 13:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-arrow-trend-up"></i> 3-Variable Equation Solver</span>
+              <p class="text-[10px] text-slate-400">Enter any two fields of the equation A × B = C to solve the third dynamically.</p>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Variable A</label><input type="number" id="eq-a" oninput="runEqSolver('a')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Variable B</label><input type="number" id="eq-b" oninput="runEqSolver('b')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Variable C (Result)</label><input type="number" id="eq-c" oninput="runEqSolver('c')" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+              </div>
+            </div>
+          `;
+          break;
+        case 14:
+          panel.innerHTML = `
+            <div class="flex flex-col gap-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-cubes"></i> HPLC Column Void / Hold-up Volume</span>
+              <p class="text-[10px] text-slate-400">Calculate estimated mobile phase volume inside a column (based on interstitial porosity ≈ 0.68).</p>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Length L (mm)</label><input type="number" id="col-l" value="250" oninput="runColumnVol()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div><label class="block text-[9px] text-slate-400 font-bold mb-1">Inner Diameter d (mm)</label><input type="number" id="col-id" value="4.6" oninput="runColumnVol()" class="w-full bg-slate-850 px-2 py-1.5 rounded border border-slate-700 text-white focus:outline-none"></div>
+                <div class="col-span-2 bg-slate-850 p-2 text-center"><p class="text-[10px] text-slate-400">Estimated Hold-up Volume:</p><p id="col-vol-res" class="font-extrabold text-emerald-400 text-sm mt-0.5">0.00 mL</p></div>
+              </div>
+            </div>
+          `;
+          runColumnVol();
+          break;
+      }
+    }
+
+    // Formulas
+    function runMolarity() {
+      const m = parseFloat(document.getElementById('c-molar').value) || 0;
+      const v = parseFloat(document.getElementById('c-vol').value) || 0;
+      const mw = parseFloat(document.getElementById('c-mw').value) || 0;
+      const mass = (m * (v / 1000) * mw).toFixed(4);
+      document.getElementById('c-mass-res').value = mass + " g";
+    }
+
+    function loadChemProfile() {
+      const idx = document.getElementById('chem-select').value;
+      const chem = chemicalSuite[idx];
+      document.getElementById('ab-dens').value = chem.density;
+      document.getElementById('ab-pur').value = chem.weightPercent;
+      document.getElementById('ab-mw').value = chem.formulaWeight;
+      runAbMolar();
+    }
+
+    function runAbMolar() {
+      const d = parseFloat(document.getElementById('ab-dens').value) || 0;
+      const p = parseFloat(document.getElementById('ab-pur').value) || 0;
+      const mw = parseFloat(document.getElementById('ab-mw').value) || 0;
+      if (mw === 0) return;
+      const molarity = ((d * p * 10) / mw).toFixed(2);
+      document.getElementById('ab-res-molar').value = molarity + " M";
+    }
+
+    function runRsd() {
+      const text = document.getElementById('rsd-input').value;
+      const list = text.split(/[\s,]+/).map(parseFloat).filter(v => !isNaN(v));
+
+      const meanLabel = document.getElementById('rsd-mean');
+      const rsdLabel = document.getElementById('rsd-percent');
+      const badge = document.getElementById('rsd-status-badge');
+
+      if (list.length < 2) {
+        meanLabel.innerText = "0.00";
+        rsdLabel.innerText = "0.00%";
+        badge.className = "col-span-2 text-center py-1.5 rounded font-black text-xs bg-slate-800 text-slate-500";
+        badge.innerText = "Need at least 2 injections";
+        return;
+      }
+
+      const sum = list.reduce((a, b) => a + b, 0);
+      const mean = sum / list.length;
+      meanLabel.innerText = mean.toFixed(2);
+
+      const varianceSum = list.reduce((a, b) => a + Math.pow(b - mean, 2), 0);
+      const sd = Math.sqrt(varianceSum / (list.length - 1));
+      const rsd = (sd / mean) * 100;
+      rsdLabel.innerText = rsd.toFixed(3) + "%";
+
+      if (rsd <= 2.0) {
+        badge.className = "col-span-2 text-center py-1.5 rounded font-black text-xs bg-emerald-950 text-emerald-400 border border-emerald-800";
+        badge.innerText = "PASS - USP Compliant (≤ 2.0%)";
+      } else {
+        badge.className = "col-span-2 text-center py-1.5 rounded font-black text-xs bg-red-950 text-red-400 border border-red-800 animate-pulse";
+        badge.innerText = "FAIL - Exceeds USP Limit (> 2.0%)";
+      }
+    }
+
+    function runDilution() {
+      const c1 = parseFloat(document.getElementById('dil-c1').value);
+      const v1 = parseFloat(document.getElementById('dil-v1').value);
+      const c2 = parseFloat(document.getElementById('dil-c2').value);
+      const v2 = parseFloat(document.getElementById('dil-v2').value);
+
+      const fields = [
+        { id: 'dil-c1', val: c1 },
+        { id: 'dil-v1', val: v1 },
+        { id: 'dil-c2', val: c2 },
+        { id: 'dil-v2', val: v2 }
+      ];
+      const empty = fields.filter(f => isNaN(f.val));
+      if (empty.length !== 1) return;
+
+      const empId = empty[0].id;
+      let computed = 0;
+
+      if (empId === 'dil-c1') {
+        computed = (c2 * v2) / v1;
+      } else if (empId === 'dil-v1') {
+        computed = (c2 * v2) / c1;
+      } else if (empId === 'dil-c2') {
+        computed = (c1 * v1) / v2;
+      } else if (empId === 'dil-v2') {
+        computed = (c1 * v1) / c2;
+      }
+
+      if (!isNaN(computed) && isFinite(computed)) {
+        document.getElementById(empId).value = computed.toFixed(3);
+      }
+    }
+
+    function runNomograph() {
+      const nbp = parseFloat(document.getElementById('pt-nbp').value) || 0;
+      const vac = parseFloat(document.getElementById('pt-vac').value) || 0;
+      if (vac <= 0) return;
+      // standard Antoine equation ratio
+      const a = 7.07;
+      const b = nbp + 230;
+      const tempK = (nbp + 273.15);
+      const targetBp = (1 / (1 / tempK - (8.314 * Math.log(760 / vac)) / 40000)) - 273.15;
+      document.getElementById('pt-bp-res').innerText = targetBp.toFixed(2) + " °C";
+    }
+
+    function convertVol(id) {
+      const val = parseFloat(document.getElementById('v-' + id).value) || 0;
+      let liters = 0;
+      if (id === 'l') liters = val;
+      if (id === 'ml') liters = val / 1000;
+      if (id === 'ul') liters = val / 1000000;
+      if (id === 'gal') liters = val * 3.78541;
+
+      if (id !== 'l') document.getElementById('v-l').value = liters.toFixed(4);
+      if (id !== 'ml') document.getElementById('v-ml').value = (liters * 1000).toFixed(2);
+      if (id !== 'ul') document.getElementById('v-ul').value = (liters * 1000000).toFixed(0);
+      if (id !== 'gal') document.getElementById('v-gal').value = (liters / 3.78541).toFixed(4);
+    }
+
+    function convertPres(id) {
+      const val = parseFloat(document.getElementById('p-' + id).value) || 0;
+      let bar = 0;
+      if (id === 'bar') bar = val;
+      if (id === 'psi') bar = val * 0.0689476;
+      if (id === 'kpa') bar = val * 0.01;
+
+      if (id !== 'bar') document.getElementById('p-bar').value = bar.toFixed(4);
+      if (id !== 'psi') document.getElementById('p-psi').value = (bar / 0.0689476).toFixed(3);
+      if (id !== 'kpa') document.getElementById('p-kpa').value = (bar * 100).toFixed(2);
+    }
+
+    function convertMass(id) {
+      const val = parseFloat(document.getElementById('m-' + id).value) || 0;
+      let kg = 0;
+      if (id === 'kg') kg = val;
+      if (id === 'g') kg = val / 1000;
+      if (id === 'mg') kg = val / 1000000;
+
+      if (id !== 'kg') document.getElementById('m-kg').value = kg.toFixed(4);
+      if (id !== 'g') document.getElementById('m-g').value = (kg * 1000).toFixed(2);
+      if (id !== 'mg') document.getElementById('m-mg').value = (kg * 1000000).toFixed(0);
+    }
+
+    function convertDens(id) {
+      const val = parseFloat(document.getElementById('d-' + id).value) || 0;
+      let gml = 0;
+      if (id === 'gml') gml = val;
+      if (id === 'kgm') gml = val / 1000;
+
+      if (id !== 'gml') document.getElementById('d-gml').value = gml.toFixed(4);
+      if (id !== 'kgm') document.getElementById('d-kgm').value = (gml * 1000).toFixed(1);
+    }
+
+    function convertLen(id) {
+      const val = parseFloat(document.getElementById('l-' + id).value) || 0;
+      let m = 0;
+      if (id === 'm') m = val;
+      if (id === 'mm') m = val / 1000;
+      if (id === 'um') m = val / 1000000;
+
+      if (id !== 'm') document.getElementById('l-m').value = m.toFixed(4);
+      if (id !== 'mm') document.getElementById('l-mm').value = (m * 1000).toFixed(2);
+      if (id !== 'um') document.getElementById('l-um').value = (m * 1000000).toFixed(0);
+    }
+
+    function runHplcScale() {
+      const dp1 = parseFloat(document.getElementById('h-dp1').value) || 1;
+      const dp2 = parseFloat(document.getElementById('h-dp2').value) || 1;
+      const f1 = parseFloat(document.getElementById('h-f1').value) || 1;
+      const flowScale = f1 * (dp1 / dp2);
+      document.getElementById('h-f2-res').value = flowScale.toFixed(2) + " mL/min";
+    }
+
+    function convertAbsToTrans() {
+      const abs = parseFloat(document.getElementById('c-abs').value) || 0;
+      const trans = Math.pow(10, 2 - abs);
+      document.getElementById('c-trans').value = isFinite(trans) ? trans.toFixed(2) : "0";
+    }
+
+    function convertTransToAbs() {
+      const trans = parseFloat(document.getElementById('c-trans').value) || 0;
+      if (trans <= 0) return;
+      const abs = 2 - Math.log10(trans);
+      document.getElementById('c-abs').value = isFinite(abs) ? abs.toFixed(4) : "0";
+    }
+
+    function convertTemp(id) {
+      const val = parseFloat(document.getElementById('t-' + id).value) || 0;
+      let c = 0;
+      if (id === 'c') c = val;
+      if (id === 'f') c = (val - 32) * 5/9;
+      if (id === 'k') c = val - 273.15;
+
+      if (id !== 'c') document.getElementById('t-c').value = c.toFixed(2);
+      if (id !== 'f') document.getElementById('t-f').value = (c * 9/5 + 32).toFixed(1);
+      if (id !== 'k') document.getElementById('t-k').value = (c + 273.15).toFixed(2);
+    }
+
+    function runEqSolver(field) {
+      const a = parseFloat(document.getElementById('eq-a').value);
+      const b = parseFloat(document.getElementById('eq-b').value);
+      const c = parseFloat(document.getElementById('eq-c').value);
+
+      const empty = [
+        { id: 'eq-a', val: a },
+        { id: 'eq-b', val: b },
+        { id: 'eq-c', val: c }
+      ].filter(f => isNaN(f.val));
+
+      if (empty.length !== 1) return;
+      const targetId = empty[0].id;
+
+      if (targetId === 'eq-a') {
+        document.getElementById('eq-a').value = (c / b).toFixed(3);
+      } else if (targetId === 'eq-b') {
+        document.getElementById('eq-b').value = (c / a).toFixed(3);
+      } else if (targetId === 'eq-c') {
+        document.getElementById('eq-c').value = (a * b).toFixed(3);
+      }
+    }
+
+    function runColumnVol() {
+      const length = parseFloat(document.getElementById('col-l').value) || 0;
+      const id = parseFloat(document.getElementById('col-id').value) || 0;
+      const radius = id / 20; // convert mm to cm
+      const lengthCm = length / 10;
+      // V = pi * r^2 * h * porosity(0.68)
+      const vol = Math.PI * Math.pow(radius, 2) * lengthCm * 0.68;
+      document.getElementById('col-vol-res').innerText = vol.toFixed(2) + " mL";
+    }
+
+    // Support Form Actions
+    function submitSupportForm(e) {
+      e.preventDefault();
+      const newI = {
+        fullName: document.getElementById('sup-name').value.trim(),
+        email: document.getElementById('sup-email').value.trim(),
+        subject: document.getElementById('sup-subject').value.trim(),
+        message: document.getElementById('sup-message').value.trim(),
+        timestamp: Date.now()
+      };
+      contactInquiries.unshift(newI);
+      localStorage.setItem('contact_inquiries', JSON.stringify(contactInquiries));
+      e.target.reset();
+      renderSupportHistory();
+      alert("Support Inquiry Registered Locally!");
+    }
+
+    function renderSupportHistory() {
+      const container = document.getElementById('support-history-container');
+      container.innerHTML = '';
+      if (contactInquiries.length === 0) {
+        container.innerHTML = `<p class="text-[10px] text-slate-500 italic">No submitted inquiries history found.</p>`;
+        return;
+      }
+      contactInquiries.forEach(inq => {
+        const d = document.createElement('div');
+        d.className = "bg-slate-900 border border-slate-800 p-3 rounded-xl flex flex-col gap-1 text-slate-300";
+        const date = new Date(inq.timestamp).toLocaleString();
+        d.innerHTML = `
+          <div class="flex justify-between items-center text-[9px] text-slate-500">
+            <span>By: <strong>${inq.fullName}</strong> (${inq.email})</span>
+            <span>${date}</span>
+          </div>
+          <h4 class="text-xs font-bold text-white mt-1">${inq.subject}</h4>
+          <p class="text-[10px] text-slate-400 leading-normal bg-slate-950 p-2 rounded mt-1">${inq.message}</p>
+        `;
+        container.appendChild(d);
+      });
     }
 
     window.onload = init;

@@ -3249,6 +3249,34 @@ class ExampleUnitTest {
       """.trimIndent()
     }
 
+    val allSops = mutableListOf<com.example.data.SopEntity>().apply {
+      addAll(com.example.data.SopPrepopulationData.qaSops)
+      addAll(com.example.data.SopPrepopulationData.microSops)
+      addAll(com.example.data.SopPrepopulationData.productionSops)
+      addAll(com.example.data.SopPrepopulationData.generalSops)
+      addAll(com.example.data.PharmaSopsNewData.getSops())
+    }
+
+    val escapedSops = allSops.joinToString(prefix = "[", postfix = "]") { sop ->
+      """
+      {
+        "id": ${sop.id},
+        "code": "${escapeJsString(sop.code)}",
+        "title": "${escapeJsString(sop.title)}",
+        "department": "${escapeJsString(sop.department)}",
+        "section": "${escapeJsString(sop.section)}",
+        "objective": "${escapeJsString(sop.objective)}",
+        "scope": "${escapeJsString(sop.scope)}",
+        "responsibility": "${escapeJsString(sop.responsibility)}",
+        "procedure": "${escapeJsString(sop.procedure)}",
+        "safetyPrecautions": "${escapeJsString(sop.safetyPrecautions)}",
+        "frequency": "${escapeJsString(sop.frequency)}",
+        "effectiveDate": "${escapeJsString(sop.effectiveDate)}",
+        "roleRequired": "${escapeJsString(sop.roleRequired)}"
+      }
+      """.trimIndent()
+    }
+
     var rootDir = java.io.File(".").absoluteFile
     while (rootDir != null && !java.io.File(rootDir, "settings.gradle.kts").exists()) {
       rootDir = rootDir.parentFile
@@ -3266,6 +3294,7 @@ class ExampleUnitTest {
     val htmlContent = templateContent
       .replace("/*COLUMNS_DATA_PLACEHOLDER*/", escapedColumns)
       .replace("/*MONOGRAPHS_DATA_PLACEHOLDER*/", escapedMonographs)
+      .replace("/*SOPS_DATA_PLACEHOLDER*/", escapedSops)
 
     val rootWebFile = java.io.File(rootDir, "web/index.html")
     rootWebFile.parentFile?.mkdirs()
