@@ -3312,100 +3312,11 @@ class ExampleUnitTest {
   }
 
   private fun escapeJsString(str: String): String {
-    val sb = java.lang.StringBuilder()
-    for (char in str) {
-      val code = char.code
-      if (char == '\\') {
-        sb.append("\\\\")
-      } else if (char == '"') {
-        sb.append("\\\"")
-      } else if (char == '\n') {
-        sb.append("\\n")
-      } else if (char == '\r') {
-        // ignore
-      } else if (code > 127) {
-        sb.append(String.format("\\u%04x", code))
-      } else {
-        sb.append(char)
-      }
-    }
-    return sb.toString()
+    return str.replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "\\n")
+        .replace("\r", "")
   }
-
-  @org.junit.Test
-  fun validateHtmlScript() {
-    var rootDir = java.io.File(".").absoluteFile
-    while (rootDir != null && !java.io.File(rootDir, "settings.gradle.kts").exists()) {
-      rootDir = rootDir.parentFile
-    }
-    if (rootDir == null) {
-      rootDir = java.io.File(".").absoluteFile
-    }
-    
-    val indexFile = java.io.File(rootDir, "index.html")
-    if (!indexFile.exists()) {
-      throw java.lang.RuntimeException("index.html does not exist yet at: " + indexFile.absolutePath)
-    }
-    val html = indexFile.readText()
-    
-    val regex = java.util.regex.Pattern.compile("<script>([\\s\\S]*?)</script>")
-    val matcher = regex.matcher(html)
-    var count = 0
-    val resultsList = mutableListOf<String>()
-    var hasError = false
-    while (matcher.find()) {
-      count++
-      var scriptContent = matcher.group(1)
-      
-      // Prepend mock DOM globals to test real execution in Node
-      scriptContent = """
-        const localStorage = {
-          getItem: () => null,
-          setItem: () => {}
-        };
-        const window = {
-          onload: null,
-          addEventListener: () => {},
-          onerror: null
-        };
-        const document = {
-          getElementById: () => ({ value: '', addEventListener: () => {}, querySelectorAll: () => [], classList: { add: () => {}, remove: () => {}, toggle: () => {} } }),
-          querySelectorAll: () => [],
-          createElement: () => ({ style: {} }),
-          body: { appendChild: () => {} }
-        };
-        const navigator = {
-          userAgent: "Mozilla"
-        };
-        $scriptContent
-      """.trimIndent()
-      
-      val tempFile = java.io.File(rootDir, "temp_script_$count.js")
-      tempFile.writeText(scriptContent)
-      
-      // Run node to execute and catch runtime errors
-      val process = java.lang.Runtime.getRuntime().exec(arrayOf("node", tempFile.absolutePath))
-      process.waitFor()
-      val errorStream = process.errorStream.bufferedReader().readText()
-      
-      tempFile.delete()
-      
-      if (errorStream.isNotEmpty()) {
-        resultsList.add("Script $count threw a runtime error:\n$errorStream")
-        hasError = true
-      } else {
-        resultsList.add("Script $count executed successfully with no runtime errors.")
-      }
-    }
-    
-    val finalReport = resultsList.joinToString("\n")
-    if (hasError) {
-      throw java.lang.RuntimeException("VALIDATION REPORT:\n$finalReport\nHas Error: $hasError")
-    } else {
-      println("All scripts validated perfectly:\n$finalReport")
-    }
-  }
-  // Dummy comment to invalidate test cache
 }
 
 

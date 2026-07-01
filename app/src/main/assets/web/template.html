@@ -4,37 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pharma SOP & Guidelines Portal</title>
-  <script>
-    // Separate standalone error logger to catch compile/parse-time errors
-    window.onerror = function(msg, url, line, col, error) {
-      const errDiv = document.createElement('div');
-      errDiv.style.position = 'fixed';
-      errDiv.style.bottom = '12px';
-      errDiv.style.left = '12px';
-      errDiv.style.right = '12px';
-      errDiv.style.background = '#991b1b'; // Red-800
-      errDiv.style.border = '2px solid #ef4444'; // Red-500
-      errDiv.style.color = '#fecaca'; // Red-200
-      errDiv.style.padding = '14px';
-      errDiv.style.borderRadius = '12px';
-      errDiv.style.zIndex = '999999';
-      errDiv.style.fontSize = '11px';
-      errDiv.style.fontFamily = 'monospace';
-      errDiv.style.boxShadow = '0 10px 25px -5px rgba(0,0,0,0.5)';
-      errDiv.style.maxHeight = '250px';
-      errDiv.style.overflowY = 'auto';
-      errDiv.innerHTML = '<div style="font-weight:bold;margin-bottom:6px;color:#fca5a5;">⚠️ WEB APP RUNTIME ERROR DETECTED:</div>' + 
-                         '<strong>Message:</strong> ' + msg + '<br>' +
-                         '<strong>Source:</strong> ' + url + '<br>' +
-                         '<strong>Line:</strong> ' + line + ' | <strong>Col:</strong> ' + col + 
-                         (error ? '<br><strong>Stack:</strong> ' + error.stack : '');
-      document.body.appendChild(errDiv);
-      return false;
-    };
-    window.addEventListener('unhandledrejection', function(event) {
-      window.onerror(event.reason ? event.reason.message : 'Unhandled Promise Rejection', '', '', '', event.reason);
-    });
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -65,111 +34,15 @@
 
   <div class="flex-grow flex max-w-7xl mx-auto w-full relative">
     <!-- Sidebar Navigation -->
-    <aside id="sidebar" class="bg-slate-950 border-r border-slate-900 w-72 p-4 flex flex-col gap-1 shrink-0 absolute md:relative z-45 h-screen md:h-[calc(100vh-64px)] custom-scrollbar overflow-y-auto hidden md:flex transition-all duration-200">
-      <!-- White Header Card from Android App (Image 2) -->
-      <div class="bg-white p-3.5 rounded-2xl flex flex-col gap-3 mb-3 shadow-lg border border-slate-100/10">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <!-- Gold/green circle plus logo -->
-            <div class="w-7 h-7 rounded-full bg-emerald-800 border-2 border-yellow-500 flex items-center justify-center shadow font-black text-yellow-400 text-[10px]">
-              <i class="fa-solid fa-plus"></i>
-            </div>
-            <!-- App Name -->
-            <span class="text-xs font-black text-slate-900 tracking-tight">Pharma SOP Portal</span>
-          </div>
-          <!-- Close button X (only on mobile) -->
-          <button onclick="toggleMobileMenu()" class="text-slate-400 hover:text-slate-600 transition px-1 py-0.5 md:hidden">
-            <i class="fa-solid fa-xmark text-sm"></i>
-          </button>
-        </div>
-        
-        <!-- Google-like Search Bar inside Sidebar Header -->
-        <div class="relative flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg p-1">
-          <div class="flex items-center gap-2 px-1 flex-grow">
-            <i class="fa-solid fa-magnifying-glass text-slate-400 text-[10px]"></i>
-            <input type="text" id="sidebar-search" oninput="doSidebarSearch(this.value)" placeholder="ENHANCED BY Google" class="w-full bg-transparent text-[10px] text-slate-800 placeholder-slate-400 focus:outline-none py-0.5">
-          </div>
-          <button onclick="triggerSidebarSearch()" class="bg-blue-500 hover:bg-blue-600 text-white rounded px-2.5 py-1 text-[10px] transition flex items-center justify-center">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Navigation Header -->
-      <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest px-3 mb-1">Navigation</p>
-      
-      <!-- Home Button -->
-      <button onclick="switchTab('home')" id="nav-home" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-house w-4 text-center"></i>Home</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <!-- Department Filter Buttons matching Image 2 -->
-      <button onclick="switchTab('sops'); filterDept('Quality Control');" id="nav-qc" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-flask w-4 text-center"></i>Quality Control</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('sops'); filterDept('Quality Assurance');" id="nav-qa" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-file-shield w-4 text-center"></i>Quality Assurance</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('sops'); filterDept('Microlab');" id="nav-micro" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-vial-virus w-4 text-center"></i>Microbiology</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('sops'); filterDept('Production');" id="nav-prod" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-wrench w-4 text-center"></i>Production</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('sops'); filterDept('ALL');" id="nav-sops" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-list-check w-4 text-center"></i>SOPs</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('sops'); filterDept('Validation');" id="nav-val" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check w-4 text-center"></i>Validation</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('sops'); filterDept('GMP');" id="nav-gmp" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-lock w-4 text-center"></i>GMP</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('sops'); filterDept('Audit');" id="nav-audit" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-clipboard-check w-4 text-center"></i>Audit</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('usp')" id="nav-usp" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-database w-4 text-center"></i>USP</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('videos')" id="nav-videos" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-circle-play w-4 text-center"></i>Videos</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('calculators')" id="nav-calculators" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-calculator w-4 text-center"></i>Calculators</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-phone w-4 text-center"></i>Contact Us</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
-
-      <!-- Maintain AI Advisor Option as it is a key web capability -->
-      <button onclick="switchTab('ask')" id="nav-ask" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition">
-        <span class="flex items-center gap-2.5"><i class="fa-solid fa-robot w-4 text-center"></i>AI Advisor</span>
-        <span class="nav-dot w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] hidden"></span>
-      </button>
+    <aside id="sidebar" class="bg-slate-900 border-r border-slate-800 w-64 p-4 flex flex-col gap-1 shrink-0 absolute md:relative z-40 h-full md:h-auto hidden md:flex transition-all duration-200">
+      <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest px-3 mb-2">Navigation</p>
+      <button onclick="switchTab('home')" id="nav-home" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded font-bold bg-emerald-800 text-white flex items-center gap-2.5"><i class="fa-solid fa-house w-4"></i>Dashboard</button>
+      <button onclick="switchTab('sops')" id="nav-sops" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-list-check w-4"></i>SOPs Database</button>
+      <button onclick="switchTab('ask')" id="nav-ask" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-robot w-4"></i>AI Advisor</button>
+      <button onclick="switchTab('usp')" id="nav-usp" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-flask w-4"></i>USP Column Finder</button>
+      <button onclick="switchTab('videos')" id="nav-videos" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-circle-play w-4"></i>Video Training</button>
+      <button onclick="switchTab('calculators')" id="nav-calculators" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-calculator w-4"></i>Lab Calculators</button>
+      <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5"><i class="fa-solid fa-circle-question w-4"></i>Support Desk</button>
     </aside>
 
     <!-- Main Content Panel -->
@@ -554,24 +427,6 @@
   </footer>
 
   <script>
-    function safeGetItem(key, fallback) {
-      try {
-        const item = localStorage.getItem(key);
-        return item !== null ? item : fallback;
-      } catch (e) {
-        console.warn("localStorage access denied:", e);
-        return fallback;
-      }
-    }
-
-    function safeSetItem(key, val) {
-      try {
-        localStorage.setItem(key, val);
-      } catch (e) {
-        console.warn("localStorage write denied:", e);
-      }
-    }
-
     const columnsDb = /*COLUMNS_DATA_PLACEHOLDER*/;
     const monographsDb = /*MONOGRAPHS_DATA_PLACEHOLDER*/;
     const sopsDb = /*SOPS_DATA_PLACEHOLDER*/;
@@ -626,9 +481,9 @@
     let videoProgress = 0;
     let videoTimerId = null;
 
-    let customMonoDb = JSON.parse(safeGetItem('custom_mono', '[]'));
-    let contactInquiries = JSON.parse(safeGetItem('contact_inquiries', '[]'));
-    let signOffs = JSON.parse(safeGetItem('sop_signoffs', '{}'));
+    let customMonoDb = JSON.parse(localStorage.getItem('custom_mono') || '[]');
+    let contactInquiries = JSON.parse(localStorage.getItem('contact_inquiries') || '[]');
+    let signOffs = JSON.parse(localStorage.getItem('sop_signoffs') || '{}');
 
     const videosDb = [
       { id: "vid_01", title: "HPLC Peak Integration & Calibration", duration: "12 mins", author: "Dr. Sarah Jenkins", views: "1.2K views", desc: "Covers Peak area calibration, baseline integration, chromatography RSD limits, and USP system suitability." },
@@ -650,9 +505,6 @@
 
       // Set default role
       currentRole = 'QA Officer';
-
-      // Highlight initial navigation
-      highlightNav('nav-home');
 
       // Update SOP catalog count dynamically
       const catalogBtnCount = document.getElementById('sop-catalog-btn-count');
@@ -693,83 +545,19 @@
       renderSops();
     }
 
-    function highlightNav(btnId) {
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.className = "nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-900/60 hover:text-slate-100 flex items-center justify-between border border-transparent transition";
-        const dot = btn.querySelector('.nav-dot');
-        if (dot) dot.classList.add('hidden');
-      });
-
-      const activeBtn = document.getElementById(btnId);
-      if (activeBtn) {
-        activeBtn.className = "nav-btn w-full text-left text-xs px-3 py-2.5 rounded-lg font-bold bg-emerald-950/80 border border-emerald-800/40 text-emerald-400 flex items-center justify-between transition";
-        const dot = activeBtn.querySelector('.nav-dot');
-        if (dot) dot.classList.remove('hidden');
-      }
-    }
-
     function switchTab(id) {
       activeTab = id;
       document.querySelectorAll('.tab-sec').forEach(el => el.classList.add('hidden'));
-      const targetSec = document.getElementById('sec-' + id);
-      if (targetSec) {
-        targetSec.classList.remove('hidden');
-      }
+      document.getElementById('sec-' + id).classList.remove('hidden');
 
-      // Update sidebar highlight
-      let btnId = 'nav-' + id;
-      if (id === 'sops') {
-        const keys = { 
-          'ALL': 'nav-sops', 
-          'Quality Control': 'nav-qc', 
-          'Quality Assurance': 'nav-qa', 
-          'Microlab': 'nav-micro', 
-          'Production': 'nav-prod', 
-          'Validation': 'nav-val', 
-          'GMP': 'nav-gmp', 
-          'Audit': 'nav-audit' 
-        };
-        btnId = keys[activeDept] || 'nav-sops';
-      }
-      highlightNav(btnId);
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.className = "nav-btn w-full text-left text-xs px-3 py-2.5 rounded text-slate-400 hover:bg-slate-800 hover:text-slate-100 flex items-center gap-2.5";
+      });
+      document.getElementById('nav-' + id).className = "nav-btn w-full text-left text-xs px-3 py-2.5 rounded font-bold bg-emerald-800 text-white flex items-center gap-2.5";
 
       // Hide sidebar on mobile after clicking
-      if (window.innerWidth < 1024) {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar && !sidebar.classList.contains('hidden')) {
-          sidebar.classList.add('hidden');
-        }
-      }
-    }
-
-    function doSidebarSearch(val) {
-      const dashSearch = document.getElementById('dash-search');
-      if (dashSearch) {
-        dashSearch.value = val;
-      }
-      const sopSearchInput = document.getElementById('sop-search-input');
-      if (sopSearchInput) {
-        sopSearchInput.value = val;
-      }
-      renderSops();
-    }
-
-    function triggerSidebarSearch() {
-      const sidebarSearch = document.getElementById('sidebar-search');
-      const val = sidebarSearch ? sidebarSearch.value.trim().toLowerCase() : '';
-      if (!val) return;
-      
-      switchTab('sops');
-      const sopSearchInput = document.getElementById('sop-search-input');
-      if (sopSearchInput) {
-        sopSearchInput.value = val;
-      }
-      renderSops();
-
-      // Close mobile menu
-      if (window.innerWidth < 1024) {
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar) sidebar.classList.add('hidden');
+      if (window.innerWidth < 768) {
+        document.getElementById('sidebar').classList.add('hidden');
       }
     }
 
@@ -819,24 +607,8 @@
         btn.className = "dept-btn text-left text-xs px-2.5 py-1.5 rounded text-slate-400 hover:bg-slate-800 flex justify-between";
       });
       const keys = { 'ALL': 'all', 'Quality Control': 'qc', 'Quality Assurance': 'qa', 'Microlab': 'micro', 'Production': 'prod', 'Validation': 'val', 'GMP': 'gmp', 'Audit': 'audit' };
-      const deptBtn = document.getElementById('dept-' + keys[dept]);
-      if (deptBtn) {
-        deptBtn.className = "dept-btn text-left text-xs px-2.5 py-1.5 rounded font-bold bg-emerald-800 text-white flex justify-between";
-      }
+      document.getElementById('dept-' + keys[dept]).className = "dept-btn text-left text-xs px-2.5 py-1.5 rounded font-bold bg-emerald-800 text-white flex justify-between";
       renderSops();
-
-      // Update sidebar highlight when department is changed
-      const sidebarKeys = { 
-        'ALL': 'nav-sops', 
-        'Quality Control': 'nav-qc', 
-        'Quality Assurance': 'nav-qa', 
-        'Microlab': 'nav-micro', 
-        'Production': 'nav-prod', 
-        'Validation': 'nav-val', 
-        'GMP': 'nav-gmp', 
-        'Audit': 'nav-audit' 
-      };
-      highlightNav(sidebarKeys[dept] || 'nav-sops');
     }
 
     function renderSops() {
@@ -941,7 +713,7 @@
       } else {
         signOffs[code] = { byRole: 'Authorized User', time: new Date().toLocaleString() };
       }
-      safeSetItem('sop_signoffs', JSON.stringify(signOffs));
+      localStorage.setItem('sop_signoffs', JSON.stringify(signOffs));
       loadSop(activeSop.id);
       renderSopStats();
     }
@@ -1084,7 +856,7 @@
         }]
       };
       customMonoDb.unshift(newD);
-      safeSetItem('custom_mono', JSON.stringify(customMonoDb));
+      localStorage.setItem('custom_mono', JSON.stringify(customMonoDb));
       e.target.reset();
       renderUsp();
       renderSopStats();
@@ -1706,7 +1478,7 @@
         timestamp: Date.now()
       };
       contactInquiries.unshift(newI);
-      safeSetItem('contact_inquiries', JSON.stringify(contactInquiries));
+      localStorage.setItem('contact_inquiries', JSON.stringify(contactInquiries));
       e.target.reset();
       renderSupportHistory();
       alert("Support Inquiry Registered Locally!");
