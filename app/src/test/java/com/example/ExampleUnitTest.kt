@@ -3291,14 +3291,10 @@ class ExampleUnitTest {
     }
     val templateContent = templateFile.readText()
 
-    val b64Columns = java.util.Base64.getEncoder().encodeToString(escapedColumns.toByteArray(Charsets.UTF_8))
-    val b64Monographs = java.util.Base64.getEncoder().encodeToString(escapedMonographs.toByteArray(Charsets.UTF_8))
-    val b64Sops = java.util.Base64.getEncoder().encodeToString(escapedSops.toByteArray(Charsets.UTF_8))
-
     val htmlContent = templateContent
-      .replace("/*COLUMNS_DATA_PLACEHOLDER*/", b64Columns)
-      .replace("/*MONOGRAPHS_DATA_PLACEHOLDER*/", b64Monographs)
-      .replace("/*SOPS_DATA_PLACEHOLDER*/", b64Sops)
+      .replace("/*COLUMNS_DATA_PLACEHOLDER*/", escapedColumns)
+      .replace("/*MONOGRAPHS_DATA_PLACEHOLDER*/", escapedMonographs)
+      .replace("/*SOPS_DATA_PLACEHOLDER*/", escapedSops)
 
     val rootWebFile = java.io.File(rootDir, "web/index.html")
     rootWebFile.parentFile?.mkdirs()
@@ -3316,10 +3312,24 @@ class ExampleUnitTest {
   }
 
   private fun escapeJsString(str: String): String {
-    return str.replace("\\", "\\\\")
-        .replace("\"", "\\\"")
-        .replace("\n", "\\n")
-        .replace("\r", "")
+    val sb = java.lang.StringBuilder()
+    for (char in str) {
+      val code = char.code
+      if (char == '\\') {
+        sb.append("\\\\")
+      } else if (char == '"') {
+        sb.append("\\\"")
+      } else if (char == '\n') {
+        sb.append("\\n")
+      } else if (char == '\r') {
+        // ignore
+      } else if (code > 127) {
+        sb.append(String.format("\\u%04x", code))
+      } else {
+        sb.append(char)
+      }
+    }
+    return sb.toString()
   }
 
   @org.junit.Test

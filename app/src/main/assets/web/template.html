@@ -572,24 +572,9 @@
       }
     }
 
-    function decodeBase64Json(b64) {
-      try {
-        const binString = atob(b64);
-        const bytes = new Uint8Array(binString.length);
-        for (let i = 0; i < binString.length; i++) {
-          bytes[i] = binString.charCodeAt(i);
-        }
-        const decoded = new TextDecoder('utf-8').decode(bytes);
-        return JSON.parse(decoded);
-      } catch (e) {
-        console.error("Base64 decode error:", e);
-        return [];
-      }
-    }
-
-    const columnsDb = decodeBase64Json("/*COLUMNS_DATA_PLACEHOLDER*/");
-    const monographsDb = decodeBase64Json("/*MONOGRAPHS_DATA_PLACEHOLDER*/");
-    const sopsDb = decodeBase64Json("/*SOPS_DATA_PLACEHOLDER*/");
+    const columnsDb = /*COLUMNS_DATA_PLACEHOLDER*/;
+    const monographsDb = /*MONOGRAPHS_DATA_PLACEHOLDER*/;
+    const sopsDb = /*SOPS_DATA_PLACEHOLDER*/;
 
     function sanitizeData() {
       const cleanStr = (str) => {
